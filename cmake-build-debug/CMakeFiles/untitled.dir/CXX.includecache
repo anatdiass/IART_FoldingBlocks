@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/MeuPC/Desktop/COMP_FoldingBlocks/Board.h
+iostream
+-
+
+/Users/MeuPC/Desktop/COMP_FoldingBlocks/main.cpp
+iostream
+-
+Board.h
+/Users/MeuPC/Desktop/COMP_FoldingBlocks/Board.h
+
