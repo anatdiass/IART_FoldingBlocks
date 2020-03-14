@@ -4,8 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/Users/MeuPC/Desktop/COMP_FoldingBlocks/Board.cpp" "/Users/MeuPC/Desktop/COMP_FoldingBlocks/cmake-build-debug/CMakeFiles/untitled.dir/Board.cpp.o"
-  "/Users/MeuPC/Desktop/COMP_FoldingBlocks/main.cpp" "/Users/MeuPC/Desktop/COMP_FoldingBlocks/cmake-build-debug/CMakeFiles/untitled.dir/main.cpp.o"
+  "/Users/MeuPC/Desktop/IART_FoldingBlocks/Board.cpp" "/Users/MeuPC/Desktop/IART_FoldingBlocks/cmake-build-debug/CMakeFiles/untitled.dir/Board.cpp.o"
+  "/Users/MeuPC/Desktop/IART_FoldingBlocks/main.cpp" "/Users/MeuPC/Desktop/IART_FoldingBlocks/cmake-build-debug/CMakeFiles/untitled.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "AppleClang")
 

@@ -43,10 +43,10 @@ RM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/MeuPC/Desktop/COMP_FoldingBlocks
+CMAKE_SOURCE_DIR = /Users/MeuPC/Desktop/IART_FoldingBlocks
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/MeuPC/Desktop/COMP_FoldingBlocks/cmake-build-debug
+CMAKE_BINARY_DIR = /Users/MeuPC/Desktop/IART_FoldingBlocks/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/untitled.dir/depend.make
@@ -59,29 +59,29 @@ include CMakeFiles/untitled.dir/flags.make
 
 CMakeFiles/untitled.dir/main.cpp.o: CMakeFiles/untitled.dir/flags.make
 CMakeFiles/untitled.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/MeuPC/Desktop/COMP_FoldingBlocks/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/untitled.dir/main.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/untitled.dir/main.cpp.o -c /Users/MeuPC/Desktop/COMP_FoldingBlocks/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/MeuPC/Desktop/IART_FoldingBlocks/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/untitled.dir/main.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/untitled.dir/main.cpp.o -c /Users/MeuPC/Desktop/IART_FoldingBlocks/main.cpp
 
 CMakeFiles/untitled.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/untitled.dir/main.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/MeuPC/Desktop/COMP_FoldingBlocks/main.cpp > CMakeFiles/untitled.dir/main.cpp.i
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/MeuPC/Desktop/IART_FoldingBlocks/main.cpp > CMakeFiles/untitled.dir/main.cpp.i
 
 CMakeFiles/untitled.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/untitled.dir/main.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/MeuPC/Desktop/COMP_FoldingBlocks/main.cpp -o CMakeFiles/untitled.dir/main.cpp.s
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/MeuPC/Desktop/IART_FoldingBlocks/main.cpp -o CMakeFiles/untitled.dir/main.cpp.s
 
 CMakeFiles/untitled.dir/Board.cpp.o: CMakeFiles/untitled.dir/flags.make
 CMakeFiles/untitled.dir/Board.cpp.o: ../Board.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/MeuPC/Desktop/COMP_FoldingBlocks/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/untitled.dir/Board.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/untitled.dir/Board.cpp.o -c /Users/MeuPC/Desktop/COMP_FoldingBlocks/Board.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/MeuPC/Desktop/IART_FoldingBlocks/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/untitled.dir/Board.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/untitled.dir/Board.cpp.o -c /Users/MeuPC/Desktop/IART_FoldingBlocks/Board.cpp
 
 CMakeFiles/untitled.dir/Board.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/untitled.dir/Board.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/MeuPC/Desktop/COMP_FoldingBlocks/Board.cpp > CMakeFiles/untitled.dir/Board.cpp.i
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/MeuPC/Desktop/IART_FoldingBlocks/Board.cpp > CMakeFiles/untitled.dir/Board.cpp.i
 
 CMakeFiles/untitled.dir/Board.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/untitled.dir/Board.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/MeuPC/Desktop/COMP_FoldingBlocks/Board.cpp -o CMakeFiles/untitled.dir/Board.cpp.s
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/MeuPC/Desktop/IART_FoldingBlocks/Board.cpp -o CMakeFiles/untitled.dir/Board.cpp.s
 
 # Object files for target untitled
 untitled_OBJECTS = \
@@ -95,7 +95,7 @@ untitled: CMakeFiles/untitled.dir/main.cpp.o
 untitled: CMakeFiles/untitled.dir/Board.cpp.o
 untitled: CMakeFiles/untitled.dir/build.make
 untitled: CMakeFiles/untitled.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/MeuPC/Desktop/COMP_FoldingBlocks/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable untitled"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/MeuPC/Desktop/IART_FoldingBlocks/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable untitled"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/untitled.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -108,6 +108,6 @@ CMakeFiles/untitled.dir/clean:
 .PHONY : CMakeFiles/untitled.dir/clean
 
 CMakeFiles/untitled.dir/depend:
-	cd /Users/MeuPC/Desktop/COMP_FoldingBlocks/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/MeuPC/Desktop/COMP_FoldingBlocks /Users/MeuPC/Desktop/COMP_FoldingBlocks /Users/MeuPC/Desktop/COMP_FoldingBlocks/cmake-build-debug /Users/MeuPC/Desktop/COMP_FoldingBlocks/cmake-build-debug /Users/MeuPC/Desktop/COMP_FoldingBlocks/cmake-build-debug/CMakeFiles/untitled.dir/DependInfo.cmake --color=$(COLOR)
+	cd /Users/MeuPC/Desktop/IART_FoldingBlocks/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/MeuPC/Desktop/IART_FoldingBlocks /Users/MeuPC/Desktop/IART_FoldingBlocks /Users/MeuPC/Desktop/IART_FoldingBlocks/cmake-build-debug /Users/MeuPC/Desktop/IART_FoldingBlocks/cmake-build-debug /Users/MeuPC/Desktop/IART_FoldingBlocks/cmake-build-debug/CMakeFiles/untitled.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/untitled.dir/depend
 

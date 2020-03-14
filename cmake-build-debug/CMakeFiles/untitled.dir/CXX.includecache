@@ -6,13 +6,13 @@
 
 #IncludeRegexTransform: 
 
-/Users/MeuPC/Desktop/COMP_FoldingBlocks/Board.h
+/Users/MeuPC/Desktop/IART_FoldingBlocks/Board.h
 iostream
 -
 
-/Users/MeuPC/Desktop/COMP_FoldingBlocks/main.cpp
+/Users/MeuPC/Desktop/IART_FoldingBlocks/main.cpp
 iostream
 -
 Board.h
-/Users/MeuPC/Desktop/COMP_FoldingBlocks/Board.h
+/Users/MeuPC/Desktop/IART_FoldingBlocks/Board.h
 
