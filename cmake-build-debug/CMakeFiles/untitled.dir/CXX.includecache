@@ -6,8 +6,14 @@
 
 #IncludeRegexTransform: 
 
+/Users/MeuPC/Desktop/IART_FoldingBlocks/Board.cpp
+Board.h
+/Users/MeuPC/Desktop/IART_FoldingBlocks/Board.h
+
 /Users/MeuPC/Desktop/IART_FoldingBlocks/Board.h
 iostream
+-
+vector
 -
 
 /Users/MeuPC/Desktop/IART_FoldingBlocks/main.cpp

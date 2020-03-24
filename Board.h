@@ -2,17 +2,18 @@
 #define UNTITLED_BOARD_H
 
 #include <iostream>
+#include <vector>
+
 using namespace std;
 
 class Board {
 public:
-    int getNRows() const;
+private:
+    int nRows;
+    int nCols;
+    vector<vector<char>> board;
+public:
 
-    int getNCols() const;
-
-    string board[100][100];
-
-    /*---REGULAR BOARDS---*/
     Board(int nRows, int nCols);
 
     void createEmptyBoard();
@@ -20,16 +21,15 @@ public:
     void printBorderLines();
     void printHorizontalNumbers();
     void printBoard();
-    string checkCellContent(int x, int y);
-    void changeCell(int x, int y, string input);
-    void reflexionRight(int x, int y);
-    void reflexionLeft(int x, int y);
-    void reflexionUp(int x, int y);
-    void reflexionDown(int x, int y);
 
-private:
-    int nRows;
-    int nCols;
+    void setPiece(int row, int col, char color);
+    char getPieceColor(int row, int col);
+    void reflexionRight(int row, int col);
+    void reflexionLeft(int row, int col);
+    void reflexionUp(int row, int col);
+    void reflexionDown(int row, int col);
+
+
 };
 
 

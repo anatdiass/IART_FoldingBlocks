@@ -13,7 +13,7 @@ int main() {
 
     /*TESTES*/
     b.printBoard();
-    b.changeCell(2,2,"A");
+    b.setPiece(2,2,'A');
     b.printBoard();
 
     int choice;
