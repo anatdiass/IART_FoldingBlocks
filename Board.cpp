@@ -74,17 +74,77 @@ char Board::getPieceColor(int row, int col) {
     else return (char)0;
 }
 
-void Board::defineBlocks() {
-    for (int row=0;row<nRows;row++){
-        for(int col=0;col<nCols;col++){
-            char cellContent = getPieceColor(row,col);
-            if(cellContent!=' ')
-                cout << "row: " << row << "; col: " << col << " piece: " << cellContent << endl;
+bool Board::blockExists(char index) {
+    for(int i=0;i<blocks.size();i++){
+        if(blocks[i].first==index)
+            return true;
+    }
+    return false;
+}
+
+void Board::createBlock(char indexChar) {
+    pair<char,vector<pair<int,int>>> block;
+    block.first=indexChar;
+
+    vector<pair<int,int>> positions;
+    for(int i=0;i<nRows;i++){
+        for(int j=0;j<nCols;j++){
+            char cellContent = getPieceColor(i,j);
+            if(cellContent == indexChar){
+                pair<int,int> pos;
+                pos.first=i;
+                pos.second=j;
+                positions.push_back(pos);
+            }
+        }
+    }
+    block.second=positions;
+    blocks.push_back(block);
+}
+
+bool Board::existPositionBlock(vector<pair<int,int>> positions, int row, int col) {
+    pair<int,int>position;
+    position.first=row;
+    position.second=col;
+    for(int i=0;i<positions.size();i++){
+        if(positions[i]==position)
+            return true;
+    }
+    return false;
+}
+
+void Board::updateBlock(char indexChar, int row, int col) {
+    for(int i=0;i<blocks.size();i++){
+        if(blocks[i].first==indexChar){
+            pair<int,int> pos;
+            pos.first=row;
+            pos.second=col;
+            if(!existPositionBlock(blocks[i].second, row, col))
+                blocks[i].second.push_back(pos);
         }
     }
 }
 
-vector<pair<char, pair<int, int>>> Board::getBlocks() {
+
+void Board::defineBlocks() {
+    for (int row=0;row<nRows;row++){
+        for(int col=0;col<nCols;col++){
+            char cellContent = getPieceColor(row,col);
+            if(cellContent!=' '){
+                //new block
+                if(!blockExists(cellContent)){
+                    createBlock(cellContent);
+                }
+                //Add to existing block
+                else{
+                    updateBlock(cellContent,row,col);
+                }
+            }
+        }
+    }
+}
+
+vector<pair<char, vector<pair<int, int>>>> Board::getBlocks() {
     return blocks;
 }
 
@@ -124,6 +184,14 @@ void Board::reflexionDown(int row, int col) {
     if(getPieceColor(row+1,col)==' ')
         setPiece(row+1,col,cellContent);
 }
+
+
+
+
+
+
+
+
 
 
 

@@ -12,9 +12,12 @@ int main() {
 
 
     /*TESTES*/
-    b.printBoard();
 
     /*
+    b.setPiece(2,2,'a');
+    b.printBoard();
+
+
     int choice;
     cout << "1-reflexion right\n";
     cout << "2-reflexion left\n";
@@ -36,14 +39,19 @@ int main() {
             b.reflexionDown(2,2);
             break;
     }
-
-    b.printBoard();*/
-
+*/
+    b.setPiece(1,1, 'a');
+    b.setPiece(1,2,'a');
+    b.setPiece(0,0,'b');
+    b.printBoard();
     b.defineBlocks();
 
-/*    cout << "nr blocos: " << b.getBlocks().size() << endl;
-    for(int i=0;i<b.getBlocks().size();i++){
-        cout << "Char: " << b.getBlocks()[i].first<<endl;
-        cout << "index: " << b.getBlocks()[i].second.first << "/" << b.getBlocks()[i].second.second<<endl;
-    }*/
+    cout << "nr blocos: " << b.getBlocks().size() << endl;
+    for(int i=0;i<b.getBlocks().size();i++) {
+        cout << "Char: " << b.getBlocks()[i].first << endl;
+        cout << "nr pecas bloco: " << b.getBlocks()[i].second.size() << endl;
+        for (int j = 0; j < b.getBlocks()[i].second.size(); j++) {
+            cout << "index: " << b.getBlocks()[i].second[j].first << "/" << b.getBlocks()[i].second[j].second << endl;
+        }
+    }
 }
