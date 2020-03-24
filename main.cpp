@@ -40,18 +40,25 @@ int main() {
             break;
     }
 */
-    b.setPiece(1,1, 'a');
-    b.setPiece(1,2,'a');
-    b.setPiece(0,0,'b');
+
+    b.printBoard();
+
+    b.setPiece(1,0,'a');
+    b.setPiece(3,2, 'a');
+    b.setPiece(3,1,'a');
+    b.setPiece(6,0,'a');
     b.printBoard();
     b.defineBlocks();
 
-    cout << "nr blocos: " << b.getBlocks().size() << endl;
+    /*cout << "nr blocos: " << b.getBlocks().size() << endl;
     for(int i=0;i<b.getBlocks().size();i++) {
         cout << "Char: " << b.getBlocks()[i].first << endl;
         cout << "nr pecas bloco: " << b.getBlocks()[i].second.size() << endl;
         for (int j = 0; j < b.getBlocks()[i].second.size(); j++) {
             cout << "index: " << b.getBlocks()[i].second[j].first << "/" << b.getBlocks()[i].second[j].second << endl;
         }
-    }
+    }*/
+
+    b.reflexionBlockRight(3,2);
+    b.printBoard();
 }

@@ -7,16 +7,13 @@ Board::Board(int nRows, int nCols) : nRows(nRows), nCols(nCols) {
 
 /*BUILD BOARD*/
 void Board::createEmptyBoard() {
-    vector<char> aux;
-    for(int i=0;i<nRows;i++){
-        aux.push_back(' ');
+    for(int i = 0; i < nRows; i++){
+        std::vector<char> temp;
+        for(int j = 0; j < nCols; j++){
+            temp.push_back(' ');
+        }
+        board.push_back(temp);
     }
-    for(int j=0;j<nCols;j++){
-        aux.push_back(' ');
-        board.push_back(aux);
-
-    }
-
 }
 
 /*PRINT BOARD*/
@@ -148,6 +145,32 @@ vector<pair<char, vector<pair<int, int>>>> Board::getBlocks() {
     return blocks;
 }
 
+pair<char, vector<pair<int,int>>> Board::getBlock(char blockColor){
+    if(blockExists(blockColor))
+        for(int i=0;i<blocks.size();i++){
+            if(blocks[i].first==blockColor)
+                return blocks[i];
+        }
+}
+
+int Board::getMostRightCell(vector<pair<int,int>> positions){
+    int maxX=0;
+    for(int i=0;i<positions.size();i++){
+        if(positions[i].second>maxX)
+            maxX=positions[i].second;
+    }
+    return maxX;
+}
+
+int Board::getMostLeftCell(vector<pair<int,int>>positions){
+    int minX;
+    for(int i=0;i<positions.size();i++){
+        if(positions[i].second<minX)
+            minX=positions[i].second;
+    }
+    return minX;
+}
+
 /*REFLEXION FUNCTIONS*/
 void Board::reflexionRight(int row, int col) {
     char cellContent = getPieceColor(row,col);
@@ -183,6 +206,36 @@ void Board::reflexionDown(int row, int col) {
 
     if(getPieceColor(row+1,col)==' ')
         setPiece(row+1,col,cellContent);
+}
+
+void Board::reflexionBlockRight(int row, int col) {
+    char pieceColor = getPieceColor(row,col);
+
+    if(pieceColor==' ')
+        return;
+
+    pair<char, vector<pair<int,int>>> block = getBlock(pieceColor);
+    int nrPieces = block.second.size();
+
+    if(nrPieces==1)
+        reflexionRight(row,col);
+
+    else {
+        int indexMostRightCell = getMostRightCell(block.second);
+        int indexMostLeftCell = getMostLeftCell(block.second);
+        int compBetweenCells = indexMostRightCell-indexMostLeftCell;
+        //verify if the reflexion is possible
+        if((indexMostLeftCell+(2*compBetweenCells)+1)>=nCols)
+            return;
+        else{
+            //Do reflexion
+            for(int i=0;i<nrPieces;i++){
+                pair<int,int>piece = block.second[i];   //piece.first -> row, piece.second->col
+                int distToMRC = indexMostRightCell - piece.second;
+                setPiece(piece.first, (2*distToMRC)+1+piece.second, 'b');
+            }
+        }
+    }
 }
 
 

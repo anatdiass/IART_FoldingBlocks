@@ -81,6 +81,18 @@ public:
      */
     vector<pair<char,vector<pair<int,int>>>> getBlocks();
 
+    /**
+     * Gets the block of a certain color
+     * @param blockColor Color of block
+     * @return Block
+     */
+    pair<char, vector<pair<int,int>>> getBlock(char blockColor);
+
+
+    int getMostRightCell(vector<pair<int,int>> positions);
+    int getMostLeftCell(vector<pair<int,int>> positions);
+    int getMostUpCell(vector<pair<int,int>> positions);
+    int getMostDownCell(vector<pair<int,int>> positions);
 
     /**
      * Right reflexion of a single piece
@@ -109,6 +121,8 @@ public:
      * @param col Horizontal coordinate of piece
      */
     void reflexionDown(int row, int col);
+
+    void reflexionBlockRight(int row, int col);
 
 };
 
