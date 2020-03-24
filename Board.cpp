@@ -146,11 +146,21 @@ vector<pair<char, vector<pair<int, int>>>> Board::getBlocks() {
 }
 
 pair<char, vector<pair<int,int>>> Board::getBlock(char blockColor){
-    if(blockExists(blockColor))
-        for(int i=0;i<blocks.size();i++){
-            if(blocks[i].first==blockColor)
+    if(blockExists(blockColor)) {
+        for (int i = 0; i < blocks.size(); i++) {
+            if (blocks[i].first == blockColor)
                 return blocks[i];
         }
+    }
+
+    pair<char,vector<pair<int,int>>> nullPair;
+    pair<int,int> null;
+    null.first=-1;null.second=-1;
+    vector<pair<int,int>> nullVec; nullVec.push_back(null);
+    nullPair.first=(char)0;
+    nullPair.second=nullVec;
+    return nullPair;
+
 }
 
 int Board::getMostRightCell(vector<pair<int,int>> positions){
@@ -231,8 +241,45 @@ void Board::reflexionBlockRight(int row, int col) {
             //Do reflexion
             for(int i=0;i<nrPieces;i++){
                 pair<int,int>piece = block.second[i];   //piece.first -> row, piece.second->col
-                int distToMRC = indexMostRightCell - piece.second;
-                setPiece(piece.first, (2*distToMRC)+1+piece.second, 'b');
+                int pieceColumn = piece.second;
+                int distToMRC = indexMostRightCell - pieceColumn;
+                int deltaX = (2*distToMRC) + 1;
+                setPiece(piece.first, pieceColumn+deltaX, pieceColor);
+            }
+        }
+    }
+}
+
+void Board::reflexionBlockLeft(int row, int col) {
+
+    char pieceColor = getPieceColor(row,col);
+
+    if(pieceColor==' ')
+        return;
+
+    pair<char, vector<pair<int,int>>> block = getBlock(pieceColor);
+    int nrPieces = block.second.size();
+
+    if(nrPieces==1)
+        reflexionLeft(row,col);
+
+    else {
+        int indexMostRightCell = getMostRightCell(block.second);
+        int indexMostLeftCell = getMostLeftCell(block.second);
+        int compBetweenCells = indexMostRightCell-indexMostLeftCell;
+        //verify if the reflexion is possible
+        if((indexMostRightCell-(2*compBetweenCells+1))<0)
+            return;
+        else{
+            //Do reflexion
+            for(int i=0;i<nrPieces;i++){
+                pair<int,int>piece = block.second[i];   //piece.first -> row, piece.second->col
+
+                int pieceColumn=piece.second;
+                int distToMLC =  pieceColumn-indexMostLeftCell;
+                int deltaX = (2*distToMLC)+1;
+
+                setPiece(piece.first, pieceColumn-deltaX, pieceColor);
             }
         }
     }

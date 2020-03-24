@@ -122,7 +122,32 @@ public:
      */
     void reflexionDown(int row, int col);
 
+    /**
+     * Right reflexion of all the pieces with the same color of indicated piece
+     * @param row Vertical coordinate of piece
+     * @param col Horizontal coordinate of piece
+     */
     void reflexionBlockRight(int row, int col);
+
+    /**
+     * Left reflexion of all the pieces with the same color of indicated piece
+     * @param row Vertical coordinate of piece
+     * @param col Horizontal coordinate of piece
+     */
+    void reflexionBlockLeft(int row, int col);
+    /**
+     * Up reflexion of all the pieces with the same color of indicated piece
+     * @param row Vertical coordinate of piece
+     * @param col Horizontal coordinate of piece
+     */
+    void reflexionBlockUp(int row, int col);
+    /**
+     * Down reflexion of all the pieces with the same color of indicated piece
+     * @param row Vertical coordinate of piece
+     * @param col Horizontal coordinate of piece
+     */
+    void reflexionBlockDown(int row, int col);
+
 
 };
 
