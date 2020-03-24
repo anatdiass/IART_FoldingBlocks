@@ -14,7 +14,9 @@ void Board::createEmptyBoard() {
     for(int j=0;j<nCols;j++){
         aux.push_back(' ');
         board.push_back(aux);
+
     }
+
 }
 
 /*PRINT BOARD*/
@@ -32,7 +34,7 @@ void Board::printBorderLines() {
 void Board::printHorizontalNumbers() {
     cout << "\n ";
     for(int i=0;i<nCols;i++){
-        cout << "     "<<i+1;
+        cout << "     "<<i;
     }
     cout << "\n";
 }
@@ -44,12 +46,12 @@ void Board::printBoard() {
     for(int i=0;i<nRows;i++){
 
         //Print row indice
-        cout<<"\n" << i+1;
-        cout << ((i + 1) < 10 ? "  |" : " |");
+        cout<<"\n" << i;
+        cout << ((i) < 10 ? "  |" : " |");
 
         //Print cell color
         for(int j=0;j<nCols;j++){
-            cout << "  "<< board[i][j]<<"  |";
+            cout << "  "<< getPieceColor(i, j)<<"  |";
         }
 
         cout << "\n";
@@ -62,14 +64,28 @@ void Board::printBoard() {
 /*MANAGE BOARD*/
 
 void Board::setPiece(int row, int col, char color){
-    if(row>0 && col>0 && row<=nRows && col<=nCols)
-        board.at(row-1).at(col-1) = color;
+    if(row>=0 && col>=0 && row<nRows && col<nCols)
+        board.at(row).at(col) = color;
 }
 
 char Board::getPieceColor(int row, int col) {
-    if(row>0 && col>0 && row<=nRows && col<=nCols)
-        return board.at(row-1).at(col-1);
+    if(row>=0 && col>=0 && row<nRows && col<nCols)
+        return board.at(row).at(col);
     else return (char)0;
+}
+
+void Board::defineBlocks() {
+    for (int row=0;row<nRows;row++){
+        for(int col=0;col<nCols;col++){
+            char cellContent = getPieceColor(row,col);
+            if(cellContent!=' ')
+                cout << "row: " << row << "; col: " << col << " piece: " << cellContent << endl;
+        }
+    }
+}
+
+vector<pair<char, pair<int, int>>> Board::getBlocks() {
+    return blocks;
 }
 
 /*REFLEXION FUNCTIONS*/
@@ -108,6 +124,8 @@ void Board::reflexionDown(int row, int col) {
     if(getPieceColor(row+1,col)==' ')
         setPiece(row+1,col,cellContent);
 }
+
+
 
 
 

@@ -13,9 +13,8 @@ int main() {
 
     /*TESTES*/
     b.printBoard();
-    b.setPiece(2,2,'A');
-    b.printBoard();
 
+    /*
     int choice;
     cout << "1-reflexion right\n";
     cout << "2-reflexion left\n";
@@ -38,5 +37,13 @@ int main() {
             break;
     }
 
-    b.printBoard();
+    b.printBoard();*/
+
+    b.defineBlocks();
+
+/*    cout << "nr blocos: " << b.getBlocks().size() << endl;
+    for(int i=0;i<b.getBlocks().size();i++){
+        cout << "Char: " << b.getBlocks()[i].first<<endl;
+        cout << "index: " << b.getBlocks()[i].second.first << "/" << b.getBlocks()[i].second.second<<endl;
+    }*/
 }
