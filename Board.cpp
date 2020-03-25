@@ -122,7 +122,6 @@ void Board::updateBlock(char indexChar, int row, int col) {
     }
 }
 
-
 void Board::defineBlocks() {
     for (int row=0;row<nRows;row++){
         for(int col=0;col<nCols;col++){
@@ -173,7 +172,7 @@ int Board::getMostRightCell(const vector<pair<int,int>>& positions){
 }
 
 int Board::getMostLeftCell(const vector<pair<int,int>>&positions){
-    int minX=0;
+    int minX;
     for(auto & position : positions){
         if(position.second<minX)
             minX=position.second;
@@ -182,7 +181,7 @@ int Board::getMostLeftCell(const vector<pair<int,int>>&positions){
 }
 
 int Board::getMostUpCell(const vector<pair<int, int>>& positions) {
-    int minY=0;
+    int minY;
     for(auto &position: positions){
         if(position.first<minY)
             minY=position.first;
@@ -330,7 +329,7 @@ void Board::reflexionBlockUp(int row, int col) {
                 int distToMUC =  pieceRow-indexMostUpCell;
                 int deltaY = (2*distToMUC)+1;
 
-                setPiece(pieceRow-deltaY, piece.second, 'b');
+                setPiece(pieceRow-deltaY, piece.second, pieceColor);
             }
         }
     }

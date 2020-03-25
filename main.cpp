@@ -25,14 +25,14 @@ for(int i=0;i<b.getBlocks().size();i++) {
 
 
     //Reflexion right
-  /*  b.setPiece(1,0,'a');
+    b.setPiece(1,0,'a');
     b.setPiece(3,2, 'a');
     b.setPiece(3,1,'a');
     b.setPiece(6,0,'a');
     b.defineBlocks();
     b.printBoard();
     b.reflexionBlockRight(1,0);
-    b.printBoard();*/
+    b.printBoard();
 
     //Reflexion left
     /*b.setPiece(1,5,'a');
@@ -46,14 +46,14 @@ for(int i=0;i<b.getBlocks().size();i++) {
 
 
     //Reflextion up
-    b.setPiece(6,1,'a');
+   /* b.setPiece(6,1,'a');
     b.setPiece(6,6,'a');
     b.setPiece(5,3,'a');
     b.setPiece(4,3,'a');
     b.defineBlocks();
     b.printBoard();
-    b.reflexionBlockUp(4,3);
-    b.printBoard();
+    b.reflexionBlockUp(6,1);
+    b.printBoard();*/
 
     //Reflexion down
     /*b.setPiece(0,1,'a');

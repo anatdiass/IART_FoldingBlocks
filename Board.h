@@ -18,10 +18,29 @@ public:
 
     Board(int nRows, int nCols);
 
+    /**
+     * Creates an empty board game
+     */
     void createEmptyBoard();
+
+    /**
+     * Prints the border of a single cell
+     */
     static void printBorderCell();
+
+    /**
+     * Prints all the board horizontal lines
+     */
     void printBorderLines();
+
+    /**
+     * Print columns indexes
+     */
     void printHorizontalNumbers();
+
+    /**
+     * Print the entire board with cells content
+     */
     void printBoard();
 
     /**
@@ -88,10 +107,32 @@ public:
      */
     pair<char, vector<pair<int,int>>> getBlock(char blockColor);
 
-
+    /**
+     * Gets the block's cell with higher horizontal coordinate
+     * @param positions All the positions of a block
+     * @return Horizontal coordinate of the cell
+     */
     static int getMostRightCell(const vector<pair<int,int>>& positions);
+
+    /**
+     * Gets the block's cell with lower horizontal coordinate
+     * @param positions All the positions of a block
+     * @return Horizontal coordinate of the cell
+     */
     static int getMostLeftCell(const vector<pair<int,int>>& positions);
+
+    /**
+     * Gets the block's cell with lower vertical coordinate
+     * @param positions All the positions of a block
+     * @return Vertical coordinate of the cell
+     */
     static int getMostUpCell(const vector<pair<int,int>>& positions);
+
+    /**
+     * Gets the block's cell with higher vertical coordinate
+     * @param positions All the positions of a block
+     * @return Vertical coordinate of the cell
+     */
     static int getMostDownCell(const vector<pair<int,int>>& positions);
 
     /**
