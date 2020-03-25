@@ -19,7 +19,7 @@ public:
     Board(int nRows, int nCols);
 
     void createEmptyBoard();
-    void printBorderCell();
+    static void printBorderCell();
     void printBorderLines();
     void printHorizontalNumbers();
     void printBoard();
@@ -60,7 +60,7 @@ public:
      * @param col Horizontal coordinate of new piece
      * @return True if the position of new piece was already added to the block
      */
-    bool existPositionBlock(vector<pair<int,int>> positions, int row, int col);
+    static bool existPositionBlock(const vector<pair<int,int>>& positions, int row, int col);
 
     /**
      * Add a new piece to an existing block
@@ -89,10 +89,10 @@ public:
     pair<char, vector<pair<int,int>>> getBlock(char blockColor);
 
 
-    int getMostRightCell(vector<pair<int,int>> positions);
-    int getMostLeftCell(vector<pair<int,int>> positions);
-    int getMostUpCell(vector<pair<int,int>> positions);
-    int getMostDownCell(vector<pair<int,int>> positions);
+    static int getMostRightCell(const vector<pair<int,int>>& positions);
+    static int getMostLeftCell(const vector<pair<int,int>>& positions);
+    static int getMostUpCell(const vector<pair<int,int>>& positions);
+    static int getMostDownCell(const vector<pair<int,int>>& positions);
 
     /**
      * Right reflexion of a single piece
