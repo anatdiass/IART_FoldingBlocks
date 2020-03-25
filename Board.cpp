@@ -1,6 +1,13 @@
 #include "Board.h"
 
 /*CONSTRUCTOR*/
+Board::Board() {
+    this->nRows=4;
+    this->nCols=4;
+    createEmptyBoard();
+}
+
+
 Board::Board(int nRows, int nCols) : nRows(nRows), nCols(nCols) {
     createEmptyBoard();
 }
@@ -366,5 +373,6 @@ void Board::reflexionBlockDown(int row, int col) {
         }
     }
 }
+
 
 

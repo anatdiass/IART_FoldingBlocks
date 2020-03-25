@@ -16,6 +16,7 @@ private:
     vector<pair<char,vector<pair<int,int>>>>blocks;
 public:
 
+    Board();
     Board(int nRows, int nCols);
 
     /**
