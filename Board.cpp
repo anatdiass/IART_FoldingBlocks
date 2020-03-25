@@ -12,6 +12,14 @@ Board::Board(int nRows, int nCols) : nRows(nRows), nCols(nCols) {
     createEmptyBoard();
 }
 
+int Board::getNumRows() {
+    return this->nRows;
+}
+
+int Board::getNumCols() {
+    return this->nCols;
+}
+
 /*BUILD BOARD*/
 void Board::createEmptyBoard() {
     for(int i = 0; i < nRows; i++){

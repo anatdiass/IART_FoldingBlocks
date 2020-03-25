@@ -19,6 +19,9 @@ public:
     Board();
     Board(int nRows, int nCols);
 
+    int getNumRows();
+    int getNumCols();
+
     /**
      * Creates an empty board game
      */
