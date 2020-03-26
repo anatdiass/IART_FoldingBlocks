@@ -162,55 +162,65 @@ public:
      * Right reflexion of a single piece
      * @param row Vertical coordinate of piece
      * @param col Horizontal coordinate of piece
+     * @return True if the reflexion was done
      */
-    void reflexionRight(int row, int col);
+    bool reflexionRight(int row, int col);
 
     /**
      * Left reflexion of a single piece
      * @param row Vertical coordinate of piece
      * @param col Horizontal coordinate of piece
+     * @return True if the reflexion was done
      */
-    void reflexionLeft(int row, int col);
+    bool reflexionLeft(int row, int col);
 
     /**
      * Up reflexion of a single piece
      * @param row Vertical coordinate of piece
      * @param col Horizontal coordinate of piece
+     * @return True if the reflexion was done
      */
-    void reflexionUp(int row, int col);
+    bool reflexionUp(int row, int col);
 
     /**
      * Down reflexion of a single piece
      * @param row Vertical coordinate of piece
      * @param col Horizontal coordinate of piece
+     * @return True if the reflexion was done
      */
-    void reflexionDown(int row, int col);
+    bool reflexionDown(int row, int col);
 
     /**
      * Right reflexion of all the pieces with the same color of indicated piece
      * @param row Vertical coordinate of piece
      * @param col Horizontal coordinate of piece
+     * @return True if the reflexion was done
      */
-    void reflexionBlockRight(int row, int col);
+    bool reflexionBlockRight(int row, int col);
 
     /**
      * Left reflexion of all the pieces with the same color of indicated piece
      * @param row Vertical coordinate of piece
      * @param col Horizontal coordinate of piece
+     * @return True if the reflexion was done
      */
-    void reflexionBlockLeft(int row, int col);
+    bool reflexionBlockLeft(int row, int col);
+
     /**
      * Up reflexion of all the pieces with the same color of indicated piece
      * @param row Vertical coordinate of piece
      * @param col Horizontal coordinate of piece
+     * @return True if the reflexion was done
      */
-    void reflexionBlockUp(int row, int col);
+    bool reflexionBlockUp(int row, int col);
+
     /**
      * Down reflexion of all the pieces with the same color of indicated piece
      * @param row Vertical coordinate of piece
      * @param col Horizontal coordinate of piece
+     * @return True if the reflexion was done
      */
-    void reflexionBlockDown(int row, int col);
+    bool reflexionBlockDown(int row, int col);
 
 
 };
