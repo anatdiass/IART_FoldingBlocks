@@ -1,8 +1,8 @@
-# Install script for directory: C:/Users/Maria Caldeira/Documents/3_ano/IART/Proj1/IART_FoldingBlocks
+# Install script for directory: /Users/MeuPC/Desktop/IART_FoldingBlocks
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/untitled")
+  set(CMAKE_INSTALL_PREFIX "/usr/local")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/Maria Caldeira/Documents/3_ano/IART/Proj1/IART_FoldingBlocks/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/MeuPC/Desktop/IART_FoldingBlocks/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

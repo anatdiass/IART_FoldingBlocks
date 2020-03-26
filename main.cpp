@@ -20,7 +20,7 @@ for(int i=0;i<b.getBlocks().size();i++) {
 
 
     /*TESTES*/
-
+/*
     int row, col,V,s;
     cout<<"nRows: "; cin>>row; cout<<"nCols: "; cin>>col;
 
@@ -52,7 +52,7 @@ for(int i=0;i<b.getBlocks().size();i++) {
 
     //Reflexion right
     //b.setPiece(1,1,'a');
-
+*/
 
     /*b.setPiece(3,2, 'a');
     b.setPiece(3,1,'a');
@@ -95,16 +95,6 @@ for(int i=0;i<b.getBlocks().size();i++) {
 
 
 
-    //Check full board
-    /*Game g = Game();
-
-    g.board.setPiece(0,0,'a');
-    g.board.setPiece(0,1,'b');
-    g.board.setPiece(1,0,'c');
-   // g.board.setPiece(1,1,'d');
-
-    g.board.printBoard();
-
-    g.checkFullBoard()?cout<<"full":cout<<"not full";*/
+    Game g=Game();
 
 }

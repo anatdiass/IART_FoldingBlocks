@@ -22,6 +22,12 @@ public:
     int getNumRows();
     int getNumCols();
     vector<vector<char>> getBoard();
+    void deleteCell(int row, int col);
+
+    //TODO -> nao implementado
+    void printIrregularBoard();
+
+
     /**
      * Creates an empty board game
      */
