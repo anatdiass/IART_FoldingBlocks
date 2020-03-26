@@ -119,18 +119,23 @@ void Game::loopGame() {
         switch(move){
             case 1:
                 board.reflexionBlockRight(row,col);
+                board.defineBlocks();
                 break;
             case 2:
                 board.reflexionBlockLeft(row, col);
+                board.defineBlocks();
                 break;
             case 3:
                 board.reflexionBlockDown(row,col);
+                board.defineBlocks();
                 break;
             case 4:
                 board.reflexionBlockUp(row,col);
+                board.defineBlocks();
                 break;
         }
         board.printBoard();
     }
+    cout << "End of game!\n";
 }
 
