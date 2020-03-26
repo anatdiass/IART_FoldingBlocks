@@ -1,6 +1,5 @@
 #include <iostream>
 
-#include "Algorithms.h"
 #include "Game.h"
 
 using namespace std;

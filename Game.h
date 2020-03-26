@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "Board.h"
+#include "Algorithms.h"
 
 
 class Game {
