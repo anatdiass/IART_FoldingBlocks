@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "Board.h"
+#include "Algorithms.h"
 #include "Game.h"
 
 using namespace std;

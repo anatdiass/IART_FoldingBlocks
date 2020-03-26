@@ -20,6 +20,10 @@ int Board::getNumCols() {
     return this->nCols;
 }
 
+vector<vector<char>> Board::getBoard(){
+    return board;
+}
+
 /*BUILD BOARD*/
 void Board::createEmptyBoard() {
     for(int i = 0; i < nRows; i++){

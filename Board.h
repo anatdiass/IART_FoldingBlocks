@@ -21,7 +21,7 @@ public:
 
     int getNumRows();
     int getNumCols();
-
+    vector<vector<char>> getBoard();
     /**
      * Creates an empty board game
      */

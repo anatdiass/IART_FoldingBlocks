@@ -6,7 +6,21 @@
 
 #IncludeRegexTransform: 
 
-/Users/MeuPC/Desktop/IART_FoldingBlocks/Board.h
+C:/Users/Maria Caldeira/Documents/3_ano/IART/Proj1/IART_FoldingBlocks/Algorithms.cpp
+list
+-
+Algorithms.h
+C:/Users/Maria Caldeira/Documents/3_ano/IART/Proj1/IART_FoldingBlocks/Algorithms.h
+
+C:/Users/Maria Caldeira/Documents/3_ano/IART/Proj1/IART_FoldingBlocks/Algorithms.h
+Board.h
+C:/Users/Maria Caldeira/Documents/3_ano/IART/Proj1/IART_FoldingBlocks/Board.h
+
+C:/Users/Maria Caldeira/Documents/3_ano/IART/Proj1/IART_FoldingBlocks/Board.cpp
+Board.h
+C:/Users/Maria Caldeira/Documents/3_ano/IART/Proj1/IART_FoldingBlocks/Board.h
+
+C:/Users/Maria Caldeira/Documents/3_ano/IART/Proj1/IART_FoldingBlocks/Board.h
 iostream
 -
 vector
@@ -14,15 +28,19 @@ vector
 utility
 -
 
-/Users/MeuPC/Desktop/IART_FoldingBlocks/Game.h
-Board.h
-/Users/MeuPC/Desktop/IART_FoldingBlocks/Board.h
+C:/Users/Maria Caldeira/Documents/3_ano/IART/Proj1/IART_FoldingBlocks/Game.cpp
+Game.h
+C:/Users/Maria Caldeira/Documents/3_ano/IART/Proj1/IART_FoldingBlocks/Game.h
 
-/Users/MeuPC/Desktop/IART_FoldingBlocks/main.cpp
+C:/Users/Maria Caldeira/Documents/3_ano/IART/Proj1/IART_FoldingBlocks/Game.h
+Board.h
+C:/Users/Maria Caldeira/Documents/3_ano/IART/Proj1/IART_FoldingBlocks/Board.h
+
+C:/Users/Maria Caldeira/Documents/3_ano/IART/Proj1/IART_FoldingBlocks/main.cpp
 iostream
 -
 Board.h
-/Users/MeuPC/Desktop/IART_FoldingBlocks/Board.h
+C:/Users/Maria Caldeira/Documents/3_ano/IART/Proj1/IART_FoldingBlocks/Board.h
 Game.h
-/Users/MeuPC/Desktop/IART_FoldingBlocks/Game.h
+C:/Users/Maria Caldeira/Documents/3_ano/IART/Proj1/IART_FoldingBlocks/Game.h
 
