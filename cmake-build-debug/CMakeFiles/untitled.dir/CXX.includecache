@@ -6,22 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/Users/MeuPC/Desktop/IART_FoldingBlocks/Algorithms.cpp
-list
--
-Algorithms.h
-/Users/MeuPC/Desktop/IART_FoldingBlocks/Algorithms.h
-
-/Users/MeuPC/Desktop/IART_FoldingBlocks/Algorithms.h
-Board.h
-/Users/MeuPC/Desktop/IART_FoldingBlocks/Board.h
-list
--
-
-/Users/MeuPC/Desktop/IART_FoldingBlocks/Board.cpp
-Board.h
-/Users/MeuPC/Desktop/IART_FoldingBlocks/Board.h
-
 /Users/MeuPC/Desktop/IART_FoldingBlocks/Board.h
 iostream
 -
@@ -31,18 +15,14 @@ utility
 -
 
 /Users/MeuPC/Desktop/IART_FoldingBlocks/Game.cpp
+sstream
+-
 Game.h
 /Users/MeuPC/Desktop/IART_FoldingBlocks/Game.h
 
 /Users/MeuPC/Desktop/IART_FoldingBlocks/Game.h
+string
+-
 Board.h
 /Users/MeuPC/Desktop/IART_FoldingBlocks/Board.h
-
-/Users/MeuPC/Desktop/IART_FoldingBlocks/main.cpp
-iostream
--
-Algorithms.h
-/Users/MeuPC/Desktop/IART_FoldingBlocks/Algorithms.h
-Game.h
-/Users/MeuPC/Desktop/IART_FoldingBlocks/Game.h
 

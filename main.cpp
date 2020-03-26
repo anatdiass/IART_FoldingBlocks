@@ -39,4 +39,5 @@ int main() {
     graph.BFS(s);*/
 
     Game g=Game();
+    g.loopGame();
 }

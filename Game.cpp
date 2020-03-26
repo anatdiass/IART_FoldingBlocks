@@ -1,3 +1,4 @@
+#include <sstream>
 #include "Game.h"
 
 Game::Game() {
@@ -23,15 +24,9 @@ bool Game::endGame() {
     return false;
 }
 
-void Game::level1() {                                               /*   ._____._____._____._____.   */
-    this->board=Board(4,4);                           /*   |     |     |     |     |   */
-    this->board.setPiece(3,0,'R');                  /*   ._____._____._____._____.   */
-    this->board=Board(4,4);                           /*   |     |     |     |     |   */
-                                                                    /*   ._____._____._____._____.   */
-                                                                    /*   |     |     |     |     |   */
-                                                                    /*   ._____._____._____._____.   */
-                                                                    /*   |  R  |     |     |     |   */
-                                                                    /*   ._____._____._____._____.   */
+void Game::level1() {
+    this->board=Board(4,4);
+    this->board.setPiece(3,0,'R');
 }
 
 
@@ -91,5 +86,51 @@ void Game::chooseLevel() {
     }
     board.defineBlocks();
     board.printBoard();
+}
+
+void Game::loopGame() {
+    string colorInput;
+    int n = colorInput.length();
+
+    // declaring character array
+    char char_array[n + 1];
+
+    int row, col, move;
+    while(!endGame()){
+
+        //Gets block by color
+        cout << "Choose the color of your block: "; cin.ignore(1000, '\n');
+        getline(cin,colorInput);
+        strcpy(char_array, colorInput.c_str());
+        char color = char_array[0];
+
+        pair<char, vector<pair<int,int>>> block = board.getBlock(color);
+        row = block.second[0].first;
+        col = block.second[0].second;
+
+        cout << "Choose one move\n";
+        cout << "1 - Reflexion right\n";
+        cout << "2 - Reflexion left\n";
+        cout << "3 - Reflexion down\n";
+        cout << "4 - Reflexion up\n";
+        cout << "Move: "; cin>>move;
+
+
+        switch(move){
+            case 1:
+                board.reflexionBlockRight(row,col);
+                break;
+            case 2:
+                board.reflexionBlockLeft(row, col);
+                break;
+            case 3:
+                board.reflexionBlockDown(row,col);
+                break;
+            case 4:
+                board.reflexionBlockUp(row,col);
+                break;
+        }
+        board.printBoard();
+    }
 }
 

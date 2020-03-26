@@ -1,8 +1,10 @@
 #ifndef UNTITLED_GAME_H
 #define UNTITLED_GAME_H
 
+#include <string>
 
 #include "Board.h"
+
 
 class Game {
 private:
@@ -41,6 +43,8 @@ public:
      * @return True if the game is over
      */
     bool endGame();
+
+    void loopGame();
 };
 
 
