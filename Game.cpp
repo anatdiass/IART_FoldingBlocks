@@ -23,9 +23,15 @@ bool Game::endGame() {
     return false;
 }
 
-void Game::level1() {
-    this->board=Board(4,4);
-    this->board.setPiece(3,0,'R');
+void Game::level1() {                                               /*   ._____._____._____._____.   */
+    this->board=Board(4,4);                           /*   |     |     |     |     |   */
+    this->board.setPiece(3,0,'R');                  /*   ._____._____._____._____.   */
+    this->board=Board(4,4);                           /*   |     |     |     |     |   */
+                                                                    /*   ._____._____._____._____.   */
+                                                                    /*   |     |     |     |     |   */
+                                                                    /*   ._____._____._____._____.   */
+                                                                    /*   |  R  |     |     |     |   */
+                                                                    /*   ._____._____._____._____.   */
 }
 
 
@@ -46,32 +52,44 @@ void Game::level2(){
     board.setPiece(2,1,'A');
 }
 
+void Game::level3(){
+    this->board=Board(5,4);
+
+    board.deleteCell(0,2);
+    board.deleteCell(0,3);
+    board.deleteCell(4,0);
+    board.deleteCell(4,1);
+
+    board.setPiece(0,0,'V');
+    board.setPiece(4,2, 'A');
+}
+
 void Game::chooseLevel() {
     int choice;
-    cout << "\n----WELCOME TO FOLDING BLOCKS!----\n\n";
-    cout << "Choose what level you want to play: \n";
-    cout << "--------------\n";
-    cout << "----LEVELS----\n";
-    cout << " - Level 1 - \n";
-    cout << " - Level 2 - \n";
-    cout << "....\n";
+    cout << " ------------------------------------------------------------ " << endl;
+    cout << "                  WELCOME TO FOLDING BLOCKS!                  " << endl;
+    cout << " ------------------------------------------------------------ " << endl;
+    cout << " ______________________________________ " << endl;
+    cout << "|- Choose one of the available levels -|" << endl;
+    cout << "| Level 1 (Warm Up)                    |" << endl;
+    cout << "| Level 2 (Beginner)                   |" << endl;
+    cout << "| Level 3 (Beginner)                   |" << endl;
+    cout << "|______________________________________|" << endl;
     cout << "\nChoice: ";
     cin>>choice;
 
-    switch (choice){
+    switch(choice){
         case 1:
             level1();
             break;
         case 2:
             level2();
             break;
+        case 3:
+            level3();
+            break;
     }
     board.defineBlocks();
-    board.printBoard();
-
-    //TODO -> apagar
-    board.reflexionBlockRight(3,0);
-
     board.printBoard();
 }
 
