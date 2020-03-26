@@ -20,14 +20,14 @@ for(int i=0;i<b.getBlocks().size();i++) {
 
 
     /*TESTES*/
-/*
-    int row, col,V,s;
-    cout<<"nRows: "; cin>>row; cout<<"nCols: "; cin>>col;
 
-    Board b(row, col);
+ //   int row, col,V,s;
+ //   cout<<"nRows: "; cin>>row; cout<<"nCols: "; cin>>col;
+
+ //   Board b(row, col);
 
     //TEST BFS
-    V = row * col;
+ /*   V = row * col;
     Graph graph(V);
 
     b.setPiece(1,1,'a');
@@ -48,13 +48,11 @@ for(int i=0;i<b.getBlocks().size();i++) {
         }
     }
 
-    graph.BFS(s);
+    graph.BFS(s);*/
 
     //Reflexion right
-    //b.setPiece(1,1,'a');
-*/
-
-    /*b.setPiece(3,2, 'a');
+   /* b.setPiece(1,0,'a');
+    b.setPiece(3,2, 'a');
     b.setPiece(3,1,'a');
     b.setPiece(6,0,'a');
     b.defineBlocks();
@@ -63,7 +61,7 @@ for(int i=0;i<b.getBlocks().size();i++) {
     b.printBoard();*/
 
     //Reflexion left
-    /*b.setPiece(1,5,'a');
+   /* b.setPiece(1,5,'a');
     b.setPiece(6,5,'a');
     b.setPiece(3,4,'a');
     b.setPiece(3,3,'a');

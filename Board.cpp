@@ -290,7 +290,7 @@ void Board::reflexionBlockRight(int row, int col) {
                 if(destinationCell != ' ' || destinationCell=='-')
                     return;
             }
-            //Do reflexion if possible
+            //Do reflexion
             for(int i=0;i<nrPieces;i++){
                 pair<int,int>piece = block.second[i];   //piece.first -> row, piece.second->col
                 int pieceColumn = piece.second;
@@ -335,9 +335,11 @@ void Board::reflexionBlockLeft(int row, int col) {
             //Do reflexion
             for(int i=0;i<nrPieces;i++){
                 pair<int,int>piece = block.second[i];   //piece.first -> row, piece.second->col
+
                 int pieceColumn=piece.second;
                 int distToMLC =  pieceColumn-indexMostLeftCell;
                 int deltaX = (2*distToMLC)+1;
+
                 setPiece(piece.first, pieceColumn-deltaX, pieceColor);
             }
         }
@@ -377,9 +379,11 @@ void Board::reflexionBlockUp(int row, int col) {
             //Do reflexion
             for(int i=0;i<nrPieces;i++){
                 pair<int,int>piece = block.second[i];   //piece.first -> row, piece.second->col
+
                 int pieceRow=piece.first;
                 int distToMUC =  pieceRow-indexMostUpCell;
                 int deltaY = (2*distToMUC)+1;
+
                 setPiece(pieceRow-deltaY, piece.second, pieceColor);
             }
         }

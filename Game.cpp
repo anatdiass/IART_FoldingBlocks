@@ -66,12 +66,11 @@ void Game::chooseLevel() {
             level2();
             break;
     }
-
+    board.defineBlocks();
     board.printBoard();
 
     //TODO -> apagar
-    board.reflexionRight(3,0);
-    board.reflexionRight(2,1);
+    board.reflexionBlockRight(3,0);
 
     board.printBoard();
 }
