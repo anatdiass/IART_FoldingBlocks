@@ -16,17 +16,30 @@ private:
     vector<pair<char,vector<pair<int,int>>>>blocks;
 public:
 
-    Board();
-    Board(int nRows, int nCols);
-
-    int getNumRows();
-    int getNumCols();
-    vector<vector<char>> getBoard();
-    void deleteCell(int row, int col);
-
     //TODO -> nao implementado
     void printIrregularBoard();
 
+    Board();
+    Board(int nRows, int nCols);
+
+    /**
+     * Return the number of rows of the board
+     * @return Number of rows
+     */
+    int getNumRows();
+
+    /**
+     * Return the number of columns of the board
+     * @return Number of columns
+     */
+    int getNumCols();
+
+    /**
+     * Set the color of a piece as '-'
+     * @param row Vertical coordinate
+     * @param col Horizontal coordinate
+     */
+    void deleteCell(int row, int col);
 
     /**
      * Creates an empty board game

@@ -10,11 +10,36 @@ private:
 public:
     Game();
 
-    void chooseLevel();
+    /**
+     * Defines the board of first level
+     */
     void level1();
+
+    /**
+     * Defines the board of second level
+     */
     void level2();
+
+    /**
+     * Defines the board of third level
+     */
     void level3();
+
+    /**
+     * Allows the user to choose which level to play
+     */
+    void chooseLevel();
+
+    /**
+     * Verify if the board is full (all the pieces have a color)
+     * @return True if the board is full
+     */
     bool checkVictory();
+
+    /**
+     * Verify if the game is over (victory or loss)
+     * @return True if the game is over
+     */
     bool endGame();
 };
 
