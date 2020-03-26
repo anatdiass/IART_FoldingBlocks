@@ -12,6 +12,7 @@ CMakeFiles/untitled.dir/Game.cpp.obj: ../Board.h
 CMakeFiles/untitled.dir/Game.cpp.obj: ../Game.cpp
 CMakeFiles/untitled.dir/Game.cpp.obj: ../Game.h
 
+CMakeFiles/untitled.dir/main.cpp.obj: ../Algorithms.h
 CMakeFiles/untitled.dir/main.cpp.obj: ../Board.h
 CMakeFiles/untitled.dir/main.cpp.obj: ../Game.h
 CMakeFiles/untitled.dir/main.cpp.obj: ../main.cpp

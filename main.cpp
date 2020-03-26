@@ -21,13 +21,40 @@ for(int i=0;i<b.getBlocks().size();i++) {
 
     /*TESTES*/
 
-   // int row, col;
-   // cout<<"nRows: "; cin>>row; cout<<"nCols: "; cin>>col;
+    int row, col,V,s;
+    cout<<"nRows: "; cin>>row; cout<<"nCols: "; cin>>col;
 
-    //Board b(row, col);
+    Board b(row, col);
+
+    //TEST BFS
+    V = row * col;
+    Graph graph(V);
+
+    b.setPiece(1,1,'a');
+
+    for(unsigned int i = 0; i < b.getNumRows(); i++){
+        for(unsigned int j = 0; j < b.getNumCols(); j++){
+            if(b.getBoard().at(i).at(j) != ' '){
+                s = 1+j+i*b.getNumRows();
+                graph.addEdge(s,1+(j-1)+(i-1)*b.getNumRows());
+                graph.addEdge(s,1+(j)+(i-1)*b.getNumRows());
+                graph.addEdge(s,1+(j+1)+(i-1)*b.getNumRows());
+                graph.addEdge(s,1+(j-1)+(i)*b.getNumRows());
+                graph.addEdge(s,1+(j+1)+(i)*b.getNumRows());
+                graph.addEdge(s,1+(j-1)+(i+1)*b.getNumRows());
+                graph.addEdge(s,1+(j)+(i+1)*b.getNumRows());
+                graph.addEdge(s,1+(j+1)+(i+1)*b.getNumRows());
+            }
+        }
+    }
+
+    graph.BFS(s);
+
     //Reflexion right
-   /* b.setPiece(1,0,'a');
-    b.setPiece(3,2, 'a');
+    //b.setPiece(1,1,'a');
+
+
+    /*b.setPiece(3,2, 'a');
     b.setPiece(3,1,'a');
     b.setPiece(6,0,'a');
     b.defineBlocks();
@@ -69,7 +96,7 @@ for(int i=0;i<b.getBlocks().size();i++) {
 
 
     //Check full board
-    Game g = Game();
+    /*Game g = Game();
 
     g.board.setPiece(0,0,'a');
     g.board.setPiece(0,1,'b');
@@ -78,6 +105,6 @@ for(int i=0;i<b.getBlocks().size();i++) {
 
     g.board.printBoard();
 
-    g.checkFullBoard()?cout<<"full":cout<<"not full";
+    g.checkFullBoard()?cout<<"full":cout<<"not full";*/
 
 }
