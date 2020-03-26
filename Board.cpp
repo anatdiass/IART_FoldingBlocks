@@ -2,8 +2,8 @@
 
 /*CONSTRUCTOR*/
 Board::Board() {
-    this->nRows=4;
-    this->nCols=4;
+    this->nRows=2;
+    this->nCols=2;
     createEmptyBoard();
 }
 

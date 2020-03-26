@@ -6,9 +6,13 @@
 
 class Game {
 private:
-    Board board;
 public:
     Game();
+
+    //TODO -> board tem de ser private --> public so para testar no main
+    Board board;
+
+    bool checkFullBoard();
 };
 
 
