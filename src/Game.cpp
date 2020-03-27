@@ -140,3 +140,6 @@ void Game::loopGame() {
     cout << "End of game!\n";
 }
 
+vector<vector<int>> Game ::possibleMoves(int row, int col){
+    
+}

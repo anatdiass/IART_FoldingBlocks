@@ -45,6 +45,8 @@ public:
     bool endGame();
 
     void loopGame();
+
+    vector<vector<int>> possibleMoves(int row, int col);
 };
 
 

@@ -5,27 +5,30 @@
 #ifndef UNTITLED_ALGORITHMS_H
 #define UNTITLED_ALGORITHMS_H
 
-#include "Board.h"
+#include "Game.h"
 #include <list>
 
-void bst(Board board);
+using namespace std::chrono;
 
-/*class Graph
-{
-    int V;    // No. of vertices
+struct node{
+    //used to save the piece or the block of pieces that were selected
+    vector<int> selected;
+    //used to save the coords of the pieces after a reflection
+    vector<int> reflected;
+    //level in the tree
+    int level;
+    //value of the node, used to aStar and greedy
+    float value;
+    //heuristic value of the node, used only for aStar
+    float heuristic;
+    //Board that we are playing at the moment
+    Game prevGame;
+    //pointer to the father node
+    struct node *father;
+};
 
-    // Pointer to an array containing adjacency
-    // lists
-    list <int> *adj;
-public:
-    Graph(int V);  // Constructor
+void bst(Game game);
 
-    // function to add an edge to graph
-    void addEdge(int v, int w);
-
-    // prints BFS traversal from a given source s
-    void BFS(int s);
-};*/
 
 
 #endif //UNTITLED_ALGORITHMS_H
