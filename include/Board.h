@@ -20,6 +20,11 @@ public:
     void printIrregularBoard();
 
     Board();
+    /**
+     * Creates an empty board game
+     * @param nRows number of rows
+     * @param nCols number of colums
+     */
     Board(int nRows, int nCols);
 
     /**
@@ -40,16 +45,6 @@ public:
      * @param col Horizontal coordinate
      */
     void deleteCell(int row, int col);
-
-    /**
-     * Creates an empty board game
-     */
-    void createEmptyBoard();
-
-    /**
-     * Prints the border of a single cell
-     */
-    static void printBorderCell();
 
     /**
      * Prints all the board horizontal lines
@@ -118,10 +113,16 @@ public:
     void defineBlocks();
 
     /**
-     * Returns the blocks of board
+     * Returns all the blocks of the board
      * @return Board's blocks
      */
     vector<pair<char,vector<pair<int,int>>>> getBlocks();
+
+    /**
+     * Returns the colors of all the blocks of the board
+     * @return Board's blocks' colors
+     */
+    vector<char> getBlocksColors();
 
     /**
      * Gets the block of a certain color
@@ -159,68 +160,56 @@ public:
     static int getMostDownCell(const vector<pair<int,int>>& positions);
 
     /**
-     * Right reflexion of a single piece
-     * @param row Vertical coordinate of piece
-     * @param col Horizontal coordinate of piece
-     * @return True if the reflexion was done
+     * Verify if the Right reflexion of a block is possible
+     * @param pieceColor Color of the block 
+     * @return True if the reflexion is possible
      */
-    bool reflexionRight(int row, int col);
+    bool verifyReflexionBlockRight(char pieceColor);
 
     /**
-     * Left reflexion of a single piece
-     * @param row Vertical coordinate of piece
-     * @param col Horizontal coordinate of piece
-     * @return True if the reflexion was done
+     * Verify if the Left reflexion of a block is possible
+     * @param pieceColor Color of the block 
+     * @return True if the reflexion is possible
      */
-    bool reflexionLeft(int row, int col);
+    bool verifyReflexionBlockLeft(char pieceColor);
 
     /**
-     * Up reflexion of a single piece
-     * @param row Vertical coordinate of piece
-     * @param col Horizontal coordinate of piece
-     * @return True if the reflexion was done
+     * Verify if the Up reflexion of a block is possible
+     * @param pieceColor Color of the block 
+     * @return True if the reflexion is possible
      */
-    bool reflexionUp(int row, int col);
+    bool verifyReflexionBlockUp(char pieceColor);
 
     /**
-     * Down reflexion of a single piece
-     * @param row Vertical coordinate of piece
-     * @param col Horizontal coordinate of piece
-     * @return True if the reflexion was done
+     * Verify if the Down reflexion of a block is possible
+     * @param pieceColor Color of the block 
+     * @return True if the reflexion is possible
      */
-    bool reflexionDown(int row, int col);
+    bool verifyReflexionBlockDown(char pieceColor);
 
     /**
-     * Right reflexion of all the pieces with the same color of indicated piece
-     * @param row Vertical coordinate of piece
-     * @param col Horizontal coordinate of piece
-     * @return True if the reflexion was done
+     * Right reflexion of a block
+     * @param pieceColor Color of the block 
      */
-    bool reflexionBlockRight(int row, int col);
+    void reflexionBlockRight(char pieceColor);
 
     /**
-     * Left reflexion of all the pieces with the same color of indicated piece
-     * @param row Vertical coordinate of piece
-     * @param col Horizontal coordinate of piece
-     * @return True if the reflexion was done
+     * Left reflexion of a block
+     * @param pieceColor Color of the block 
      */
-    bool reflexionBlockLeft(int row, int col);
+    void reflexionBlockLeft(char pieceColor);
 
     /**
      * Up reflexion of all the pieces with the same color of indicated piece
-     * @param row Vertical coordinate of piece
-     * @param col Horizontal coordinate of piece
-     * @return True if the reflexion was done
+     * @param pieceColor Color of the block 
      */
-    bool reflexionBlockUp(int row, int col);
+    void reflexionBlockUp(char pieceColor);
 
     /**
      * Down reflexion of all the pieces with the same color of indicated piece
-     * @param row Vertical coordinate of piece
-     * @param col Horizontal coordinate of piece
-     * @return True if the reflexion was done
+     * @param pieceColor Color of the block 
      */
-    bool reflexionBlockDown(int row, int col);
+    void reflexionBlockDown(char pieceColor);
 
 
 };

@@ -85,58 +85,149 @@ void Game::chooseLevel() {
             level3();
             break;
     }
-    board.defineBlocks();
-    board.printBoard();
+
 }
 
 void Game::loopGame() {
-    string colorInput;
-    int n = colorInput.length();
 
-    // declaring character array
-    char char_array[n + 1];
+    char color;
+    int  move;
 
-    int row, col, move;
     while(!endGame()){
+
+        board.defineBlocks();
+        board.printBoard();
 
         //Gets block by color
         cout << "Choose the color of your block: "; cin.ignore(1000, '\n');
-        getline(cin,colorInput);
-        strcpy(char_array, colorInput.c_str());
-        char color = char_array[0];
-
-        pair<char, vector<pair<int,int>>> block = board.getBlock(color);
-        row = block.second[0].first;
-        col = block.second[0].second;
+        cin >> color;
+        
+        //check if color is valid
+        while(!board.blockExists(color))
+        {
+            cin.clear();
+            cin.ignore();
+            cout << "Color does not exist!" << endl << "Choose the color of your block: ";
+            cin>>color;
+        }
 
         cout << "Choose one move\n";
-        cout << "1 - Reflexion right\n";
-        cout << "2 - Reflexion left\n";
-        cout << "3 - Reflexion down\n";
-        cout << "4 - Reflexion up\n";
-        cout << "Move: "; cin>>move;
-
-
-        switch(move){
-            case 1:
-                board.reflexionBlockRight(row,col);
-                board.defineBlocks();
-                break;
-            case 2:
-                board.reflexionBlockLeft(row, col);
-                board.defineBlocks();
-                break;
-            case 3:
-                board.reflexionBlockDown(row,col);
-                board.defineBlocks();
-                break;
-            case 4:
-                board.reflexionBlockUp(row,col);
-                board.defineBlocks();
-                break;
+        cout << RIGTH << " - Reflexion right\n";
+        cout << LEFT << " - Reflexion left\n";
+        cout << DOWN << " - Reflexion down\n";
+        cout << UP << " - Reflexion up\n";
+        cout << "Move: "; 
+        cin>>move;
+        
+        //check if move is valid
+        while (!cin.good() || move < 1 || move > 4)
+        {
+            cin.clear();
+            cin.ignore(INT_MAX, '\n');
+            cout << "Not an option" << endl << "Choose one move: ";
+            cin>>move;
         }
-        board.printBoard();
+
+        if(verifyPlay(color,move)){
+            play(color,move);
+        }
+
     }
+
+    board.printBoard();
     cout << "End of game!\n";
 }
+
+vector<int> Game::getBlockNextValidMoves(char color){
+    vector<int> validMoves;
+    if(board.verifyReflexionBlockRight(color)){
+        validMoves.push_back(RIGTH);
+    }
+    if(board.verifyReflexionBlockLeft(color)){
+        validMoves.push_back(LEFT);
+    }
+    if(board.verifyReflexionBlockDown(color)){
+        validMoves.push_back(DOWN);
+    }
+    if(board.verifyReflexionBlockUp(color)){
+        validMoves.push_back(UP);
+    }
+    return validMoves;
+}
+
+vector<pair<char, vector<int>>> Game:: getNextValidMoves(){
+    vector<pair<char, vector<int>>> validMoves; 
+
+    vector<char> colors = board.getBlocksColors();
+    vector<int> colorMoves;
+    pair<char, vector<int>> colorPair;
+
+
+    for (auto & color : colors) {
+        colorMoves = getBlockNextValidMoves(color);
+
+        if(!colorMoves.empty()){
+            colorPair = make_pair(color,colorMoves);
+            validMoves.push_back(colorPair);
+        }
+    }
+    
+    return validMoves;
+}
+
+bool Game::verifyPlay(char color, int move){
+    vector<pair<char, vector<int>>> allMoves = getNextValidMoves();
+
+    for (auto & blockMoves : allMoves) {
+
+        if (blockMoves.first == color){
+
+            bool found;
+            
+            for (auto & currMove : blockMoves.second) {
+                if(currMove == move){
+                    found = true;
+                }
+            }
+
+            if(!found){
+                cout << "Move not possible " << endl;
+                return false;
+            }
+            else return true;
+        }
+        
+    }
+    cout << "Color not found " << endl;
+    return false; 
+}
+
+void Game::play(char color, int move){
+
+    switch(move){
+        case RIGTH:
+            board.reflexionBlockRight(color);
+            break;
+        case LEFT:
+            board.reflexionBlockLeft(color);
+            break;
+        case DOWN:
+            board.reflexionBlockDown(color);
+            break;
+        case UP:
+            board.reflexionBlockUp(color);
+            break;
+        default:
+            break;
+    }
+
+}
+
+
+
+
+
+
+
+
 

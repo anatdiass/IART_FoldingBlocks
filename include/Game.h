@@ -5,12 +5,55 @@
 
 #include "Board.h"
 
+int const RIGTH = 1;
+int const LEFT = 2;
+int const DOWN = 3;
+int const UP = 4;
 
 class Game {
 private:
     Board board;
+   
+
 public:
     Game();
+    void loopGame();
+
+    /**
+     * Get the next valid moves for a block
+     * @param color Color of the block 
+     * @return vector with the valid the moves
+     */
+    vector<int> getBlockNextValidMoves(char color);
+
+    /**
+     * Get all the next valid moves
+     * @return vector with the valid the moves
+     */
+    vector<pair<char, vector<int>>> getNextValidMoves();
+
+    /**
+     * Verify if a play is valid 
+     * @param color Color of the block 
+     * @param move type of move 
+     * @return True if the play is full
+     */
+    bool verifyPlay(char color, int move);
+
+    void play(char color, int move);
+
+
+     /**
+     * Verify if the board is full (all the pieces have a color)
+     * @return True if the board is full
+     */
+    bool checkVictory();
+
+    /**
+     * Verify if the game is over (victory or loss)
+     * @return True if the game is over
+     */
+    bool endGame();
 
     /**
      * Defines the board of first level
@@ -32,19 +75,6 @@ public:
      */
     void chooseLevel();
 
-    /**
-     * Verify if the board is full (all the pieces have a color)
-     * @return True if the board is full
-     */
-    bool checkVictory();
-
-    /**
-     * Verify if the game is over (victory or loss)
-     * @return True if the game is over
-     */
-    bool endGame();
-
-    void loopGame();
 };
 
 

@@ -1,4 +1,6 @@
 #include "Board.h"
+using namespace std;
+
 
 /*CONSTRUCTOR*/
 
@@ -13,7 +15,13 @@ Board::Board() {
 }
 
 Board::Board(int nRows, int nCols) : nRows(nRows), nCols(nCols) {
-    createEmptyBoard();
+    for(int i = 0; i < nRows; i++){
+        vector<char> temp;
+        for(int j = 0; j < nCols; j++){
+            temp.push_back(' ');
+        }
+        board.push_back(temp);
+    }
 }
 
 int Board::getNumRows() {
@@ -28,26 +36,10 @@ void Board::deleteCell(int row, int col) {
     setPiece(row, col, '-');
 }
 
-/*BUILD BOARD*/
-void Board::createEmptyBoard() {
-    for(int i = 0; i < nRows; i++){
-        std::vector<char> temp;
-        for(int j = 0; j < nCols; j++){
-            temp.push_back(' ');
-        }
-        board.push_back(temp);
-    }
-}
-
-/*PRINT BOARD*/
-void Board::printBorderCell() {
-    cout << "_____.";
-}
-
 void Board::printBorderLines() {
     cout << "   .";
     for (int i=0; i<nCols; i++){
-        printBorderCell();
+        cout << "_____.";
     }
 }
 
@@ -63,6 +55,8 @@ void Board::printBoard() {
 
     printHorizontalNumbers();
     printBorderLines();
+    cout << "\n";
+
     for(int i=0;i<nRows;i++){
 
         //Print row indice
@@ -184,6 +178,15 @@ pair<char, vector<pair<int,int>>> Board::getBlock(char blockColor){
 
 }
 
+vector<char> Board::getBlocksColors(){
+    vector<char> colors;
+    for (auto & block : blocks) {
+        colors.push_back(block.first);
+    }
+    return colors;
+}
+
+
 int Board::getMostRightCell(const vector<pair<int,int>>& positions){
     int maxX=0;
     for(auto & position : positions){
@@ -220,224 +223,183 @@ int Board::getMostDownCell(const vector<pair<int, int>>& positions) {
     return maxY;
 }
 
-/*REFLEXION FUNCTIONS*/
-bool Board::reflexionRight(int row, int col) {
-    char cellContent = getPieceColor(row,col);
-    if(cellContent==' ' || nCols<=col)
-        return false;
+/*VERIFY REFLEXION FUNCTIONS*/
 
-    if(getPieceColor(row, col+1)==' ' && getPieceColor(row,col+1)!='-')
-        setPiece(row, col+1, cellContent);
 
-    return true;
-}
-
-bool Board::reflexionLeft(int row, int col) {
-    char cellContent = getPieceColor(row,col);
-    if(cellContent==' '  || col==1)
-        return false;
-
-    if(getPieceColor(row, col-1)==' ' && getPieceColor(row,col-1)!='-')
-        setPiece(row, col-1, cellContent);
-
-    return true;
-}
-
-bool Board::reflexionUp(int row, int col) {
-    char cellContent = getPieceColor(row,col);
-    if(cellContent==' '  || row==1)
-        return false;
-
-    if(getPieceColor(row-1,col)==' ' &&getPieceColor(row-1,col)!='-')
-        setPiece(row-1, col, cellContent);
-
-    return true;
-}
-
-bool Board::reflexionDown(int row, int col) {
-    char cellContent = getPieceColor(row,col);
-    if(cellContent==' ' || nRows<=row)
-        return false;
-
-    if(getPieceColor(row+1,col)==' ' && getPieceColor(row+1,col)!='-')
-        setPiece(row+1,col,cellContent);
-
-    return true;
-}
-
-bool Board::reflexionBlockRight(int row, int col) {
-    char pieceColor = getPieceColor(row,col);
-
-    if(pieceColor==' ')
-        return false;
+bool Board::verifyReflexionBlockRight(char pieceColor) {
 
     pair<char, vector<pair<int,int>>> block = getBlock(pieceColor);
     int nrPieces = block.second.size();
 
-    if(nrPieces==1)
-        reflexionRight(row,col);
+    int indexMostRightCell = getMostRightCell(block.second);
+    int indexMostLeftCell = getMostLeftCell(block.second);
+    int compBetweenCells = indexMostRightCell-indexMostLeftCell;
 
-    else {
-        int indexMostRightCell = getMostRightCell(block.second);
-        int indexMostLeftCell = getMostLeftCell(block.second);
-        int compBetweenCells = indexMostRightCell-indexMostLeftCell;
-        //verify if the reflexion is possible
-        if((indexMostLeftCell+(2*compBetweenCells)+1)>=nCols)
-            return false;
-        else{
-            //Verify the destination pieces
-            for(int i=0;i<nrPieces;i++){
-                pair<int,int>piece = block.second[i];   //piece.first -> row, piece.second->col
-                int pieceColumn = piece.second;
-                int distToMRC = indexMostRightCell - pieceColumn;
-                int deltaX = (2*distToMRC) + 1;
-                char destinationCell = getPieceColor(piece.first,pieceColumn+deltaX);
-                if(destinationCell != ' ' || destinationCell=='-')
-                    return false;
-            }
-            //Do reflexion
-            for(int i=0;i<nrPieces;i++){
-                pair<int,int>piece = block.second[i];   //piece.first -> row, piece.second->col
-                int pieceColumn = piece.second;
-                int distToMRC = indexMostRightCell - pieceColumn;
-                int deltaX = (2*distToMRC) + 1;
-                setPiece(piece.first, pieceColumn+deltaX, pieceColor);
-            }
+     //verify if the reflexion is possible
+    if((indexMostLeftCell+(2*compBetweenCells)+1)>=nCols)
+        return false;
+    else{
+        //Verify the destination pieces are available
+        for(int i=0;i<nrPieces;i++){
+            pair<int,int>piece = block.second[i];   //piece.first -> row, piece.second->col
+            int pieceColumn = piece.second;
+            int distToMRC = indexMostRightCell - pieceColumn;
+            int deltaX = (2*distToMRC) + 1;
+            char destinationCell = getPieceColor(piece.first,pieceColumn+deltaX);
+            if(destinationCell != ' ' || destinationCell=='-')
+                return false;
+        }
+       
+    }
+    return true;
+}
+
+bool Board::verifyReflexionBlockLeft(char pieceColor) {
+
+    pair<char, vector<pair<int,int>>> block = getBlock(pieceColor);
+    int nrPieces = block.second.size();
+    
+    int indexMostRightCell = getMostRightCell(block.second);
+    int indexMostLeftCell = getMostLeftCell(block.second);
+    int compBetweenCells = indexMostRightCell-indexMostLeftCell;
+
+    //verify if the reflexion is possible
+    if((indexMostRightCell-(2*compBetweenCells+1))<0)
+        return false;
+    else{
+        //Verify the destination pieces are available
+        for(int i=0;i<nrPieces;i++){
+            pair<int,int>piece = block.second[i];   //piece.first -> row, piece.second->col
+            int pieceColumn=piece.second;
+            int distToMLC =  pieceColumn-indexMostLeftCell;
+            int deltaX = (2*distToMLC)+1;
+            char destinationCell = getPieceColor(piece.first,pieceColumn-deltaX);
+            if(destinationCell != ' ' || destinationCell=='-')
+                return false;
         }
     }
     return true;
 }
 
-bool Board::reflexionBlockLeft(int row, int col) {
-    char pieceColor = getPieceColor(row,col);
-
-    if(pieceColor==' ')
-        return false;
+bool Board::verifyReflexionBlockUp(char pieceColor) {
 
     pair<char, vector<pair<int,int>>> block = getBlock(pieceColor);
     int nrPieces = block.second.size();
 
-    if(nrPieces==1)
-        reflexionLeft(row,col);
+    int indexMostDownCell = getMostDownCell(block.second);
+    int indexMostUpCell = getMostUpCell(block.second);
+    int heightBetweenCells = indexMostDownCell-indexMostUpCell;
 
-    else {
-        int indexMostRightCell = getMostRightCell(block.second);
-        int indexMostLeftCell = getMostLeftCell(block.second);
-        int compBetweenCells = indexMostRightCell-indexMostLeftCell;
-        //verify if the reflexion is possible
-        if((indexMostRightCell-(2*compBetweenCells+1))<0)
-            return false;
-        else{
-            //Verify the destination pieces
-            for(int i=0;i<nrPieces;i++){
-                pair<int,int>piece = block.second[i];   //piece.first -> row, piece.second->col
-                int pieceColumn=piece.second;
-                int distToMLC =  pieceColumn-indexMostLeftCell;
-                int deltaX = (2*distToMLC)+1;
-                char destinationCell = getPieceColor(piece.first,pieceColumn-deltaX);
-                if(destinationCell != ' ' || destinationCell=='-')
-                    return false;
-            }
-            //Do reflexion
-            for(int i=0;i<nrPieces;i++){
-                pair<int,int>piece = block.second[i];   //piece.first -> row, piece.second->col
-
-                int pieceColumn=piece.second;
-                int distToMLC =  pieceColumn-indexMostLeftCell;
-                int deltaX = (2*distToMLC)+1;
-
-                setPiece(piece.first, pieceColumn-deltaX, pieceColor);
-            }
-        }
-    }
-
-    return true;
-}
-
-bool Board::reflexionBlockUp(int row, int col) {
-    char pieceColor = getPieceColor(row,col);
-
-    if(pieceColor==' ')
+    //verify if the reflexion is possible
+    if((indexMostDownCell-(2*heightBetweenCells+1))<0)
         return false;
-
-    pair<char, vector<pair<int,int>>> block = getBlock(pieceColor);
-    int nrPieces = block.second.size();
-
-    if(nrPieces==1)
-        reflexionUp(row,col);
-
-    else {
-        int indexMostDownCell = getMostDownCell(block.second);
-        int indexMostUpCell = getMostUpCell(block.second);
-        int heightBetweenCells = indexMostDownCell-indexMostUpCell;
-        //verify if the reflexion is possible
-        if((indexMostDownCell-(2*heightBetweenCells+1))<0)
-            return false;
-        else{
-            //Verify the destination pieces
-            for(int i=0;i<nrPieces;i++){
-                pair<int,int>piece = block.second[i];   //piece.first -> row, piece.second->col
-                int pieceRow=piece.first;
-                int distToMUC =  pieceRow-indexMostUpCell;
-                int deltaY = (2*distToMUC)+1;
-                char destinationCell = getPieceColor(pieceRow-deltaY,piece.second);
-                if(destinationCell != ' ' || destinationCell=='-')
-                    return false;
-            }
-            //Do reflexion
-            for(int i=0;i<nrPieces;i++){
-                pair<int,int>piece = block.second[i];   //piece.first -> row, piece.second->col
-
-                int pieceRow=piece.first;
-                int distToMUC =  pieceRow-indexMostUpCell;
-                int deltaY = (2*distToMUC)+1;
-
-                setPiece(pieceRow-deltaY, piece.second, pieceColor);
-            }
+    else{
+        //Verify if the destination pieces are available
+        for(int i=0;i<nrPieces;i++){
+            pair<int,int>piece = block.second[i];   //piece.first -> row, piece.second->col
+            int pieceRow=piece.first;
+            int distToMUC =  pieceRow-indexMostUpCell;
+            int deltaY = (2*distToMUC)+1;
+            char destinationCell = getPieceColor(pieceRow-deltaY,piece.second);
+            if(destinationCell != ' ' || destinationCell=='-')
+                return false;
         }
     }
     return true;
 }
 
-bool Board::reflexionBlockDown(int row, int col) {
-    char pieceColor = getPieceColor(row,col);
-
-    if(pieceColor==' ')
-        return false;
+bool Board::verifyReflexionBlockDown(char pieceColor) {
 
     pair<char, vector<pair<int,int>>> block = getBlock(pieceColor);
     int nrPieces = block.second.size();
-
-    if(nrPieces==1)
-        reflexionDown(row,col);
-
-    else {
-        int indexMostDownCell = getMostDownCell(block.second);
-        int indexMostUpCell = getMostUpCell(block.second);
-        int heightBetweenCells = indexMostDownCell-indexMostUpCell;
-        //verify if the reflexion is possible
-        if((indexMostUpCell+(2*heightBetweenCells)+1)>=nCols)
-            return false;
-        else{
-            //Verify the destination pieces
-            for(int i=0;i<nrPieces;i++){
-                pair<int,int>piece = block.second[i];   //piece.first -> row, piece.second->col
-                int pieceRow = piece.first;
-                int distToMDC = indexMostDownCell - pieceRow;
-                int deltaY = (2*distToMDC) + 1;
-                char destinationCell = getPieceColor(pieceRow+deltaY,piece.second);
-                if(destinationCell != ' ' || destinationCell=='-')
-                    return false;
-            }
-            //Do reflexion
-            for(int i=0;i<nrPieces;i++){
-                pair<int,int>piece = block.second[i];   //piece.first -> row, piece.second->col
-                int pieceRow = piece.first;
-                int distToMDC = indexMostDownCell - pieceRow;
-                int deltaY = (2*distToMDC) + 1;
-                setPiece(pieceRow+deltaY, piece.second, pieceColor);
-            }
+  
+    int indexMostDownCell = getMostDownCell(block.second);
+    int indexMostUpCell = getMostUpCell(block.second);
+    int heightBetweenCells = indexMostDownCell-indexMostUpCell;
+    
+    //verify if the reflexion is possible
+    if((indexMostUpCell+(2*heightBetweenCells)+1)>=nCols)
+        return false;
+    else{
+        //Verify if the destination pieces are available
+        for(int i=0;i<nrPieces;i++){
+            pair<int,int>piece = block.second[i];   //piece.first -> row, piece.second->col
+            int pieceRow = piece.first;
+            int distToMDC = indexMostDownCell - pieceRow;
+            int deltaY = (2*distToMDC) + 1;
+            char destinationCell = getPieceColor(pieceRow+deltaY,piece.second);
+            if(destinationCell != ' ' || destinationCell=='-')
+                return false;
         }
     }
+    
     return true;
 }
+
+/*DO REFLEXION FUNCTIONS*/
+
+void Board::reflexionBlockRight(char pieceColor) {
+
+    pair<char, vector<pair<int,int>>> block = getBlock(pieceColor);
+    int nrPieces = block.second.size();
+    int indexMostRightCell = getMostRightCell(block.second);
+        
+    for(int i=0; i<nrPieces; i++){
+        pair<int,int>piece = block.second[i];   //piece.first -> row, piece.second->col
+        int pieceColumn = piece.second;
+        int distToMRC = indexMostRightCell - pieceColumn;
+        int deltaX = (2*distToMRC) + 1;
+        setPiece(piece.first, pieceColumn+deltaX, pieceColor);
+    }
+}
+
+void Board::reflexionBlockLeft(char pieceColor) {
+
+    pair<char, vector<pair<int,int>>> block = getBlock(pieceColor);
+    int nrPieces = block.second.size();
+    int indexMostLeftCell = getMostLeftCell(block.second);
+
+    for(int i=0;i<nrPieces;i++){
+        pair<int,int>piece = block.second[i];   //piece.first -> row, piece.second->col
+
+        int pieceColumn=piece.second;
+        int distToMLC =  pieceColumn-indexMostLeftCell;
+        int deltaX = (2*distToMLC)+1;
+
+        setPiece(piece.first, pieceColumn-deltaX, pieceColor);
+    }
+}
+
+void Board::reflexionBlockUp(char pieceColor) {
+
+    pair<char, vector<pair<int,int>>> block = getBlock(pieceColor);
+    int nrPieces = block.second.size();
+    int indexMostUpCell = getMostUpCell(block.second);
+    
+    for(int i=0;i<nrPieces;i++){
+        pair<int,int>piece = block.second[i];   //piece.first -> row, piece.second->col
+
+        int pieceRow=piece.first;
+        int distToMUC =  pieceRow-indexMostUpCell;
+        int deltaY = (2*distToMUC)+1;
+
+        setPiece(pieceRow-deltaY, piece.second, pieceColor);
+    }
+}
+
+void Board::reflexionBlockDown(char pieceColor) {
+
+    pair<char, vector<pair<int,int>>> block = getBlock(pieceColor);
+    int nrPieces = block.second.size();
+    int indexMostDownCell = getMostDownCell(block.second);
+    
+    for(int i=0;i<nrPieces;i++){
+        pair<int,int>piece = block.second[i];   //piece.first -> row, piece.second->col
+        int pieceRow = piece.first;
+        int distToMDC = indexMostDownCell - pieceRow;
+        int deltaY = (2*distToMDC) + 1;
+        setPiece(pieceRow+deltaY, piece.second, pieceColor);
+    }
+}
+
+
