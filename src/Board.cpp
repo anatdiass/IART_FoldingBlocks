@@ -33,6 +33,11 @@ int Board::getNumCols() {
     return this->nCols;
 }
 
+vector<vector<char>> Board::getBoard(){
+    return this->board;
+}
+
+
 void Board::deleteCell(int row, int col) {
     setPiece(row, col, '-');
 }
