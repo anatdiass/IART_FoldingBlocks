@@ -18,6 +18,10 @@ private:
 public:
     Game();
 
+    void setBoard(Board board){
+        this->board = board;
+    }
+
     /**
      * @brief Get the current board of the game
      * 

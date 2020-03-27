@@ -9,15 +9,33 @@ using namespace std;
 
 void bfs(Game game)
 {
-    // Mark all the vertices as not visited
-    //int N = board.getNumCols() * board.getNumRows();
-
     queue<struct node *> bfsTree;
+    game.getBoard().defineBlocks();
+    vector<pair<char, vector<pair<int, int>>>> blocks = game.getBoard().getBlocks();
+    cout << blocks.size() << endl;
+    vector<char> allcolors = game.getBoard().getBlocksColors();
+    cout << allcolors.size() << endl;
 
-    do
+    for(int i = 0; i < allcolors.size();i++){
+        cout << "sdfghjk" << endl;
+        cout << allcolors.at(i) << endl;
+    }
+    /*int a = 0;
+    for (int i = 0; i < game.getBoard().getNumRows(); i++){
+            for (int j = 0; j < game.getBoard().getNumCols(); j++)
+            {
+                a++;
+                cout << game.getBoard().getBoard().at(i).at(j) << endl;
+            }
+            }
+    cout << a << endl;*/
+
+
+    
+    /*do
     {
-        for (int i = 0; i < (int)game.getBoard().getBoard().size(); i++){
-            for (int j = 0; j < (int)game.getBoard().getBoard().at(i).size(); j++)
+        for (int i = 0; i < game.getBoard().getNumRows(); i++){
+            for (int j = 0; j < game.getBoard().getNumCols(); j++)
             {
                 /*vector<vector<int>> possibleMoves = game.possibleMovesList(i, j);
                 if (possibleMoves.size() > 0)
@@ -63,10 +81,10 @@ void bfs(Game game)
                 getSolution();
                 cout << "\n\n\n\nVitoria do bot em : " << currNode->level << "\n";
                 stopClock();
-                return;*/
+                return;
             }
         } while (!game.endGame() );
 
     } while (bfsTree.size() > 0);
-    cout << "\n\nError, not a valid board because not a valid sequence found!\n\n";
+    cout << "\n\nError, not a valid board because not a valid sequence found!\n\n";*/
 }

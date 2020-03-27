@@ -4,7 +4,7 @@
 
 Game::Game() {
     this->board=Board();
-    chooseLevel();
+    //chooseLevel();
 }
 
 Board Game::getBoard(){

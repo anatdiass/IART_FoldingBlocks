@@ -28,7 +28,7 @@ struct node{
     struct node *father;
 };
 
-void bst(Game game);
+void bfs(Game game);
 
 
 
