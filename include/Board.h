@@ -28,6 +28,13 @@ public:
     Board(int nRows, int nCols);
 
     /**
+     * @brief Get the Board object
+     * 
+     * @return board
+     */
+    vector<vector<char>> getBoard();
+
+    /**
      * Return the number of rows of the board
      * @return Number of rows
      */
