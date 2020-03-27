@@ -7,8 +7,8 @@
 
 using namespace std;
 
-void bfs(Game game)
-{
+//void bfs(Game game)
+//{
     // Mark all the vertices as not visited
     //int N = board.getNumCols() * board.getNumRows();
 
@@ -68,4 +68,4 @@ void bfs(Game game)
 
     } while (bfsTree.size() > 0);
     cout << "\n\nError, not a valid board because not a valid sequence found!\n\n";*/
-}
+//}

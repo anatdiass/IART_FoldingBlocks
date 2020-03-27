@@ -19,8 +19,15 @@ bool Game::checkVictory() {
 }
 
 bool Game::endGame() {
-    if(checkVictory() /*|| noMoreMovesAvailable*/)
+    if(getNextValidMoves().empty()){
+    
+        if(checkVictory()){
+            cout << "YOU WON!!!" << endl;
+        }
+        else cout << "YOU LOST!!!" << endl;
         return true;
+
+    }
 
     return false;
 }
@@ -93,7 +100,7 @@ void Game::loopGame() {
     char color;
     int  move;
 
-    while(!endGame()){
+    do{
 
         board.defineBlocks();
         board.printBoard();
@@ -132,7 +139,7 @@ void Game::loopGame() {
             play(color,move);
         }
 
-    }
+    }while(!endGame());
 
     board.printBoard();
     cout << "End of game!\n";

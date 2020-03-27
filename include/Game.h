@@ -36,12 +36,16 @@ public:
      * Verify if a play is valid 
      * @param color Color of the block 
      * @param move type of move 
-     * @return True if the play is full
+     * @return True if the play is valid
      */
     bool verifyPlay(char color, int move);
 
+    /**
+     * Make a play  
+     * @param color Color of the block 
+     * @param move type of move 
+     */
     void play(char color, int move);
-
 
      /**
      * Verify if the board is full (all the pieces have a color)
