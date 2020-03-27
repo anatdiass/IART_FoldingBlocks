@@ -198,7 +198,7 @@ int Board::getMostRightCell(const vector<pair<int,int>>& positions){
 }
 
 int Board::getMostLeftCell(const vector<pair<int,int>>&positions){
-    int minX;
+    int minX=positions[0].second;
     for(auto & position : positions){
         if(position.second<minX)
             minX=position.second;
@@ -207,7 +207,7 @@ int Board::getMostLeftCell(const vector<pair<int,int>>&positions){
 }
 
 int Board::getMostUpCell(const vector<pair<int, int>>& positions) {
-    int minY;
+    int minY=positions[0].first;
     for(auto &position: positions){
         if(position.first<minY)
             minY=position.first;

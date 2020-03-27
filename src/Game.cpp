@@ -33,13 +33,13 @@ bool Game::endGame() {
 }
 
 void Game::level1() {
-    this->board=Board(4,4);
-    this->board.setPiece(3,0,'R');
+    this->board=Board(6,6);
+    this->board.setPiece(4,4,'R');
 }
 
 
 void Game::level2(){
-    this->board=Board(4,4);
+    this->board=Board(5,5);
 
     //Null cells
     board.deleteCell(0,1);
@@ -178,6 +178,20 @@ vector<pair<char, vector<int>>> Game:: getNextValidMoves(){
             validMoves.push_back(colorPair);
         }
     }
+
+    //PRINT VALID MOVES
+        cout << "VALID MOVES " <<endl;
+
+     for (auto & c : validMoves) {
+        cout << "Color: " << c.first;
+
+        for (auto & d : c.second) {
+            cout << " Move: " << d;
+        }
+        cout << endl;
+      
+    }
+    
     
     return validMoves;
 }
