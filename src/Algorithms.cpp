@@ -7,21 +7,22 @@
 
 using namespace std;
 
-//void bfs(Game game)
-//{
+void bfs(Game game)
+{
     // Mark all the vertices as not visited
     //int N = board.getNumCols() * board.getNumRows();
 
-    /*queue<struct node *> bfsTree;
+    queue<struct node *> bfsTree;
 
     do
     {
         for (int i = 0; i < (int)game.getBoard().getBoard().size(); i++){
             for (int j = 0; j < (int)game.getBoard().getBoard().at(i).size(); j++)
             {
-                vector<vector<int>> possibleMoves = game.possibleMovesList(i, j);
+                /*vector<vector<int>> possibleMoves = game.possibleMovesList(i, j);
                 if (possibleMoves.size() > 0)
                 {
+                    
                     for (unsigned int w = 0; w < possibleMoves.size(); w++)
                     {
                         vector<int> from = {i, j};
@@ -62,10 +63,10 @@ using namespace std;
                 getSolution();
                 cout << "\n\n\n\nVitoria do bot em : " << currNode->level << "\n";
                 stopClock();
-                return;
+                return;*/
             }
-        } while (game.checkGameOver() || currNode->level >= game.getMaxMoves());
+        } while (!game.endGame() );
 
     } while (bfsTree.size() > 0);
-    cout << "\n\nError, not a valid board because not a valid sequence found!\n\n";*/
-//}
+    cout << "\n\nError, not a valid board because not a valid sequence found!\n\n";
+}

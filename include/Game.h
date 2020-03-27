@@ -19,6 +19,14 @@ public:
     Game();
 
     /**
+     * @brief Get the current board of the game
+     * 
+     * @return Board 
+     */
+
+    Board getBoard();
+
+    /**
      * Get the next valid moves for a block
      * @param color Color of the block 
      * @return vector with the valid the moves

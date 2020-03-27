@@ -7,6 +7,10 @@ Game::Game() {
     chooseLevel();
 }
 
+Board Game::getBoard(){
+    return this->board;
+}
+
 vector<int> Game::getBlockNextValidMoves(char color){
     vector<int> validMoves;
     if(board.verifyReflexionBlockRight(color)){
