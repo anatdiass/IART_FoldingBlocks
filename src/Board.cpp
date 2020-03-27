@@ -319,7 +319,7 @@ bool Board::verifyReflexionBlockDown(char pieceColor) {
     int heightBetweenCells = indexMostDownCell-indexMostUpCell;
     
     //verify if the reflexion is possible
-    if((indexMostUpCell+(2*heightBetweenCells)+1)>=nCols)
+    if((indexMostUpCell+(2*heightBetweenCells)+1)>=nRows)
         return false;
     else{
         //Verify if the destination pieces are available
