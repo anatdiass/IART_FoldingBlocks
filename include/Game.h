@@ -17,7 +17,6 @@ private:
 
 public:
     Game();
-    void loopGame();
 
     /**
      * Get the next valid moves for a block
@@ -75,9 +74,21 @@ public:
     void level3();
 
     /**
+     * Defines the board of third level
+     */
+    void level4();
+
+    /**
      * Allows the user to choose which level to play
      */
     void chooseLevel();
+
+        
+    /**
+     * Game main loop
+     */
+    void loopGame();
+
 
 };
 
