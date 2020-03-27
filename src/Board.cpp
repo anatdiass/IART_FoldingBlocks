@@ -286,7 +286,7 @@ bool Board::reflexionBlockRight(int row, int col) {
             return false;
         else{
             //Verify the destination pieces
-            for(int i=0;i<block.second.size();i++){
+            for(int i=0;i<nrPieces;i++){
                 pair<int,int>piece = block.second[i];   //piece.first -> row, piece.second->col
                 int pieceColumn = piece.second;
                 int distToMRC = indexMostRightCell - pieceColumn;
@@ -296,7 +296,7 @@ bool Board::reflexionBlockRight(int row, int col) {
                     return false;
             }
             //Do reflexion
-            for(int i=0;i<block.second.size();i++){
+            for(int i=0;i<nrPieces;i++){
                 pair<int,int>piece = block.second[i];   //piece.first -> row, piece.second->col
                 int pieceColumn = piece.second;
                 int distToMRC = indexMostRightCell - pieceColumn;
