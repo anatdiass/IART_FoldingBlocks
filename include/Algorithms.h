@@ -7,9 +7,10 @@
 
 #include "Board.h"
 #include <list>
-//void bst(Board board, int s);
 
-class Graph
+void bst(Board board);
+
+/*class Graph
 {
     int V;    // No. of vertices
 
@@ -24,7 +25,7 @@ public:
 
     // prints BFS traversal from a given source s
     void BFS(int s);
-};
+};*/
 
 
 #endif //UNTITLED_ALGORITHMS_H

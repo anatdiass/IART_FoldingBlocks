@@ -7,10 +7,42 @@
 
 using namespace std;
 
-/*void bfs(Board board, int s)
+void bfs(Board board)
 {
     // Mark all the vertices as not visited
-    int N = board.getNumCols() * board.getNumRows();
+    /*int N = board.getNumCols() * board.getNumRows();
+
+    for (int i = 0; i < board.getBoard().getBoard().size(); i++)
+        {
+            for (int j = 0; j < board.getBoard().getBoard().at(i).size(); j++)
+            {
+                vector<vector<int>> possibleMoves = game.possibleMovesList(i, j);
+                if (possibleMoves.size() > 0)
+                {
+                    for (unsigned int w = 0; w < possibleMoves.size(); w++)
+                    {
+                        vector<int> from = {i, j};
+                        vector<int> to = possibleMoves.at(w);
+                        struct node *newNode = new node();
+                        newNode->from = from;
+                        newNode->to = to;
+                        newNode->prevGame = game;
+                        if (currNode == NULL)
+                        {
+                            newNode->father = NULL;
+                            newNode->level = 1;
+                        }
+                        else
+                        {
+                            newNode->father = currNode;
+                            newNode->level = currNode->level + 1;
+                        }
+                        bfsTree.push(newNode);
+                    }
+                }
+            }
+
+
     bool *visited = new bool[N];
     for(int i = 0; i < N; i++)
         visited[i] = false;
@@ -44,10 +76,10 @@ using namespace std;
                 queue.push_back(*i);
             }
         }
-    }
-}*/
+    }*/
+}
 
-Graph::Graph(int V)
+/*Graph::Graph(int V)
 {
     this->V = V;
     adj = new list<int>[V];
@@ -95,4 +127,4 @@ void Graph::BFS(int s)
             }
         }
     }
-}
+}*/

@@ -16,6 +16,10 @@ Board::Board(int nRows, int nCols) : nRows(nRows), nCols(nCols) {
     createEmptyBoard();
 }
 
+vector<vector<char>> getBoard(){
+    return this->board;
+}
+
 int Board::getNumRows() {
     return this->nRows;
 }
