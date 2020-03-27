@@ -33,13 +33,13 @@ bool Game::endGame() {
 }
 
 void Game::level1() {
-    this->board=Board(6,6);
-    this->board.setPiece(4,4,'R');
+    this->board=Board(4,4);
+    this->board.setPiece(3,0,'R');
 }
 
 
 void Game::level2(){
-    this->board=Board(5,5);
+    this->board=Board(4,4);
 
     //Null cells
     board.deleteCell(0,1);
@@ -99,14 +99,14 @@ void Game::loopGame() {
 
     char color;
     int  move;
-
+    
+    board.defineBlocks();
     do{
 
-        board.defineBlocks();
         board.printBoard();
 
         //Gets block by color
-        cout << "Choose the color of your block: "; cin.ignore(1000, '\n');
+        cout << "\nChoose the color of your block: "; cin.ignore(1000, '\n');
         cin >> color;
         
         //check if color is valid
@@ -130,7 +130,7 @@ void Game::loopGame() {
         while (!cin.good() || move < 1 || move > 4)
         {
             cin.clear();
-            cin.ignore(INT_MAX, '\n');
+            cin.ignore(INT8_MAX, '\n');
             cout << "Not an option" << endl << "Choose one move: ";
             cin>>move;
         }
@@ -142,7 +142,7 @@ void Game::loopGame() {
     }while(!endGame());
 
     board.printBoard();
-    cout << "End of game!\n";
+    cout << "\nEnd of game!\n";
 }
 
 vector<int> Game::getBlockNextValidMoves(char color){
@@ -242,6 +242,7 @@ void Game::play(char color, int move){
             break;
     }
 
+    board.defineBlocks();
 }
 
 
