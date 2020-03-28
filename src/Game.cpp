@@ -4,15 +4,19 @@
 
 Game::Game() {
     this->board=Board();
+    this->validMoves=0;
 }
 
 int Game::nrValidMoves(){
-    int sum=0;
+    return validMoves;
+}
+
+void Game::calculateValidMoves(){
+    this->validMoves=0;
     vector<pair<char, vector<int>>> validMoves = getNextValidMoves();
      for (auto & c : validMoves) {
-        sum+=c.second.size();   
+        this->validMoves+=c.second.size();   
     }
-    return sum;
 }
 
 Board Game::getBoard(){
@@ -253,6 +257,7 @@ void Game::loopGame() {
     do{
 
         board.printBoard();
+        calculateValidMoves();
         cout << "Possible moves: " << nrValidMoves() << endl;
         printValidMoves();
         //Gets block by color

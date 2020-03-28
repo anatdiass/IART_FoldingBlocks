@@ -19,6 +19,7 @@ public:
     Game();
 
     int nrValidMoves();
+    void calculateValidMoves();
 
     void setBoard(Board board){
         this->board = board;

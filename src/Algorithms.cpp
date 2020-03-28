@@ -21,6 +21,7 @@ void bfs(Game game)
     vector<char> allcolors = b.getBlocksColors();
     cout << "Nr colors: " << allcolors.size() << endl;
 
+    game.calculateValidMoves();
     cout << "Nr moves: " << game.nrValidMoves() << endl;
 
     /*for (int i = 0; i < b.getNumRows(); i++){
