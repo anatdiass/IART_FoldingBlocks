@@ -188,9 +188,11 @@ pair<char, vector<pair<int,int>>> Board::getBlock(char blockColor){
 
 vector<char> Board::getBlocksColors(){
     vector<char> colors;
-    for (auto & block : blocks) {
+    for (auto & block : getBlocks()) {
         colors.push_back(block.first);
     }
+
+    
     return colors;
 }
 
@@ -238,7 +240,6 @@ bool Board::verifyReflexionBlockRight(char pieceColor) {
 
     pair<char, vector<pair<int,int>>> block = getBlock(pieceColor);
     int nrPieces = block.second.size();
-
     int indexMostRightCell = getMostRightCell(block.second);
     int indexMostLeftCell = getMostLeftCell(block.second);
     int compBetweenCells = indexMostRightCell-indexMostLeftCell;

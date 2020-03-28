@@ -16,6 +16,10 @@ void bfs(Game game)
 
     vector<char> allcolors = b.getBlocksColors();
 
+    //cout << "colors: " << allcolors.size() << endl;
+
+    cout << game.getNextValidMoves().size() << endl;
+
     /*for (int i = 0; i < b.getNumRows(); i++){
         for (int j = 0; j < b.getNumCols(); j++){
             for(int k = 0; k < (int)allcolors.size(); k++){

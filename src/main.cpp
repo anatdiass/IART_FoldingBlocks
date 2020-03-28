@@ -20,7 +20,5 @@ int main() {
 
     bfs(g);
 
-    //board.defineBlocks();
-    //cout << "Colors: "<< board.getBlocksColors().size()<< endl;
-    //cout << "Colors: "<< g.getBoard().getBlocksColors().size() << endl;
+    //cout << g.getNextValidMoves().size() ;
 }

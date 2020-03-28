@@ -19,6 +19,7 @@ vector<int> Game::getBlockNextValidMoves(char color){
         a++;
     }
     cout << a << endl;*/
+
     if(b.verifyReflexionBlockRight(color)){
         cout << "rigth" << endl;
         validMoves.push_back(RIGTH);
@@ -38,11 +39,11 @@ vector<int> Game::getBlockNextValidMoves(char color){
 vector<pair<char, vector<int>>> Game:: getNextValidMoves(){
     vector<pair<char, vector<int>>> validMoves; 
 
-    vector<char> colors = board.getBlocksColors();
+    vector<char> colors = getBoard().getBlocksColors();
     vector<int> colorMoves;
     pair<char, vector<int>> colorPair;
 
-
+    cout << colors.size() << endl;
     for (auto & color : colors) {
         colorMoves = getBlockNextValidMoves(color);
 
@@ -53,7 +54,7 @@ vector<pair<char, vector<int>>> Game:: getNextValidMoves(){
     }
 
     //PRINT VALID MOVES
-        cout << "VALID MOVES " <<endl;
+    cout << "VALID MOVES " <<endl;
 
      for (auto & c : validMoves) {
         cout << "Color: " << c.first;
