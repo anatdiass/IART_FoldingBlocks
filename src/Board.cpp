@@ -103,6 +103,7 @@ bool Board::blockExists(char index) {
 
 void Board::createBlock(char indexChar) {
     pair<char,vector<pair<int,int>>> block;
+    vector<pair<char,vector<pair<int,int>>>>blocks_vec = getBlocks();
     block.first=indexChar;
 
     vector<pair<int,int>> positions;
@@ -118,7 +119,8 @@ void Board::createBlock(char indexChar) {
         }
     }
     block.second=positions;
-    blocks.push_back(block);
+    blocks_vec.push_back(block);
+    setBlocks(blocks_vec);
 }
 
 bool Board::existPositionBlock(const vector<pair<int,int>>& positions, int row, int col) {
@@ -133,7 +135,7 @@ bool Board::existPositionBlock(const vector<pair<int,int>>& positions, int row, 
 }
 
 void Board::updateBlock(char indexChar, int row, int col) {
-    for(auto & block : blocks){
+    for(auto & block : getBlocks()){
         if(block.first==indexChar){
             pair<int,int> pos;
             pos.first=row;
@@ -163,7 +165,7 @@ void Board::defineBlocks() {
 }
 
 vector<pair<char, vector<pair<int, int>>>> Board::getBlocks() {
-    return blocks;
+    return this->blocks;
 }
 
 pair<char, vector<pair<int,int>>> Board::getBlock(char blockColor){

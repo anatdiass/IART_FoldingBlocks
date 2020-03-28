@@ -10,16 +10,19 @@ using namespace std;
 void bfs(Game game)
 {
     queue<struct node *> bfsTree;
-    game.getBoard().defineBlocks();
-    vector<pair<char, vector<pair<int, int>>>> blocks = game.getBoard().getBlocks();
-    cout << blocks.size() << endl;
-    vector<char> allcolors = game.getBoard().getBlocksColors();
+
+    Board b = game.getBoard();
+    b.defineBlocks();
+
+    vector<char> allcolors = b.getBlocksColors();
     cout << allcolors.size() << endl;
 
-    for(int i = 0; i < allcolors.size();i++){
+    /*for(int i = 0; i < allcolors.size();i++){
         cout << "sdfghjk" << endl;
         cout << allcolors.at(i) << endl;
-    }
+    } */
+
+
     /*int a = 0;
     for (int i = 0; i < game.getBoard().getNumRows(); i++){
             for (int j = 0; j < game.getBoard().getNumCols(); j++)
@@ -31,7 +34,7 @@ void bfs(Game game)
     cout << a << endl;*/
 
 
-    
+
     /*do
     {
         for (int i = 0; i < game.getBoard().getNumRows(); i++){

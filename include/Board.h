@@ -125,6 +125,8 @@ public:
      */
     vector<pair<char,vector<pair<int,int>>>> getBlocks();
 
+    void setBlocks(vector<pair<char,vector<pair<int,int>>>> blocks){ this->blocks = blocks;}
+
     /**
      * Returns the colors of all the blocks of the board
      * @return Board's blocks' colors
