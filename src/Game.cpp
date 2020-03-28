@@ -1,5 +1,4 @@
 #include <sstream>
-#include <cstring>
 #include "Game.h"
 
 Game::Game() {
@@ -14,8 +13,8 @@ int Game::nrValidMoves(){
 void Game::calculateValidMoves(){
     this->validMoves=0;
     vector<pair<char, vector<int>>> validMoves = getNextValidMoves();
-     for (auto & c : validMoves) {
-        this->validMoves+=c.second.size();   
+    for (auto & c : validMoves) {
+        this->validMoves+=c.second.size();
     }
 }
 
@@ -26,11 +25,6 @@ Board Game::getBoard(){
 vector<int> Game::getBlockNextValidMoves(char color){
     vector<int> validMoves;
     Board b = getBoard();
-    /*int a = 0;
-    for(int i = 0; i < b.getBoard().size(); i++){
-        a++;
-    }
-    cout << a << endl;*/
 
     if(b.verifyReflexionBlockRight(color)){
         validMoves.push_back(RIGTH);
@@ -48,7 +42,7 @@ vector<int> Game::getBlockNextValidMoves(char color){
 }
 
 vector<pair<char, vector<int>>> Game::getNextValidMoves(){
-    vector<pair<char, vector<int>>> validMoves; 
+    vector<pair<char, vector<int>>> validMoves;
 
     vector<char> colors = getBoard().getBlocksColors();
     vector<int> colorMoves;
@@ -69,19 +63,19 @@ vector<pair<char, vector<int>>> Game::getNextValidMoves(){
 
 void Game::printValidMoves(){
 
-    vector<pair<char, vector<int>>> validMoves = getNextValidMoves(); 
+    vector<pair<char, vector<int>>> validMoves = getNextValidMoves();
 
     //PRINT VALID MOVES
     cout << "VALID MOVES " <<endl;
 
-     for (auto & c : validMoves) {
+    for (auto & c : validMoves) {
         cout << "Color: " << c.first << endl;
 
         for (auto & d : c.second) {
             cout << "\tMove: " << d << endl;
         }
         cout << endl;
-    }  
+    }
 }
 
 bool Game::verifyPlay(char color, int move){
@@ -92,7 +86,7 @@ bool Game::verifyPlay(char color, int move){
         if (blockMoves.first == color){
 
             bool found;
-            
+
             for (auto & currMove : blockMoves.second) {
                 if(currMove == move){
                     found = true;
@@ -105,14 +99,14 @@ bool Game::verifyPlay(char color, int move){
             }
             else return true;
         }
-        
+
     }
     cout << "Color not found " << endl;
-    return false; 
+    return false;
 }
 
 void Game::play(char color, int move){
-    
+
     switch(move){
         case RIGTH:
             board.reflexionBlockRight(color);
@@ -130,6 +124,7 @@ void Game::play(char color, int move){
             break;
     }
     board.defineBlocks();
+    calculateValidMoves();
 }
 
 bool Game::checkVictory() {
@@ -145,7 +140,7 @@ bool Game::checkVictory() {
 
 bool Game::endGame() {
     if(getNextValidMoves().empty()){
-    
+
         if(checkVictory()){
             cout << "YOU WON!!!" << endl;
         }
@@ -160,6 +155,7 @@ bool Game::endGame() {
 void Game::level1() {
     this->board=Board(4,4);
     this->board.setPiece(3,0,'R');
+    board.defineBlocks();
 }
 
 void Game::level2(){
@@ -177,6 +173,8 @@ void Game::level2(){
 
     board.setPiece(3,0,'A');
     board.setPiece(2,1,'A');
+
+    board.defineBlocks();
 }
 
 void Game::level3(){
@@ -189,6 +187,8 @@ void Game::level3(){
 
     board.setPiece(0,0,'V');
     board.setPiece(4,2, 'A');
+
+    board.defineBlocks();
 }
 
 void Game::level4(){
@@ -217,6 +217,8 @@ void Game::level4(){
 
     //Red piece
     board.setPiece(6,3,'V');
+
+    board.defineBlocks();
 }
 
 void Game::chooseLevel() {
@@ -252,7 +254,7 @@ void Game::loopGame() {
 
     char color;
     int  move;
-    
+
     board.defineBlocks();
     do{
 
@@ -263,7 +265,7 @@ void Game::loopGame() {
         //Gets block by color
         cout << "\nChoose the color of your block: "; cin.ignore(1000, '\n');
         cin >> color;
-        
+
         //check if color is valid
         while(!board.blockExists(color))
         {
@@ -278,9 +280,9 @@ void Game::loopGame() {
         cout << LEFT << " - Reflexion left\n";
         cout << DOWN << " - Reflexion down\n";
         cout << UP << " - Reflexion up\n";
-        cout << "Move: "; 
+        cout << "Move: ";
         cin>>move;
-        
+
         //check if move is valid
         while (!cin.good() || move < 1 || move > 4)
         {
@@ -299,17 +301,3 @@ void Game::loopGame() {
     board.printBoard();
     cout << "\nEnd of game!\n";
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

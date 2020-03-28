@@ -1,7 +1,3 @@
-//
-// Created by Maria Caldeira on 25/03/2020.
-//
-
 #ifndef UNTITLED_ALGORITHMS_H
 #define UNTITLED_ALGORITHMS_H
 

@@ -1,9 +1,6 @@
-//
-// Created by Maria Caldeira on 25/03/2020.
-//
-
 #include <list>
 #include "Algorithms.h"
+#include "Game.h"
 
 using namespace std;
 
@@ -13,16 +10,62 @@ void bfs(Game game)
 
     Board b = game.getBoard();
     b.defineBlocks();
-    b.printBoard();
 
 
     cout << "nr blocos: " << b.getBlocks().size() << endl;
-
     vector<char> allcolors = b.getBlocksColors();
     cout << "Nr colors: " << allcolors.size() << endl;
 
+
+    b.printBoard();
     game.calculateValidMoves();
     cout << "Nr moves: " << game.nrValidMoves() << endl;
+    game.printValidMoves();
+
+
+    /****************************************NOTA*********************************************/
+    //Sempre que se faz uma reflexao fazer b.defineBlocks + game.setBoard(b)
+    b.reflexionBlockRight('R');
+    b.defineBlocks();
+    game.setBoard(b);
+    b.printBoard();
+    game.calculateValidMoves();
+    cout << "Nr moves: " << game.nrValidMoves() << endl;
+    game.printValidMoves();
+
+
+    /****************************************NOTA*********************************************/
+    //Sempre que se faz uma reflexao fazer b.defineBlocks + game.setBoard(b) 
+
+    b.reflexionBlockRight('R');
+    b.defineBlocks();
+    game.setBoard(b);
+    b.printBoard();
+    game.calculateValidMoves();
+    cout << "Nr moves: " << game.nrValidMoves() << endl;
+    game.printValidMoves();
+
+
+    b.reflexionBlockUp('R');
+    b.defineBlocks();
+    game.setBoard(b);
+    b.printBoard();
+    game.calculateValidMoves();
+    cout << "Nr moves: " << game.nrValidMoves() << endl;
+    game.printValidMoves();
+
+
+    b.reflexionBlockUp('R');
+    b.defineBlocks();
+    game.setBoard(b);
+    b.printBoard();
+    game.calculateValidMoves();
+    cout << "Nr moves: " << game.nrValidMoves() << endl;
+    game.printValidMoves();
+
+
+    if(game.endGame())
+        cout << "end game";
 
     /*for (int i = 0; i < b.getNumRows(); i++){
         for (int j = 0; j < b.getNumCols(); j++){

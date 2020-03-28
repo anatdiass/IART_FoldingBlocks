@@ -155,7 +155,7 @@ void Board::defineBlocks() {
                 if(!blockExists(cellContent)){
                     createBlock(cellContent);
                 }
-                //Add to existing block
+                    //Add to existing block
                 else{
                     updateBlock(cellContent,row,col);
                 }
@@ -192,7 +192,7 @@ vector<char> Board::getBlocksColors(){
         colors.push_back(block.first);
     }
 
-    
+
     return colors;
 }
 
@@ -244,7 +244,7 @@ bool Board::verifyReflexionBlockRight(char pieceColor) {
     int indexMostLeftCell = getMostLeftCell(block.second);
     int compBetweenCells = indexMostRightCell-indexMostLeftCell;
 
-     //verify if the reflexion is possible
+    //verify if the reflexion is possible
     if((indexMostLeftCell+(2*compBetweenCells)+1)>=nCols)
         return false;
     else{
@@ -258,7 +258,7 @@ bool Board::verifyReflexionBlockRight(char pieceColor) {
             if(destinationCell != ' ' || destinationCell=='-')
                 return false;
         }
-       
+
     }
     return true;
 }
@@ -267,7 +267,7 @@ bool Board::verifyReflexionBlockLeft(char pieceColor) {
 
     pair<char, vector<pair<int,int>>> block = getBlock(pieceColor);
     int nrPieces = block.second.size();
-    
+
     int indexMostRightCell = getMostRightCell(block.second);
     int indexMostLeftCell = getMostLeftCell(block.second);
     int compBetweenCells = indexMostRightCell-indexMostLeftCell;
@@ -321,11 +321,11 @@ bool Board::verifyReflexionBlockDown(char pieceColor) {
 
     pair<char, vector<pair<int,int>>> block = getBlock(pieceColor);
     int nrPieces = block.second.size();
-  
+
     int indexMostDownCell = getMostDownCell(block.second);
     int indexMostUpCell = getMostUpCell(block.second);
     int heightBetweenCells = indexMostDownCell-indexMostUpCell;
-    
+
     //verify if the reflexion is possible
     if((indexMostUpCell+(2*heightBetweenCells)+1)>=nRows)
         return false;
@@ -341,7 +341,7 @@ bool Board::verifyReflexionBlockDown(char pieceColor) {
                 return false;
         }
     }
-    
+
     return true;
 }
 
@@ -352,7 +352,7 @@ void Board::reflexionBlockRight(char pieceColor) {
     pair<char, vector<pair<int,int>>> block = getBlock(pieceColor);
     int nrPieces = block.second.size();
     int indexMostRightCell = getMostRightCell(block.second);
-        
+
     for(int i=0; i<nrPieces; i++){
         pair<int,int>piece = block.second[i];   //piece.first -> row, piece.second->col
         int pieceColumn = piece.second;
@@ -384,7 +384,7 @@ void Board::reflexionBlockUp(char pieceColor) {
     pair<char, vector<pair<int,int>>> block = getBlock(pieceColor);
     int nrPieces = block.second.size();
     int indexMostUpCell = getMostUpCell(block.second);
-    
+
     for(int i=0;i<nrPieces;i++){
         pair<int,int>piece = block.second[i];   //piece.first -> row, piece.second->col
 
@@ -401,7 +401,7 @@ void Board::reflexionBlockDown(char pieceColor) {
     pair<char, vector<pair<int,int>>> block = getBlock(pieceColor);
     int nrPieces = block.second.size();
     int indexMostDownCell = getMostDownCell(block.second);
-    
+
     for(int i=0;i<nrPieces;i++){
         pair<int,int>piece = block.second[i];   //piece.first -> row, piece.second->col
         int pieceRow = piece.first;
@@ -410,5 +410,6 @@ void Board::reflexionBlockDown(char pieceColor) {
         setPiece(pieceRow+deltaY, piece.second, pieceColor);
     }
 }
+
 
 
