@@ -4,7 +4,15 @@
 
 Game::Game() {
     this->board=Board();
-    //chooseLevel();
+}
+
+int Game::nrValidMoves(){
+    int sum=0;
+    vector<pair<char, vector<int>>> validMoves = getNextValidMoves();
+     for (auto & c : validMoves) {
+        sum+=c.second.size();   
+    }
+    return sum;
 }
 
 Board Game::getBoard(){
@@ -21,7 +29,6 @@ vector<int> Game::getBlockNextValidMoves(char color){
     cout << a << endl;*/
 
     if(b.verifyReflexionBlockRight(color)){
-        cout << "rigth" << endl;
         validMoves.push_back(RIGTH);
     }
     if(getBoard().verifyReflexionBlockLeft(color)){
@@ -36,14 +43,13 @@ vector<int> Game::getBlockNextValidMoves(char color){
     return validMoves;
 }
 
-vector<pair<char, vector<int>>> Game:: getNextValidMoves(){
+vector<pair<char, vector<int>>> Game::getNextValidMoves(){
     vector<pair<char, vector<int>>> validMoves; 
 
     vector<char> colors = getBoard().getBlocksColors();
     vector<int> colorMoves;
     pair<char, vector<int>> colorPair;
 
-    cout << colors.size() << endl;
     for (auto & color : colors) {
         colorMoves = getBlockNextValidMoves(color);
 
@@ -53,19 +59,25 @@ vector<pair<char, vector<int>>> Game:: getNextValidMoves(){
         }
     }
 
+
+    return validMoves;
+}
+
+void Game::printValidMoves(){
+
+    vector<pair<char, vector<int>>> validMoves = getNextValidMoves(); 
+
     //PRINT VALID MOVES
     cout << "VALID MOVES " <<endl;
 
      for (auto & c : validMoves) {
-        cout << "Color: " << c.first;
+        cout << "Color: " << c.first << endl;
 
         for (auto & d : c.second) {
-            cout << " Move: " << d;
+            cout << "\tMove: " << d << endl;
         }
         cout << endl;
-      
     }  
-    return validMoves;
 }
 
 bool Game::verifyPlay(char color, int move){
@@ -96,6 +108,7 @@ bool Game::verifyPlay(char color, int move){
 }
 
 void Game::play(char color, int move){
+    
     switch(move){
         case RIGTH:
             board.reflexionBlockRight(color);
@@ -204,9 +217,6 @@ void Game::level4(){
 
 void Game::chooseLevel() {
     int choice;
-    cout << " ------------------------------------------------------------ " << endl;
-    cout << "                  WELCOME TO FOLDING BLOCKS!                  " << endl;
-    cout << " ------------------------------------------------------------ " << endl;
     cout << " ______________________________________ " << endl;
     cout << "|- Choose one of the available levels -|" << endl;
     cout << "| Level 1 (Warm Up)                    |" << endl;
@@ -243,7 +253,8 @@ void Game::loopGame() {
     do{
 
         board.printBoard();
-
+        cout << "Possible moves: " << nrValidMoves() << endl;
+        printValidMoves();
         //Gets block by color
         cout << "\nChoose the color of your block: "; cin.ignore(1000, '\n');
         cin >> color;

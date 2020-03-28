@@ -13,12 +13,15 @@ void bfs(Game game)
 
     Board b = game.getBoard();
     b.defineBlocks();
+    b.printBoard();
+
+
+    cout << "nr blocos: " << b.getBlocks().size() << endl;
 
     vector<char> allcolors = b.getBlocksColors();
+    cout << "Nr colors: " << allcolors.size() << endl;
 
-    //cout << "colors: " << allcolors.size() << endl;
-
-    cout << game.getNextValidMoves().size() << endl;
+    cout << "Nr moves: " << game.nrValidMoves() << endl;
 
     /*for (int i = 0; i < b.getNumRows(); i++){
         for (int j = 0; j < b.getNumCols(); j++){
@@ -56,15 +59,15 @@ void bfs(Game game)
             }
         }
     }*/
-    vector<int> validMoves = game.getBlockNextValidMoves(allcolors.at(0));
-    b.printBoard();
+    //vector<int> validMoves = game.getBlockNextValidMoves(allcolors.at(0));
+//    b.printBoard();
 
     /*do
     {
         for (int i = 0; i < game.getBoard().getNumRows(); i++){
             for (int j = 0; j < game.getBoard().getNumCols(); j++)
             {
-                /*vector<vector<int>> possibleMoves = game.possibleMovesList(i, j);
+                vector<vector<int>> possibleMoves = game.possibleMovesList(i, j);
                 if (possibleMoves.size() > 0)
                 {
                     

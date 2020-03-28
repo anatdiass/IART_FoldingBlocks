@@ -13,10 +13,12 @@ int const UP = 4;
 class Game {
 private:
     Board board;
-   
+    int validMoves;
 
 public:
     Game();
+
+    int nrValidMoves();
 
     void setBoard(Board board){
         this->board = board;
@@ -42,6 +44,8 @@ public:
      * @return vector with the valid the moves
      */
     vector<pair<char, vector<int>>> getNextValidMoves();
+
+    void printValidMoves();
 
     /**
      * Verify if a play is valid 
