@@ -15,25 +15,45 @@ void bfs(Game game)
     b.defineBlocks();
 
     vector<char> allcolors = b.getBlocksColors();
-    cout << allcolors.size() << endl;
 
-    /*for(int i = 0; i < allcolors.size();i++){
-        cout << "sdfghjk" << endl;
-        cout << allcolors.at(i) << endl;
-    } */
+    /*for (int i = 0; i < b.getNumRows(); i++){
+        for (int j = 0; j < b.getNumCols(); j++){
+            for(int k = 0; k < (int)allcolors.size(); k++){
 
+                vector<int> validMoves = game.getBlockNextValidMoves(allcolors.at(k));
+                //cout << validMoves.size()<<endl;
+                if (validMoves.size() > 0)
+                {
+                    for (int z = 0; z < (int)validMoves.size(); z++)
+                    {
+                        cout << "++" << endl;
+                        int reflection = validMoves.at(z);
 
-    /*int a = 0;
-    for (int i = 0; i < game.getBoard().getNumRows(); i++){
-            for (int j = 0; j < game.getBoard().getNumCols(); j++)
-            {
-                a++;
-                cout << game.getBoard().getBoard().at(i).at(j) << endl;
+                        switch(reflection){
+                            case 1:
+                            b.setPiece(i,j+1,allcolors.at(k));
+                            cout << "right" << endl;
+                            break;
+                            case 2:
+                            b.setPiece(i,j-1,allcolors.at(k));
+                            break;
+                            case 3:
+                            b.setPiece(i-1,j,allcolors.at(k));
+                            break;
+                            case 4:
+                            b.setPiece(i+1,j,allcolors.at(k));
+                            break;
+                            default:
+                            break;
+                        }
+
+                    }
+                }
             }
-            }
-    cout << a << endl;*/
-
-
+        }
+    }*/
+    vector<int> validMoves = game.getBlockNextValidMoves(allcolors.at(0));
+    b.printBoard();
 
     /*do
     {

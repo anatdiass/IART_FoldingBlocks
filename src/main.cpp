@@ -13,20 +13,8 @@ int main() {
     
     //g.loopGame();
 
-    Board board=Board(8,4);
-
-    //Yellow pieces
-    board.setPiece(0,0,'A');
-    board.setPiece(0,1,'A');
-    board.setPiece(1,0,'A');
-    board.setPiece(1,1,'A');
-    board.setPiece(2,3,'A');
-
-    //Blue piece
-    board.setPiece(2,2,'B');
-
-    //Red piece
-    board.setPiece(6,3,'V');
+    Board board=Board(4,4);
+    board.setPiece(3,0,'R');
 
     g.setBoard(board);
 

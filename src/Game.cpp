@@ -13,16 +13,23 @@ Board Game::getBoard(){
 
 vector<int> Game::getBlockNextValidMoves(char color){
     vector<int> validMoves;
-    if(board.verifyReflexionBlockRight(color)){
+    Board b = getBoard();
+    /*int a = 0;
+    for(int i = 0; i < b.getBoard().size(); i++){
+        a++;
+    }
+    cout << a << endl;*/
+    if(b.verifyReflexionBlockRight(color)){
+        cout << "rigth" << endl;
         validMoves.push_back(RIGTH);
     }
-    if(board.verifyReflexionBlockLeft(color)){
+    if(getBoard().verifyReflexionBlockLeft(color)){
         validMoves.push_back(LEFT);
     }
-    if(board.verifyReflexionBlockDown(color)){
+    if(getBoard().verifyReflexionBlockDown(color)){
         validMoves.push_back(DOWN);
     }
-    if(board.verifyReflexionBlockUp(color)){
+    if(getBoard().verifyReflexionBlockUp(color)){
         validMoves.push_back(UP);
     }
     return validMoves;
