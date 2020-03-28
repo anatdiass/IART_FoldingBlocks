@@ -10,15 +10,15 @@ int main() {
     /*TESTES*/
 
     Game g=Game();
-    
-    //g.loopGame();
-
+    g.chooseLevel();
+    g.loopGame();
+/*
     Board board=Board(4,4);
     board.setPiece(3,0,'R');
 
     g.setBoard(board);
 
-    bfs(g);
+    bfs(g);*/
 
     //cout << g.getNextValidMoves().size() ;
 }

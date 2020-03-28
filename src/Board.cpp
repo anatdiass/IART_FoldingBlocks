@@ -135,7 +135,7 @@ bool Board::existPositionBlock(const vector<pair<int,int>>& positions, int row, 
 }
 
 void Board::updateBlock(char indexChar, int row, int col) {
-    for(auto & block : getBlocks()){
+    for(auto & block : blocks){
         if(block.first==indexChar){
             pair<int,int> pos;
             pos.first=row;
