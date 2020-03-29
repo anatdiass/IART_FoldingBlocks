@@ -1,10 +1,10 @@
 #include <list>
-#include "Algorithms.h"
-#include "Game.h"
+#include <iostream>
+#include "../include/Algorithms.h"
+#include "../include/Game.h"
 
 using namespace std;
 
-Game initGame;
 struct node *currentNode;
 vector<struct node> allNodes;
 
@@ -57,75 +57,16 @@ void bfs(Game game)
     }*/
     //vector<int> validMoves = game.getBlockNextValidMoves(allcolors.at(0));
 //    b.printBoard();
-/*
-    do{
-        for (int i = 0; i < b.getNumRows(); i++){
-            for (int j = 0; j < b.getNumCols(); j++){
-                game.calculateValidMoves();
-                vector<pair<char, vector<int>>> validMoves=game.getNextValidMoves();
 
-                if (game.nrValidMoves() > 0)
-                {
-                    
-                    for (unsigned int w = 0; w < game.nrValidMoves(); w++)
-                    {
-                        for(int z=0;j<validMoves[w].second.size();z++){
-                            char color = validMoves[w].first;
-                            int move = validMoves[w].second[z];
-                            struct node *newNode = new node();
-                            newNode->blockColor = color;
-                            newNode->move = move;
-                            newNode->prevGame = game;
-                            if (currentNode == NULL)
-                            {
-                                newNode->father = NULL;
-                                newNode->level = 1;
-                            }
-                            else
-                            {
-                                newNode->father = currentNode;
-                                newNode->level = currentNode->level + 1;
-                            }
-                            bfsTree.push(newNode);
-                        }
-                    }
-                }
-            }
-        }
-        do
-        {
-            currentNode = bfsTree.front();
-            bfsTree.pop();
-            game = currentNode->prevGame;
-            //game.swapPiecesAI(currNode->from[0], currNode->from[1], currNode->to[0], currNode->to[1]);
-            while (game.applyGravity() || game.verifyCombos());
-                
-            if (checkDuplicated(game.getBoard().getBoard(), currNode->level))
-                continue;
-            else
-                allNodes.push_back(*currNode);
-            if (game.checkVictory())
-            {
-                getSolution();
-                cout << "\n\n\n\nVitoria do bot em : " << currNode->level << "\n";
-                stopClock();
-                return;
-            }
-        } while (!game.endGame() );
-
-    } while (bfsTree.size() > 0);
-    cout << "\n\nError, not a valid board because not a valid sequence found!\n\n";*/
-    vector<char> blocksColors = b.getBlocksColors();
     do{
         for (int i = 0; i < b.getNumRows(); i++){
             for (int j = 0; j < b.getNumCols(); j++){
                 char colorPiece = b.getPieceColor(i,j);
                 if(colorPiece != ' ' && colorPiece!= '-'){
                     vector<int> possibleMoves = game.getBlockNextValidMoves(colorPiece);
-                    if (possibleMoves.size() > 0){
-                        for (unsigned int w = 0; w < possibleMoves.size(); w++){
+                    if (!possibleMoves.empty()){
+                        for (int move : possibleMoves){
                             pair<int,int> actualCell = make_pair(i,j);
-                            int move = possibleMoves.at(w);
                             struct node *newNode = new node();
                             newNode->color = colorPiece;
                             newNode->selected = actualCell;
@@ -157,32 +98,36 @@ void bfs(Game game)
                     b.reflexionBlockRight(currentNode->color);
                     b.defineBlocks();
                     game.setBoard(b);
+                    b.printBoard();
                     break;
                 case 2:
                     b.reflexionBlockLeft(currentNode->color);
                     b.defineBlocks();
                     game.setBoard(b);
+                    b.printBoard();
                     break;
                 case 3:
-                    b.reflexionBlockUp(currentNode->color);
-                    b.defineBlocks();
-                    game.setBoard(b);
-                    break;
-                case 4:
                     b.reflexionBlockDown(currentNode->color);
                     b.defineBlocks();
                     game.setBoard(b);
+                    b.printBoard();
+                    break;
+                case 4:
+                    b.reflexionBlockUp(currentNode->color);
+                    b.defineBlocks();
+                    game.setBoard(b);
+                    b.printBoard();
                     break;
                 default:
                     break;
             }
-                
-         /*   if (checkDuplicated(game.getBoard().getBoard(), currNode->level))
-                continue;
-            else*/
-                allNodes.push_back(*currentNode);
+
+            /*   if (checkDuplicated(game.getBoard().getBoard(), currNode->level))
+                   continue;
+               else*/
+            allNodes.push_back(*currentNode);
             if (game.checkVictory())
-            {   
+            {
                 b.printBoard();
                 //getSolution();
                 cout << "\n\n\n\nVitoria do bot em : " << currentNode->level << "\n";
@@ -191,10 +136,11 @@ void bfs(Game game)
             }
         } while (!game.endGame() /*|| currentNode->level >= game.getMaxMoves())*/);
 
-    } while (bfsTree.size() > 0);
+    } while (!bfsTree.empty());
     cout << "\n\nError, not a valid board because not a valid sequence found!\n\n";
 
 
 
 
 }
+
