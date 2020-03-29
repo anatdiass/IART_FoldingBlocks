@@ -4,6 +4,10 @@
 
 using namespace std;
 
+Game initGame;
+struct node *currentNode;
+vector<struct node> allNodes;
+
 void bfs(Game game)
 {
     queue<struct node *> bfsTree;
@@ -11,61 +15,9 @@ void bfs(Game game)
     Board b = game.getBoard();
     b.defineBlocks();
 
-
-    cout << "nr blocos: " << b.getBlocks().size() << endl;
-    vector<char> allcolors = b.getBlocksColors();
-    cout << "Nr colors: " << allcolors.size() << endl;
-
-
-    b.printBoard();
-    game.calculateValidMoves();
-    cout << "Nr moves: " << game.nrValidMoves() << endl;
-    game.printValidMoves();
-
-
     /****************************************NOTA*********************************************/
     //Sempre que se faz uma reflexao fazer b.defineBlocks + game.setBoard(b)
-    b.reflexionBlockRight('R');
-    b.defineBlocks();
-    game.setBoard(b);
-    b.printBoard();
-    game.calculateValidMoves();
-    cout << "Nr moves: " << game.nrValidMoves() << endl;
-    game.printValidMoves();
 
-
-    /****************************************NOTA*********************************************/
-    //Sempre que se faz uma reflexao fazer b.defineBlocks + game.setBoard(b) 
-
-    b.reflexionBlockRight('R');
-    b.defineBlocks();
-    game.setBoard(b);
-    b.printBoard();
-    game.calculateValidMoves();
-    cout << "Nr moves: " << game.nrValidMoves() << endl;
-    game.printValidMoves();
-
-
-    b.reflexionBlockUp('R');
-    b.defineBlocks();
-    game.setBoard(b);
-    b.printBoard();
-    game.calculateValidMoves();
-    cout << "Nr moves: " << game.nrValidMoves() << endl;
-    game.printValidMoves();
-
-
-    b.reflexionBlockUp('R');
-    b.defineBlocks();
-    game.setBoard(b);
-    b.printBoard();
-    game.calculateValidMoves();
-    cout << "Nr moves: " << game.nrValidMoves() << endl;
-    game.printValidMoves();
-
-
-    if(game.endGame())
-        cout << "end game";
 
     /*for (int i = 0; i < b.getNumRows(); i++){
         for (int j = 0; j < b.getNumCols(); j++){
@@ -105,47 +57,49 @@ void bfs(Game game)
     }*/
     //vector<int> validMoves = game.getBlockNextValidMoves(allcolors.at(0));
 //    b.printBoard();
+/*
+    do{
+        for (int i = 0; i < b.getNumRows(); i++){
+            for (int j = 0; j < b.getNumCols(); j++){
+                game.calculateValidMoves();
+                vector<pair<char, vector<int>>> validMoves=game.getNextValidMoves();
 
-    /*do
-    {
-        for (int i = 0; i < game.getBoard().getNumRows(); i++){
-            for (int j = 0; j < game.getBoard().getNumCols(); j++)
-            {
-                vector<vector<int>> possibleMoves = game.possibleMovesList(i, j);
-                if (possibleMoves.size() > 0)
+                if (game.nrValidMoves() > 0)
                 {
                     
-                    for (unsigned int w = 0; w < possibleMoves.size(); w++)
+                    for (unsigned int w = 0; w < game.nrValidMoves(); w++)
                     {
-                        vector<int> from = {i, j};
-                        vector<int> to = possibleMoves.at(w);
-                        struct node *newNode = new node();
-                        newNode->from = from;
-                        newNode->to = to;
-                        newNode->prevGame = game;
-                        if (currNode == NULL)
-                        {
-                            newNode->father = NULL;
-                            newNode->level = 1;
+                        for(int z=0;j<validMoves[w].second.size();z++){
+                            char color = validMoves[w].first;
+                            int move = validMoves[w].second[z];
+                            struct node *newNode = new node();
+                            newNode->blockColor = color;
+                            newNode->move = move;
+                            newNode->prevGame = game;
+                            if (currentNode == NULL)
+                            {
+                                newNode->father = NULL;
+                                newNode->level = 1;
+                            }
+                            else
+                            {
+                                newNode->father = currentNode;
+                                newNode->level = currentNode->level + 1;
+                            }
+                            bfsTree.push(newNode);
                         }
-                        else
-                        {
-                            newNode->father = currNode;
-                            newNode->level = currNode->level + 1;
-                        }
-                        bfsTree.push(newNode);
                     }
                 }
             }
         }
         do
         {
-            currNode = bfsTree.front();
+            currentNode = bfsTree.front();
             bfsTree.pop();
-            game = currNode->prevGame;
-            game.swapPiecesAI(currNode->from[0], currNode->from[1], currNode->to[0], currNode->to[1]);
-            while (game.applyGravity() || game.verifyCombos())
-                ;
+            game = currentNode->prevGame;
+            //game.swapPiecesAI(currNode->from[0], currNode->from[1], currNode->to[0], currNode->to[1]);
+            while (game.applyGravity() || game.verifyCombos());
+                
             if (checkDuplicated(game.getBoard().getBoard(), currNode->level))
                 continue;
             else
@@ -161,4 +115,86 @@ void bfs(Game game)
 
     } while (bfsTree.size() > 0);
     cout << "\n\nError, not a valid board because not a valid sequence found!\n\n";*/
+    vector<char> blocksColors = b.getBlocksColors();
+    do{
+        for (int i = 0; i < b.getNumRows(); i++){
+            for (int j = 0; j < b.getNumCols(); j++){
+                char colorPiece = b.getPieceColor(i,j);
+                if(colorPiece != ' ' && colorPiece!= '-'){
+                    vector<int> possibleMoves = game.getBlockNextValidMoves(colorPiece);
+                    if (possibleMoves.size() > 0){
+                        for (unsigned int w = 0; w < possibleMoves.size(); w++){
+                            pair<int,int> actualCell = make_pair(i,j);
+                            int move = possibleMoves.at(w);
+                            struct node *newNode = new node();
+                            newNode->color = colorPiece;
+                            newNode->selected = actualCell;
+                            newNode->move = move;
+                            newNode->prevGame = game;
+                            if (currentNode == NULL)
+                            {
+                                newNode->father = NULL;
+                                newNode->level = 1;
+                            }
+                            else
+                            {
+                                newNode->father = currentNode;
+                                newNode->level = currentNode->level + 1;
+                            }
+                            bfsTree.push(newNode);
+                        }
+                    }
+                }
+            }
+        }
+        do
+        {
+            currentNode = bfsTree.front();
+            bfsTree.pop();
+            game = currentNode->prevGame;
+            switch(currentNode->move){
+                case 1:
+                    b.reflexionBlockRight(currentNode->color);
+                    b.defineBlocks();
+                    game.setBoard(b);
+                    break;
+                case 2:
+                    b.reflexionBlockLeft(currentNode->color);
+                    b.defineBlocks();
+                    game.setBoard(b);
+                    break;
+                case 3:
+                    b.reflexionBlockUp(currentNode->color);
+                    b.defineBlocks();
+                    game.setBoard(b);
+                    break;
+                case 4:
+                    b.reflexionBlockDown(currentNode->color);
+                    b.defineBlocks();
+                    game.setBoard(b);
+                    break;
+                default:
+                    break;
+            }
+                
+         /*   if (checkDuplicated(game.getBoard().getBoard(), currNode->level))
+                continue;
+            else*/
+                allNodes.push_back(*currentNode);
+            if (game.checkVictory())
+            {   
+                b.printBoard();
+                //getSolution();
+                cout << "\n\n\n\nVitoria do bot em : " << currentNode->level << "\n";
+                //stopClock();
+                return;
+            }
+        } while (!game.endGame() /*|| currentNode->level >= game.getMaxMoves())*/);
+
+    } while (bfsTree.size() > 0);
+    cout << "\n\nError, not a valid board because not a valid sequence found!\n\n";
+
+
+
+
 }

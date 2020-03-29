@@ -35,15 +35,4 @@ int main() {
     Game game;
     selectMode(game);
     return 0;
-
-    /*TESTES*/
-/*
-    Board board=Board(4,4);
-    board.setPiece(3,0,'R');
-
-    g.setBoard(board);
-
-    bfs(g);*/
-
-    //cout << g.getNextValidMoves().size() ;
 }

@@ -8,10 +8,11 @@
 //using namespace std::chrono;
 
 struct node{
+    char color;
     //used to save the piece or the block of pieces that were selected
-    vector<int> selected;
+    pair<int,int> selected;
     //used to save the coords of the pieces after a reflection
-    vector<int> reflected;
+    int move;
     //level in the tree
     int level;
     //value of the node, used to aStar and greedy
