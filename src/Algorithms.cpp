@@ -10,22 +10,15 @@ vector<struct node> allNodes;
 
 queue<struct node *> bfsTree;
 
-void bfs(Game game)
-{
+void bfs(Game game){
 
     Board b = game.getBoard();
     b.defineBlocks();
-    game.calculateValidMoves();
 
     b.printBoard();
 
-    cout << "Possible moves: " << game.nrValidMoves() << endl;
-    game.printValidMoves();
 
-    /****************************************NOTA*********************************************/
-    //Sempre que se faz uma reflexao fazer b.defineBlocks + game.setBoard(b)
-
-    do{
+    do {
         for (int i = 0; i < b.getNumRows(); i++){
             for (int j = 0; j < b.getNumCols(); j++){
                 char colorPiece = b.getPieceColor(i,j);
@@ -39,13 +32,11 @@ void bfs(Game game)
                             newNode->selected = actualCell;
                             newNode->move = move;
                             newNode->prevGame = game;
-                            if (currentNode == NULL)
-                            {
+                            if (currentNode == NULL){
                                 newNode->father = NULL;
                                 newNode->level = 1;
                             }
-                            else
-                            {
+                            else{
                                 newNode->father = currentNode;
                                 newNode->level = currentNode->level + 1;
                             }
@@ -55,9 +46,7 @@ void bfs(Game game)
                 }
             }
         }
-
-        do
-        {
+        do {
             currentNode = bfsTree.front();
             bfsTree.pop();
             game = currentNode->prevGame;
@@ -71,9 +60,6 @@ void bfs(Game game)
                         b.defineBlocks();
                         game.setBoard(b);
                         b.printBoard();
-                        game.calculateValidMoves();
-                        cout << "Possible moves: " << game.nrValidMoves() << endl;
-                        game.printValidMoves();
                     }
                     break;
                 case 2:
@@ -84,9 +70,6 @@ void bfs(Game game)
                         b.defineBlocks();
                         game.setBoard(b);
                         b.printBoard();
-                        game.calculateValidMoves();
-                        cout << "Possible moves: " << game.nrValidMoves() << endl;
-                        game.printValidMoves();
                     }
                     break;
                 case 3:
@@ -97,9 +80,6 @@ void bfs(Game game)
                         b.defineBlocks();
                         game.setBoard(b);
                         b.printBoard();
-                        game.calculateValidMoves();
-                        cout << "Possible moves: " << game.nrValidMoves() << endl;
-                        game.printValidMoves();
                     }
                     break;
                 case 4:
@@ -110,9 +90,6 @@ void bfs(Game game)
                         b.defineBlocks();
                         game.setBoard(b);
                         b.printBoard();
-                        game.calculateValidMoves();
-                        cout << "Possible moves: " << game.nrValidMoves() << endl;
-                        game.printValidMoves();
                     }
                     break;
                 default:
@@ -121,12 +98,11 @@ void bfs(Game game)
 
             allNodes.push_back(*currentNode);
             if (game.checkVictory()){
-                cout << "\n\n\n\nAI won at level: " << currentNode->level << "\n";
+                cout << "\n\nAI won at level: " << currentNode->level << "\n";
                 return;
             }
-        } while (!bfsTree.empty() /*|| currentNode->level >= game.getMaxMoves())*/);
+        } while (!bfsTree.empty());
 
     } while (!game.endGame());
-    cout << "\n\nError, not a valid board because not a valid sequence found!\n\n";
 }
 
