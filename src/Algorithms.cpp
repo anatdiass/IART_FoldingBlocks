@@ -14,49 +14,10 @@ void bfs(Game game)
 
     Board b = game.getBoard();
     b.defineBlocks();
+    b.printBoard();
 
     /****************************************NOTA*********************************************/
     //Sempre que se faz uma reflexao fazer b.defineBlocks + game.setBoard(b)
-
-
-    /*for (int i = 0; i < b.getNumRows(); i++){
-        for (int j = 0; j < b.getNumCols(); j++){
-            for(int k = 0; k < (int)allcolors.size(); k++){
-
-                vector<int> validMoves = game.getBlockNextValidMoves(allcolors.at(k));
-                //cout << validMoves.size()<<endl;
-                if (validMoves.size() > 0)
-                {
-                    for (int z = 0; z < (int)validMoves.size(); z++)
-                    {
-                        cout << "++" << endl;
-                        int reflection = validMoves.at(z);
-
-                        switch(reflection){
-                            case 1:
-                            b.setPiece(i,j+1,allcolors.at(k));
-                            cout << "right" << endl;
-                            break;
-                            case 2:
-                            b.setPiece(i,j-1,allcolors.at(k));
-                            break;
-                            case 3:
-                            b.setPiece(i-1,j,allcolors.at(k));
-                            break;
-                            case 4:
-                            b.setPiece(i+1,j,allcolors.at(k));
-                            break;
-                            default:
-                            break;
-                        }
-
-                    }
-                }
-            }
-        }
-    }*/
-    //vector<int> validMoves = game.getBlockNextValidMoves(allcolors.at(0));
-//    b.printBoard();
 
     do{
         for (int i = 0; i < b.getNumRows(); i++){
@@ -67,7 +28,7 @@ void bfs(Game game)
                     if (!possibleMoves.empty()){
                         for (int move : possibleMoves){
                             pair<int,int> actualCell = make_pair(i,j);
-                            struct node *newNode = new node();
+                            auto *newNode = new node();
                             newNode->color = colorPiece;
                             newNode->selected = actualCell;
                             newNode->move = move;
@@ -95,28 +56,32 @@ void bfs(Game game)
             game = currentNode->prevGame;
             switch(currentNode->move){
                 case 1:
-                    cout << "\n\nTree level: " << currentNode->level<<"\nMOVE: right reflexion\n";
+                    cout << "\n\nTree level: " << currentNode->level;
+                    cout <<"\nMOVE: right reflexion of block with color " << currentNode->color<<endl;
                     b.reflexionBlockRight(currentNode->color);
                     b.defineBlocks();
                     game.setBoard(b);
                     b.printBoard();
                     break;
                 case 2:
-                    cout << "\n\nTree level: " << currentNode->level<<"\nMOVE: left reflexion\n";
+                    cout << "\n\nTree level: " << currentNode->level;
+                    cout <<"\nMove: left reflexion of block with color " << currentNode->color<<endl;
                     b.reflexionBlockLeft(currentNode->color);
                     b.defineBlocks();
                     game.setBoard(b);
                     b.printBoard();
                     break;
                 case 3:
-                    cout << "\n\nTree level: " << currentNode->level<<"\nMOVE: down reflexion\n";
+                    cout << "\n\nTree level: " << currentNode->level;
+                    cout <<"\nMove: down reflexion of block with color " << currentNode->color<<endl;
                     b.reflexionBlockDown(currentNode->color);
                     b.defineBlocks();
                     game.setBoard(b);
                     b.printBoard();
                     break;
                 case 4:
-                    cout << "\n\nTree level: " << currentNode->level<<"\nMOVE: up reflexion\n";
+                    cout << "\n\nTree level: " << currentNode->level;
+                    cout <<"\nMove: up reflexion of block with color " << currentNode->color<<endl;
                     b.reflexionBlockUp(currentNode->color);
                     b.defineBlocks();
                     game.setBoard(b);
@@ -126,22 +91,14 @@ void bfs(Game game)
                     break;
             }
 
-            /*   if (checkDuplicated(game.getBoard().getBoard(), currNode->level))
-                   continue;
-               else*/
             allNodes.push_back(*currentNode);
-            if (game.checkVictory())
-            {
-                b.printBoard();
-                //getSolution();
-                cout << "\n\n\n\nVitoria do bot em : " << currentNode->level << "\n";
-                //stopClock();
+            if (game.checkVictory()){
+                cout << "\n\n\n\nAI won at level: " << currentNode->level << "\n";
                 return;
             }
         } while (!game.endGame() /*|| currentNode->level >= game.getMaxMoves())*/);
 
     } while (!bfsTree.empty());
     cout << "\n\nError, not a valid board because not a valid sequence found!\n\n";
-
 }
 
