@@ -95,24 +95,28 @@ void bfs(Game game)
             game = currentNode->prevGame;
             switch(currentNode->move){
                 case 1:
+                    cout << "\n\nTree level: " << currentNode->level<<"\nMOVE: right reflexion\n";
                     b.reflexionBlockRight(currentNode->color);
                     b.defineBlocks();
                     game.setBoard(b);
                     b.printBoard();
                     break;
                 case 2:
+                    cout << "\n\nTree level: " << currentNode->level<<"\nMOVE: left reflexion\n";
                     b.reflexionBlockLeft(currentNode->color);
                     b.defineBlocks();
                     game.setBoard(b);
                     b.printBoard();
                     break;
                 case 3:
+                    cout << "\n\nTree level: " << currentNode->level<<"\nMOVE: down reflexion\n";
                     b.reflexionBlockDown(currentNode->color);
                     b.defineBlocks();
                     game.setBoard(b);
                     b.printBoard();
                     break;
                 case 4:
+                    cout << "\n\nTree level: " << currentNode->level<<"\nMOVE: up reflexion\n";
                     b.reflexionBlockUp(currentNode->color);
                     b.defineBlocks();
                     game.setBoard(b);
@@ -138,9 +142,6 @@ void bfs(Game game)
 
     } while (!bfsTree.empty());
     cout << "\n\nError, not a valid board because not a valid sequence found!\n\n";
-
-
-
 
 }
 
