@@ -62,8 +62,6 @@ void bfs(Game game)
             bfsTree.pop();
             game = currentNode->prevGame;
 
-
-
             switch(currentNode->move){
                 case 1:
                     if(b.verifyReflexionBlockRight(currentNode->color)) {
@@ -126,9 +124,9 @@ void bfs(Game game)
                 cout << "\n\n\n\nAI won at level: " << currentNode->level << "\n";
                 return;
             }
-        } while (!game.endGame() /*|| currentNode->level >= game.getMaxMoves())*/);
+        } while (!bfsTree.empty() /*|| currentNode->level >= game.getMaxMoves())*/);
 
-    } while (!bfsTree.empty());
+    } while (!game.endGame());
     cout << "\n\nError, not a valid board because not a valid sequence found!\n\n";
 }
 
