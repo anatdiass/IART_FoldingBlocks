@@ -13,6 +13,7 @@ stack<struct node *> dfsTree;
 
 void bfs(Game game){
 
+    int nMoves=0;
     Board b = game.getBoard();
     b.defineBlocks();
 
@@ -57,7 +58,8 @@ void bfs(Game game){
                     if(game.verifyPlay(currentNode->color, 1)) {
                         cout << "\n\nTree level: " << currentNode->level;
                         cout << "\nMOVE: right reflexion of block with color " << currentNode->color << endl;
-                        game.play(currentNode->color, 1);                        
+                        game.play(currentNode->color, 1);   
+                        nMoves++;                     
                     }
                     game.getBoard().printBoard();
                     break;
@@ -66,6 +68,7 @@ void bfs(Game game){
                         cout << "\n\nTree level: " << currentNode->level;
                         cout << "\nMove: left reflexion of block with color " << currentNode->color << endl;
                         game.play(currentNode->color, 2);
+                        nMoves++;
                     }
                     game.getBoard().printBoard();
                     break;
@@ -74,6 +77,7 @@ void bfs(Game game){
                         cout << "\n\nTree level: " << currentNode->level;
                         cout << "\nMove: down reflexion of block with color " << currentNode->color << endl;
                         game.play(currentNode->color,3);
+                        nMoves++;
                     }
                     game.getBoard().printBoard();
 
@@ -83,6 +87,7 @@ void bfs(Game game){
                         cout << "\n\nTree level: " << currentNode->level;
                         cout << "\nMove: up reflexion of block with color " << currentNode->color << endl;
                         game.play(currentNode->color,4);
+                        nMoves++;
                     }
                     game.getBoard().printBoard();
                     break;
@@ -93,6 +98,7 @@ void bfs(Game game){
             allNodes.push_back(*currentNode);
             if (game.checkVictory()){
                 cout << "\n\nAI won at level: " << currentNode->level << "\n";
+                cout << "Total moves: " << nMoves <<endl;
                 return;
             }
         } while (!bfsTree.empty());
@@ -101,6 +107,7 @@ void bfs(Game game){
 }
 
 void dfs(Game game){
+    int nMoves=0;
     Board b = game.getBoard();
     b.defineBlocks();
 
@@ -144,7 +151,8 @@ void dfs(Game game){
                     if(game.verifyPlay(currentNode->color, 1)) {
                         cout << "\n\nTree level: " << currentNode->level;
                         cout << "\nMOVE: right reflexion of block with color " << currentNode->color << endl;
-                        game.play(currentNode->color, 1);                        
+                        game.play(currentNode->color, 1);    
+                        nMoves++;                    
                     }
                     game.getBoard().printBoard();
                     break;
@@ -153,6 +161,7 @@ void dfs(Game game){
                         cout << "\n\nTree level: " << currentNode->level;
                         cout << "\nMove: left reflexion of block with color " << currentNode->color << endl;
                         game.play(currentNode->color, 2);
+                        nMoves++;
                     }
                     game.getBoard().printBoard();
                     break;
@@ -161,6 +170,7 @@ void dfs(Game game){
                         cout << "\n\nTree level: " << currentNode->level;
                         cout << "\nMove: down reflexion of block with color " << currentNode->color << endl;
                         game.play(currentNode->color,3);
+                        nMoves++;
                     }
                     game.getBoard().printBoard();
 
@@ -170,6 +180,7 @@ void dfs(Game game){
                         cout << "\n\nTree level: " << currentNode->level;
                         cout << "\nMove: up reflexion of block with color " << currentNode->color << endl;
                         game.play(currentNode->color,4);
+                        nMoves++;
                     }
                     game.getBoard().printBoard();
                     break;
@@ -179,6 +190,7 @@ void dfs(Game game){
             allNodes.push_back(*currentNode);
             if (game.checkVictory()){
                 cout << "\n\nAI won at level: " << currentNode->level << "\n";
+                cout << "Total moves: " << nMoves << endl;
                 return;
             }
         } while (!dfsTree.empty());
