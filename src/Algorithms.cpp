@@ -75,7 +75,7 @@ void bfs(Game game){
                         cout << "\nMove: down reflexion of block with color " << currentNode->color << endl;
                         game.play(currentNode->color,3);
                     }
-                                        game.getBoard().printBoard();
+                    game.getBoard().printBoard();
 
                     break;
                 case 4:
@@ -84,8 +84,7 @@ void bfs(Game game){
                         cout << "\nMove: up reflexion of block with color " << currentNode->color << endl;
                         game.play(currentNode->color,4);
                     }
-                                        game.getBoard().printBoard();
-
+                    game.getBoard().printBoard();
                     break;
                 default:
                     break;
@@ -142,44 +141,37 @@ void dfs(Game game){
 
             switch(currentNode->move){
                 case 1:
-                    if(b.verifyReflexionBlockRight(currentNode->color)) {
+                    if(game.verifyPlay(currentNode->color, 1)) {
                         cout << "\n\nTree level: " << currentNode->level;
                         cout << "\nMOVE: right reflexion of block with color " << currentNode->color << endl;
-                        b.reflexionBlockRight(currentNode->color);
-                        b.defineBlocks();
-                        game.setBoard(b);
-                        b.printBoard();
+                        game.play(currentNode->color, 1);                        
                     }
+                    game.getBoard().printBoard();
                     break;
                 case 2:
-                    if(b.verifyReflexionBlockLeft(currentNode->color)) {
+                    if(game.verifyPlay(currentNode->color, 2)) {
                         cout << "\n\nTree level: " << currentNode->level;
                         cout << "\nMove: left reflexion of block with color " << currentNode->color << endl;
-                        b.reflexionBlockLeft(currentNode->color);
-                        b.defineBlocks();
-                        game.setBoard(b);
-                        b.printBoard();
+                        game.play(currentNode->color, 2);
                     }
+                    game.getBoard().printBoard();
                     break;
                 case 3:
-                    if(b.verifyReflexionBlockDown(currentNode->color)) {
+                    if(game.verifyPlay(currentNode->color,3)) {
                         cout << "\n\nTree level: " << currentNode->level;
                         cout << "\nMove: down reflexion of block with color " << currentNode->color << endl;
-                        b.reflexionBlockDown(currentNode->color);
-                        b.defineBlocks();
-                        game.setBoard(b);
-                        b.printBoard();
+                        game.play(currentNode->color,3);
                     }
+                    game.getBoard().printBoard();
+
                     break;
                 case 4:
-                    if(b.verifyReflexionBlockUp(currentNode->color)) {
+                    if(game.verifyPlay(currentNode->color,4)) {
                         cout << "\n\nTree level: " << currentNode->level;
                         cout << "\nMove: up reflexion of block with color " << currentNode->color << endl;
-                        b.reflexionBlockUp(currentNode->color);
-                        b.defineBlocks();
-                        game.setBoard(b);
-                        b.printBoard();
+                        game.play(currentNode->color,4);
                     }
+                    game.getBoard().printBoard();
                     break;
                 default:
                     break;
