@@ -22,7 +22,31 @@ void selectMode(Game game){
             break;
         case 2:
             game.chooseLevel();
+            selectAlgorithm(game);
+            break;
+        default:
+            break;
+    }
+}
+
+void selectAlgorithm(Game game){
+    int choice;
+    cout << " __________________________________" << endl;
+    cout << "|-      Choose the algorithm      -|" << endl;
+    cout << "| 1 - BFS (Breadth First Search)   |" << endl;
+    cout << "| 2 - DFS (Depth First Search)     |" << endl;
+    cout << "|__________________________________|" << endl;
+    cout << "\nChoice: ";
+    cin>>choice;
+
+    switch(choice){
+        case 1:
             bfs(game);
+            break;
+        case 2:
+            dfs(game);
+            break;
+        default:
             break;
     }
 }

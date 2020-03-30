@@ -4,6 +4,7 @@
 #include "Game.h"
 #include <list>
 #include <queue>
+#include <stack>     
 
 //using namespace std::chrono;
 
@@ -25,7 +26,10 @@ struct node{
     struct node *father;
 };
 
+
+void selectAlgorithm(Game game);
 void bfs(Game game);
+void dfs(Game game);
 
 
 
