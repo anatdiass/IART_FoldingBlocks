@@ -96,7 +96,12 @@ public:
     void level4();
 
     void level5();
-
+    void level6();
+    void level7();
+    void level8();
+    void level9();
+    void level10();
+    
     /**
      * Allows the user to choose which level to play
      */

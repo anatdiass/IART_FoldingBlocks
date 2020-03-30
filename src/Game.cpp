@@ -241,6 +241,200 @@ void Game::level5(){
     board.defineBlocks();
 }
 
+void Game::level6(){
+    board=Board(8,7);
+
+    //Blue piece
+    board.setPiece(0,2,'B');
+
+    //Yellow piece
+    board.setPiece(3,1,'A');
+
+    //Cyan piece
+    board.setPiece(5,1,'C');
+
+    //Green pieces
+    board.setPiece(0,4,'G');
+    board.setPiece(1,3,'G');
+    board.setPiece(1,4,'G');
+    board.setPiece(1,5,'G');
+
+    //Red pieces
+    board.setPiece(4,3,'R');
+    board.setPiece(4,5,'R');
+    board.setPiece(4,6,'R');
+    board.setPiece(5,6,'R');
+
+    board.defineBlocks();
+}
+
+void Game::level7(){
+    board=Board(7,6);
+    
+    board.deleteCell(0,0);
+    board.deleteCell(0,0);
+    board.deleteCell(0,2);
+    board.deleteCell(0,3);
+    board.deleteCell(0,4);
+    board.deleteCell(0,5);
+    board.deleteCell(1,5);
+    board.deleteCell(2,5);
+    board.deleteCell(3,5);
+    board.deleteCell(6,5);
+    board.deleteCell(6,4);
+
+    //Yellow
+    board.setPiece(0,1,'A');
+    board.setPiece(1,0,'A');
+    //Green
+    board.setPiece(3,0,'G');
+    //Blue
+    board.setPiece(2,2,'B');
+    //Purple
+    board.setPiece(4,2,'P');
+    //Cyan
+    board.setPiece(3,4,'C');
+    board.setPiece(4,4,'C');
+    board.setPiece(4,5,'C');
+    board.setPiece(5,3,'C');
+    board.setPiece(5,4,'C');
+    board.setPiece(5,5,'C');
+
+    //Red
+    board.setPiece(6,1,'R');
+
+    board.defineBlocks();
+}
+
+void Game::level8(){
+    board=Board(8,6);
+
+    board.deleteCell(0,4);
+    board.deleteCell(0,5);
+    board.deleteCell(1,4);
+    board.deleteCell(1,5);
+
+    //Purple
+    board.setPiece(1,2,'P');
+
+    //Red
+    board.setPiece(5,2,'R');
+    board.setPiece(5,3,'R');
+
+    //Blue
+    board.setPiece(5,5,'B');
+
+    //Green
+    board.setPiece(6,3,'G');
+
+    //Cyan
+    board.setPiece(5,4,'C');
+    board.setPiece(6,4,'C');
+    board.setPiece(6,5,'C');
+    board.setPiece(7,4,'C');
+    board.setPiece(7,5,'C');
+
+    //Yellow
+    board.setPiece(6,0,'A');
+
+    board.defineBlocks();
+}
+
+void Game::level9(){
+    board=Board(10,8);
+
+    board.deleteCell(0,0);
+    board.deleteCell(1,0);
+    board.deleteCell(2,0);
+    board.deleteCell(3,0);
+    board.deleteCell(2,1);
+    board.deleteCell(2,2);
+    board.deleteCell(4,2);
+    board.deleteCell(5,2);
+    board.deleteCell(6,0);
+    board.deleteCell(7,0);
+    board.deleteCell(7,1);
+    board.deleteCell(7,2);
+    board.deleteCell(0,7);
+    board.deleteCell(1,7);
+    board.deleteCell(2,7);
+    board.deleteCell(3,7);
+    board.deleteCell(4,7);
+    board.deleteCell(5,7);
+    board.deleteCell(6,7);
+    board.deleteCell(7,7);
+
+    //Green
+    board.setPiece(1,3,'G');
+
+    //Purple
+    board.setPiece(2,6,'P');
+
+    //Cyan
+    board.setPiece(2,3,'C');
+    board.setPiece(3,3,'C');
+    
+    //Red
+    board.setPiece(3,1,'R');
+    board.setPiece(3,2,'R');
+    board.setPiece(4,0,'R');
+    board.setPiece(4,1,'R');
+
+    //Yellow
+    board.setPiece(5,3,'A');
+
+    //Blue
+    board.setPiece(8,7,'B');
+
+    board.defineBlocks();
+}
+
+void Game::level10(){
+    board=Board(7,10);
+
+    board.deleteCell(0,0);
+    board.deleteCell(1,0);
+    board.deleteCell(0,9);
+    board.deleteCell(1,9);
+    board.deleteCell(6,8);
+    board.deleteCell(6,9);
+    board.deleteCell(3,1);
+    board.deleteCell(3,2);
+    board.deleteCell(4,5);
+    board.deleteCell(4,6);    
+    board.deleteCell(2,7);
+    board.deleteCell(3,7);
+
+    //Cyan
+    board.setPiece(0,3,'C');
+
+    //Red
+    board.setPiece(5,0,'R');
+    board.setPiece(5,1,'R');
+
+    //Yellow
+    board.setPiece(2,2,'A');
+    board.setPiece(2,3,'A');
+    board.setPiece(3,3,'A');
+    board.setPiece(4,2,'A');
+    board.setPiece(4,3,'A');
+
+    //Blue
+    board.setPiece(2,4,'B');
+    board.setPiece(2,5,'B');
+    board.setPiece(2,6,'B');
+    board.setPiece(3,4,'B');
+
+    //Green
+    board.setPiece(3,5,'G');
+    board.setPiece(4,4,'G');
+
+    //Purple
+    board.setPiece(3,8,'P');
+
+    board.defineBlocks();            
+}
+
 void Game::chooseLevel() {
     int choice;
     cout << " ______________________________________ " << endl;
@@ -248,8 +442,13 @@ void Game::chooseLevel() {
     cout << "| Level 1 (Warm Up)                    |" << endl;
     cout << "| Level 2 (Beginner)                   |" << endl;
     cout << "| Level 3 (Beginner)                   |" << endl;
-    cout << "| Level 4 (Beginner)                   |" << endl;
+    cout << "| Level 4 (Easy)                       |" << endl;
     cout << "| Level 5 (Easy)                       |" << endl;
+    cout << "| Level 6 (Intermediate)               |" << endl;
+    cout << "| Level 7 (Medium)                     |" << endl;
+    cout << "| Level 8 (Difficult)                  |" << endl;
+    cout << "| Level 9 (Hard)                       |" << endl;
+    cout << "| Level 10 (Expert)                    |" << endl;
     cout << "|______________________________________|" << endl;
     cout << "\nChoice: ";
     cin>>choice;
@@ -269,6 +468,21 @@ void Game::chooseLevel() {
             break;
         case 5:
             level5();
+            break;
+        case 6:
+            level6();
+            break;
+        case 7:
+            level7();
+            break;
+        case 8:
+            level8();
+            break;
+        case 9:
+            level9();
+            break;
+        case 10:
+            level10();
             break;
         default:
             break;
