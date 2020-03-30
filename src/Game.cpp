@@ -221,6 +221,26 @@ void Game::level4(){
     board.defineBlocks();
 }
 
+void Game::level5(){
+    this->board=Board(8,4);
+
+    //Yellow piece
+    board.setPiece(0,0,'A');
+
+    //Blue pieces
+    board.setPiece(1,0,'B');
+    board.setPiece(2,0,'B');
+
+    //Green piece
+    board.setPiece(3,0,'G');
+
+    //Red pieces
+    board.setPiece(6,3,'V');
+    board.setPiece(7,3,'V');
+
+    board.defineBlocks();
+}
+
 void Game::chooseLevel() {
     int choice;
     cout << " ______________________________________ " << endl;
@@ -229,6 +249,7 @@ void Game::chooseLevel() {
     cout << "| Level 2 (Beginner)                   |" << endl;
     cout << "| Level 3 (Beginner)                   |" << endl;
     cout << "| Level 4 (Beginner)                   |" << endl;
+    cout << "| Level 5 (Easy)                       |" << endl;
     cout << "|______________________________________|" << endl;
     cout << "\nChoice: ";
     cin>>choice;
@@ -245,6 +266,11 @@ void Game::chooseLevel() {
             break;
         case 4:
             level4();
+            break;
+        case 5:
+            level5();
+            break;
+        default:
             break;
     }
 

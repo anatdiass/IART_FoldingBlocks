@@ -190,13 +190,11 @@ void dfs(Game game){
                 default:
                     break;
             }
-
             allNodes.push_back(*currentNode);
             if (game.checkVictory()){
                 cout << "\n\nAI won at level: " << currentNode->level << "\n";
                 return;
             }
-        } while (!bfsTree.empty());
-
+        } while (!dfsTree.empty());
     } while (!game.endGame());
 }

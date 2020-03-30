@@ -95,6 +95,8 @@ public:
      */
     void level4();
 
+    void level5();
+
     /**
      * Allows the user to choose which level to play
      */
