@@ -148,7 +148,7 @@ void bfs(Game game) {
             }
         } while (!bfsTree.empty());
 
-    } while (!game.endGame());
+    } while (!game.checkVictory() || !game.endGame());
 }
 
 void dfs(Game game) {
