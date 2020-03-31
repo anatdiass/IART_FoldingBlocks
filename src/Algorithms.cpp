@@ -173,11 +173,13 @@ void dfs(Game game) {
 						possibleMoves = game.getBlockNextValidMoves(colorPiece);
 					}
 					else {
-						if (!dfsTree_parents.empty()) {
+						/*if (!dfsTree_parents.empty()) {
 							node_var = dfsTree_parents.top();
 							possibleMoves = node_var->actualGame.getBlockNextValidMoves(colorPiece);
 							//dfsTree_parents.pop();
-						}
+						}*/
+
+						possibleMoves = currentNode->actualGame.getBlockNextValidMoves(colorPiece);
 					}
 
 					if (!possibleMoves.empty()) {
@@ -201,8 +203,8 @@ void dfs(Game game) {
 							else {
 
 								newNode->father = node_var;
-								newNode->prevGame = newNode->father->actualGame;
-								newNode->level = newNode->father->level + 1;
+								newNode->prevGame = currentNode->actualGame;
+								newNode->level = currentNode->level + 1;
 								if (level == 0) {
 									dfsTree.push(newNode);
 								}
@@ -214,16 +216,16 @@ void dfs(Game game) {
 					/*else {
 						dfsTree_parents.pop();
 					}*/
-					if (dfsTree_parents.size() > 0) {
+					/*if (dfsTree_parents.size() > 0) {
 						dfsTree_parents.pop();
-					}
+					}*/
 				}
 			}
 		}
 		do {
 			currentNode = dfsTree.top();
 			dfsTree.pop();
-			dfsTree_parents.push(currentNode);
+			//dfsTree_parents.push(currentNode);
 			game = currentNode->prevGame;
 
 			switch (currentNode->move) {
@@ -232,7 +234,7 @@ void dfs(Game game) {
 					cout << "\n\nTree level: " << currentNode->level;
 					cout << "\nMOVE: right reflexion of block with color " << currentNode->color << endl;
 					game.play(currentNode->color, 1);
-					b = game.getBoard();
+					//b = game.getBoard();
 					nMoves++;
 				}
 				game.getBoard().printBoard();
@@ -242,7 +244,7 @@ void dfs(Game game) {
 					cout << "\n\nTree level: " << currentNode->level;
 					cout << "\nMove: left reflexion of block with color " << currentNode->color << endl;
 					game.play(currentNode->color, 2);
-					b = game.getBoard();
+					//b = game.getBoard();
 					nMoves++;
 				}
 				game.getBoard().printBoard();
@@ -252,7 +254,7 @@ void dfs(Game game) {
 					cout << "\n\nTree level: " << currentNode->level;
 					cout << "\nMove: down reflexion of block with color " << currentNode->color << endl;
 					game.play(currentNode->color, 3);
-					b = game.getBoard();
+					//b = game.getBoard();
 					nMoves++;
 				}
 				game.getBoard().printBoard();
@@ -263,7 +265,7 @@ void dfs(Game game) {
 					cout << "\n\nTree level: " << currentNode->level;
 					cout << "\nMove: up reflexion of block with color " << currentNode->color << endl;
 					game.play(currentNode->color, 4);
-					b = game.getBoard();
+					//b = game.getBoard();
 					nMoves++;
 				}
 				game.getBoard().printBoard();
@@ -272,7 +274,7 @@ void dfs(Game game) {
 				break;
 			}
 
-			game.setBoard(b);
+			//game.setBoard(b);
 			currentNode->actualGame = game;
 			allNodes.push_back(*currentNode);
 			if (game.checkVictory()) {
@@ -283,6 +285,7 @@ void dfs(Game game) {
 		} while (!dfsTree.empty());
 	} while (!game.endGame());
 }
+
 
 
 void greedy(Game game){
