@@ -21,14 +21,23 @@ void bfs(Game game) {
 
 	b.printBoard();
 
-	//currentNode->actualGame = game;
-
+	
 	do {
 		for (int i = 0; i < b.getNumRows(); i++) {
 			for (int j = 0; j < b.getNumCols(); j++) {
 				char colorPiece = b.getPieceColor(i, j);
 				if (colorPiece != ' ' && colorPiece != '-') {
-					vector<int> possibleMoves = game.getBlockNextValidMoves(colorPiece);
+					vector<int> possibleMoves;
+					if (currentNode == NULL) {
+
+						possibleMoves = game.getBlockNextValidMoves(colorPiece);
+					}
+					else {
+						
+						node_var = bfsTree_parents.front();
+						possibleMoves = node_var->actualGame.getBlockNextValidMoves(colorPiece);
+					}
+					
 					if (!possibleMoves.empty()) {
 						for (int move : possibleMoves) {
 							pair<int, int> actualCell = make_pair(i, j);
@@ -36,20 +45,19 @@ void bfs(Game game) {
 							newNode->color = colorPiece;
 							newNode->selected = actualCell;
 							newNode->move = move;
-							newNode->prevGame = game;
 							
 							if (currentNode == NULL) {
 								newNode->father = NULL;
 								newNode->level = 1;
+								newNode->prevGame = game;
 							}
 							else {
-								node_var = bfsTree_parents.front();
+								
 								newNode->father = node_var;
 								newNode->prevGame = newNode->father->actualGame;
 								newNode->level = newNode->father->level + 1;
 
 							}
-
 
 							bfsTree.push(newNode);
 						}
@@ -63,25 +71,45 @@ void bfs(Game game) {
 		do {
 			currentNode = bfsTree.front();
 			bfsTree.pop();
-			bfsTree_parents.push(currentNode);
+
+			if (bfsTree_parents.empty()) {
+				bfsTree_parents.push(currentNode);
+			}
+			else {
+				struct node *bfsTree_parents_var = bfsTree_parents.front();
+
+				if (bfsTree_parents_var == currentNode) {
+					bfsTree_parents.push(currentNode);
+				}
+			}
+
+			
+			
 			
 			game = currentNode->prevGame;
 
+			game.printValidMoves();
+
 			switch (currentNode->move) {
 			case 1:
+				cout << "verify play 1" << endl;
 				if (game.verifyPlay(currentNode->color, 1)) {
 					cout << "\n\nTree level: " << currentNode->level;
 					cout << "\nMOVE: right reflexion of block with color " << currentNode->color << endl;
 					game.play(currentNode->color, 1);
+					b = game.getBoard();
 					nMoves++;
 				}
 				game.getBoard().printBoard();
+
 				break;
 			case 2:
 				if (game.verifyPlay(currentNode->color, 2)) {
 					cout << "\n\nTree level: " << currentNode->level;
 					cout << "\nMove: left reflexion of block with color " << currentNode->color << endl;
+					
 					game.play(currentNode->color, 2);
+					b = game.getBoard();
 					nMoves++;
 				}
 				game.getBoard().printBoard();
@@ -91,16 +119,19 @@ void bfs(Game game) {
 					cout << "\n\nTree level: " << currentNode->level;
 					cout << "\nMove: down reflexion of block with color " << currentNode->color << endl;
 					game.play(currentNode->color, 3);
+					b = game.getBoard();
 					nMoves++;
 				}
 				game.getBoard().printBoard();
 
 				break;
 			case 4:
+				cout << "verify play 4" << endl;
 				if (game.verifyPlay(currentNode->color, 4)) {
 					cout << "\n\nTree level: " << currentNode->level;
 					cout << "\nMove: up reflexion of block with color " << currentNode->color << endl;
 					game.play(currentNode->color, 4);
+					b = game.getBoard();
 					nMoves++;
 				}
 				game.getBoard().printBoard();
@@ -109,6 +140,7 @@ void bfs(Game game) {
 				break;
 			}
 
+			game.setBoard(b);
 			currentNode->actualGame = game;
 			allNodes.push_back(*currentNode);
 			if (game.checkVictory()) {
