@@ -58,12 +58,11 @@ void bfs(Game game) {
                                 newNode->level = newNode->father->level + 1;
 
                             }
-
                             bfsTree.push(newNode);
                         }
-                        if (bfsTree_parents.size() > 0) {
-                            bfsTree_parents.pop();
-                        }
+                    }
+                    if (bfsTree_parents.size() > 0) {
+                        bfsTree_parents.pop();
                     }
                 }
             }
@@ -148,7 +147,7 @@ void bfs(Game game) {
             }
         } while (!bfsTree.empty());
 
-    } while (!game.checkVictory() || !game.endGame());
+    } while (!game.checkVictory() || !game.getNextValidMoves().empty());
 }
 
 void dfs(Game game) {
