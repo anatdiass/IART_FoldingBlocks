@@ -10,6 +10,9 @@ struct node {
     //store the color of the block that was selected
     char color;
 
+    //used to save the piece or the block of pieces that were selected
+    pair<int, int> selected;
+
     //used to save the coords of the pieces after a reflection
     int move;
 

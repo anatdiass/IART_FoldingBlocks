@@ -21,10 +21,13 @@ queue<struct node *> aStarTree;
 queue<struct node *> aStarTree_parents;
 
 void bfs(Game game) {
+
     int nMoves = 0;
     Board b = game.getBoard();
     b.defineBlocks();
+
     b.printBoard();
+
 
     do {
         for (int i = 0; i < b.getNumRows(); i++) {
@@ -33,6 +36,7 @@ void bfs(Game game) {
                 if (colorPiece != ' ' && colorPiece != '-') {
                     vector<int> possibleMoves;
                     if (currentNode == NULL) {
+
                         possibleMoves = game.getBlockNextValidMoves(colorPiece);
                     }
                     else {
@@ -40,20 +44,26 @@ void bfs(Game game) {
                             node_var = bfsTree_parents.front();
                         possibleMoves = node_var->actualGame.getBlockNextValidMoves(colorPiece);
                     }
+
                     if (!possibleMoves.empty()) {
                         for (int move : possibleMoves) {
+                            pair<int, int> actualCell = make_pair(i, j);
                             auto *newNode = new node();
                             newNode->color = colorPiece;
+                            newNode->selected = actualCell;
                             newNode->move = move;
+
                             if (currentNode == NULL) {
                                 newNode->father = NULL;
                                 newNode->level = 1;
                                 newNode->prevGame = game;
                             }
                             else {
+
                                 newNode->father = node_var;
                                 newNode->prevGame = newNode->father->actualGame;
                                 newNode->level = newNode->father->level + 1;
+
                             }
                             bfsTree.push(newNode);
                         }
@@ -78,6 +88,7 @@ void bfs(Game game) {
                         cout << "\n\nTree level: " << currentNode->level;
                         cout << "\nMOVE: right reflexion of block with color " << currentNode->color << endl;
                         game.play(currentNode->color, 1);
+                        b = game.getBoard();
                         nMoves++;
                     }
                     break;
@@ -85,7 +96,9 @@ void bfs(Game game) {
                     if (game.verifyPlay(currentNode->color, 2)) {
                         cout << "\n\nTree level: " << currentNode->level;
                         cout << "\nMove: left reflexion of block with color " << currentNode->color << endl;
+
                         game.play(currentNode->color, 2);
+                        b = game.getBoard();
                         nMoves++;
                     }
                     break;
@@ -94,6 +107,7 @@ void bfs(Game game) {
                         cout << "\n\nTree level: " << currentNode->level;
                         cout << "\nMove: down reflexion of block with color " << currentNode->color << endl;
                         game.play(currentNode->color, 3);
+                        b = game.getBoard();
                         nMoves++;
                     }
                     break;
@@ -102,12 +116,15 @@ void bfs(Game game) {
                         cout << "\n\nTree level: " << currentNode->level;
                         cout << "\nMove: up reflexion of block with color " << currentNode->color << endl;
                         game.play(currentNode->color, 4);
+                        b = game.getBoard();
                         nMoves++;
                     }
                     break;
                 default:
                     break;
             }
+
+            game.setBoard(b);
             currentNode->actualGame = game;
             allNodes.push_back(*currentNode);
             if (game.checkVictory()) {
@@ -124,6 +141,7 @@ void dfs(Game game) {
     int nMoves = 0;
     Board b = game.getBoard();
     b.defineBlocks();
+
     b.printBoard();
 
     bool move_possible;
@@ -133,37 +151,58 @@ void dfs(Game game) {
             for (int j = 0; j < b.getNumCols(); j++) {
                 char colorPiece = b.getPieceColor(i, j);
                 if (colorPiece != ' ' && colorPiece != '-') {
+
                     do {
                         int level = 0;
                         vector<int> possibleMoves;
                         move_possible = true;
                         if (currentNode == NULL) {
+
                             possibleMoves = game.getBlockNextValidMoves(colorPiece);
                         }
                         else {
                             possibleMoves = currentNode->actualGame.getBlockNextValidMoves(colorPiece);
+
                             if (possibleMoves.empty()) {
+                                /*node_var = currentNode;
+                                //currentNode = node_var->father;
+                                possibleMoves = currentNode->prevGame.getBlockNextValidMoves(colorPiece);
+                                //vector<int>::iterator it;
+
+                                for (int move = 1; move < possibleMoves.size()+1; move++) {
+                                    if (node_var->move == move) {
+                                        possibleMoves.erase(possibleMoves.begin(), possibleMoves.begin() + i-1);
+                                        move--;
+                                    }
+                                }*/
                                 move_possible = false;
                                 if (!dfsTree_parents.empty())
                                     dfsTree_parents.pop();
                             }
                         }
+
                         if (move_possible) {
+
                             if (!possibleMoves.empty()) {
                                 for (int move : possibleMoves) {
+                                    pair<int, int> actualCell = make_pair(i, j);
                                     auto *newNode = new node();
                                     newNode->color = colorPiece;
+                                    newNode->selected = actualCell;
                                     newNode->move = move;
+
                                     if (currentNode == NULL) {
                                         newNode->father = NULL;
                                         newNode->level = 1;
                                         newNode->prevGame = game;
+
                                         if (level == 0) {
                                             dfsTree.push(newNode);
                                         }
                                         level++;
                                     }
                                     else {
+
                                         newNode->father = node_var;
                                         newNode->prevGame = currentNode->actualGame;
                                         newNode->level = currentNode->level + 1;
@@ -172,18 +211,22 @@ void dfs(Game game) {
                                         }
                                         level++;
                                     }
+
                                 }
                             }
+
                             currentNode = dfsTree.top();
                             dfsTree.pop();
                             dfsTree_parents.push(currentNode);
                             game = currentNode->prevGame;
+
                             switch (currentNode->move) {
                                 case 1:
                                     if (game.verifyPlay(currentNode->color, 1)) {
                                         cout << "\n\nTree level: " << currentNode->level;
                                         cout << "\nMOVE: right reflexion of block with color " << currentNode->color << endl;
                                         game.play(currentNode->color, 1);
+                                        //b = game.getBoard();
                                         nMoves++;
                                     }
                                     break;
@@ -192,6 +235,7 @@ void dfs(Game game) {
                                         cout << "\n\nTree level: " << currentNode->level;
                                         cout << "\nMove: left reflexion of block with color " << currentNode->color << endl;
                                         game.play(currentNode->color, 2);
+                                        //b = game.getBoard();
                                         nMoves++;
                                     }
                                     break;
@@ -200,6 +244,7 @@ void dfs(Game game) {
                                         cout << "\n\nTree level: " << currentNode->level;
                                         cout << "\nMove: down reflexion of block with color " << currentNode->color << endl;
                                         game.play(currentNode->color, 3);
+                                        //b = game.getBoard();
                                         nMoves++;
                                     }
                                     break;
@@ -208,12 +253,15 @@ void dfs(Game game) {
                                         cout << "\n\nTree level: " << currentNode->level;
                                         cout << "\nMove: up reflexion of block with color " << currentNode->color << endl;
                                         game.play(currentNode->color, 4);
+                                        //b = game.getBoard();
                                         nMoves++;
                                     }
                                     break;
                                 default:
                                     break;
                             }
+
+                            //game.setBoard(b);
                             currentNode->actualGame = game;
                             allNodes.push_back(*currentNode);
                             if (game.checkVictory()) {
@@ -236,6 +284,7 @@ void greedy(Game game){
     int nMoves = 0;
     Board b = game.getBoard();
     b.defineBlocks();
+
     b.printBoard();
 
     do {
@@ -255,8 +304,10 @@ void greedy(Game game){
 
                     if (!possibleMoves.empty()) {
                         for (int move : possibleMoves) {
+                            pair<int, int> actualCell = make_pair(i, j);
                             auto *newNode = new node();
                             newNode->color = colorPiece;
+                            newNode->selected = actualCell;
                             newNode->move = move;
                             newNode->value = getGreedyValue(game,move,colorPiece);
                             if (newNode->value != -1) {
@@ -311,6 +362,7 @@ void greedy(Game game){
                         cout << "\n\nTree level: " << currentNode->level;
                         cout << "\nMOVE: right reflexion of block with color " << currentNode->color << endl;
                         game.play(currentNode->color, 1);
+                        b = game.getBoard();
                         nMoves++;
                     }
                     break;
@@ -318,7 +370,9 @@ void greedy(Game game){
                     if (game.verifyPlay(currentNode->color, 2)) {
                         cout << "\n\nTree level: " << currentNode->level;
                         cout << "\nMove: left reflexion of block with color " << currentNode->color << endl;
+
                         game.play(currentNode->color, 2);
+                        b = game.getBoard();
                         nMoves++;
                     }
                     break;
@@ -327,6 +381,7 @@ void greedy(Game game){
                         cout << "\n\nTree level: " << currentNode->level;
                         cout << "\nMove: down reflexion of block with color " << currentNode->color << endl;
                         game.play(currentNode->color, 3);
+                        b = game.getBoard();
                         nMoves++;
                     }
                     break;
@@ -335,12 +390,15 @@ void greedy(Game game){
                         cout << "\n\nTree level: " << currentNode->level;
                         cout << "\nMove: up reflexion of block with color " << currentNode->color << endl;
                         game.play(currentNode->color, 4);
+                        b = game.getBoard();
                         nMoves++;
                     }
                     break;
                 default:
                     break;
             }
+
+            game.setBoard(b);
             currentNode->actualGame = game;
             allNodes.push_back(*currentNode);
             if (game.checkVictory()) {
@@ -401,6 +459,7 @@ void aStar(Game game, int heuristic){
     int nMoves = 0;
     Board b = game.getBoard();
     b.defineBlocks();
+
     b.printBoard();
 
     do {
@@ -417,10 +476,13 @@ void aStar(Game game, int heuristic){
                             node_var = aStarTree_parents.front();
                         possibleMoves = node_var->actualGame.getBlockNextValidMoves(colorPiece);
                     }
+
                     if (!possibleMoves.empty()) {
                         for (int move : possibleMoves) {
+                            pair<int, int> actualCell = make_pair(i, j);
                             auto *newNode = new node();
                             newNode->color = colorPiece;
+                            newNode->selected = actualCell;
                             newNode->move = move;
                             newNode->heuristicValue = getHeuristicValue(game, move,colorPiece, heuristic);
                             if (newNode->heuristicValue != -1) {
@@ -429,13 +491,16 @@ void aStar(Game game, int heuristic){
                                     newNode->level = 1;
                                     newNode->prevGame = game;
                                 } else {
+
                                     newNode->father = node_var;
                                     newNode->prevGame = newNode->father->actualGame;
                                     newNode->level = newNode->father->level + 1;
+
                                 }
                                 if(!heuristicValueExist(children,newNode->heuristicValue))
                                     children.push_back(newNode);
                                 newNode->value = newNode->heuristicValue + newNode->level;
+
                             }
                             else{
                                 if(currentNode!=NULL){
@@ -471,6 +536,7 @@ void aStar(Game game, int heuristic){
                         cout << "\n\nTree level: " << currentNode->level;
                         cout << "\nMOVE: right reflexion of block with color " << currentNode->color << endl;
                         game.play(currentNode->color, 1);
+                        b = game.getBoard();
                         nMoves++;
                     }
                     break;
@@ -478,7 +544,9 @@ void aStar(Game game, int heuristic){
                     if (game.verifyPlay(currentNode->color, 2)) {
                         cout << "\n\nTree level: " << currentNode->level;
                         cout << "\nMove: left reflexion of block with color " << currentNode->color << endl;
+
                         game.play(currentNode->color, 2);
+                        b = game.getBoard();
                         nMoves++;
                     }
                     break;
@@ -487,6 +555,7 @@ void aStar(Game game, int heuristic){
                         cout << "\n\nTree level: " << currentNode->level;
                         cout << "\nMove: down reflexion of block with color " << currentNode->color << endl;
                         game.play(currentNode->color, 3);
+                        b = game.getBoard();
                         nMoves++;
                     }
                     break;
@@ -495,12 +564,15 @@ void aStar(Game game, int heuristic){
                         cout << "\n\nTree level: " << currentNode->level;
                         cout << "\nMove: up reflexion of block with color " << currentNode->color << endl;
                         game.play(currentNode->color, 4);
+                        b = game.getBoard();
                         nMoves++;
                     }
                     break;
                 default:
                     break;
             }
+
+            game.setBoard(b);
             currentNode->actualGame = game;
             allNodes.push_back(*currentNode);
             if (game.checkVictory()) {
