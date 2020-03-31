@@ -16,23 +16,17 @@ private:
     vector<pair<char,vector<pair<int,int>>>>blocks;
 public:
 
-    //TODO -> nao implementado
-    void printIrregularBoard();
-
+    /**
+     * Default constructor
+     */
     Board();
+
     /**
      * Creates an empty board game
      * @param nRows number of rows
      * @param nCols number of colums
      */
     Board(int nRows, int nCols);
-
-    /**
-     * @brief Get the Board object
-     * 
-     * @return board
-     */
-    vector<vector<char>> getBoard();
 
     /**
      * Return the number of rows of the board

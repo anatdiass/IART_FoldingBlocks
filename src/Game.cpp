@@ -407,7 +407,7 @@ void Game::chooseLevel() {
 
 }
 
-void Game::loopGame() {
+void Game::loopGame(bool tips) {
 
     char color;
     int  move;
@@ -417,8 +417,10 @@ void Game::loopGame() {
 
         board.printBoard();
         calculateValidMoves();
-        cout << "Possible moves: " << nrValidMoves() << endl;
-        printValidMoves();
+        if(tips) {
+            cout << "Possible moves: " << nrValidMoves() << endl;
+            printValidMoves();
+        }
         //Gets block by color
         cout << "\nChoose the color of your block: "; cin.ignore(1000, '\n');
         cin >> color;

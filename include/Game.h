@@ -139,7 +139,7 @@ public:
     /**
      * Game main loop
      */
-    void loopGame();
+    void loopGame(bool tips);
 };
 
 

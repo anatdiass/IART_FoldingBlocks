@@ -1,14 +1,7 @@
 #include "Board.h"
 using namespace std;
 
-
 /*CONSTRUCTOR*/
-
-void Board::printIrregularBoard(){
-    //TODO -> se possível
-}
-
-
 Board::Board() {
     this->nRows=0;
     this->nCols=0;
@@ -24,7 +17,6 @@ Board::Board(int nRows, int nCols) : nRows(nRows), nCols(nCols) {
     }
 }
 
-
 int Board::getNumRows() {
     return this->nRows;
 }
@@ -32,11 +24,6 @@ int Board::getNumRows() {
 int Board::getNumCols() {
     return this->nCols;
 }
-
-vector<vector<char>> Board::getBoard(){
-    return this->board;
-}
-
 
 void Board::deleteCell(int row, int col) {
     setPiece(row, col, '-');

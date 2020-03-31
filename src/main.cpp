@@ -51,20 +51,25 @@ void selectAlgorithm(Game game){
 
 void selectMode(Game game){
     int choice;
-    cout << " ____________________ " << endl;
-    cout << "|- Choose game mode -|" << endl;
-    cout << "| 1 - Player         |" << endl;
-    cout << "| 2- AI              |" << endl;
-    cout << "|____________________|" << endl;
+    cout << " ____________________________ " << endl;
+    cout << "|-     Choose game mode     -|" << endl;
+    cout << "| 1 - Player(w/tips)         |" << endl;
+    cout << "| 2 - Player                 |" << endl;
+    cout << "| 3- AI                      |" << endl;
+    cout << "|____________________________|" << endl;
     cout << "\nChoice: ";
     cin>>choice;
 
     switch(choice){
         case 1:
             game.chooseLevel();
-            game.loopGame();
+            game.loopGame(true);
             break;
         case 2:
+            game.chooseLevel();
+            game.loopGame(false);
+            break;
+        case 3:
             game.chooseLevel();
             selectAlgorithm(game);
             break;
