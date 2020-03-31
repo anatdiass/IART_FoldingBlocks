@@ -24,9 +24,11 @@ void selectAlgorithm(Game game){
     cout << " __________________________________" << endl;
     cout << "|-      Choose the algorithm      -|" << endl;
     cout << "| 1 - BFS (Breadth First Search)   |" << endl;
-    cout << "| 2 - DFS (Depth First Search)     |" << endl;
-    cout << "| 3 - Greedy Algorithm             |" << endl;
-    cout << "| 4 - A* Algorithm                 |" << endl;
+    cout << "| 2 - BFS (slow working version)   |" << endl;
+    cout << "| 3 - DFS (Depth First Search)     |" << endl;
+    cout << "| 4 - DFS (slow working version    |" << endl;    
+    cout << "| 5 - Greedy Algorithm             |" << endl;
+    cout << "| 6 - A* Algorithm                 |" << endl;
     cout << "|__________________________________|" << endl;
     cout << "\nChoice: ";
     cin>>choice;
@@ -36,12 +38,18 @@ void selectAlgorithm(Game game){
             bfs(game);
             break;
         case 2:
-            dfs(game);
+            bfs_v2(game);
             break;
         case 3:
-            greedy(game);
+            dfs(game);
             break;
         case 4:
+            dfs_v2(game);
+            break;
+        case 5:
+            greedy(game);
+            break;
+        case 6:
             selectAStarFunction(game);
             break;
         default:

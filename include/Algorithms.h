@@ -41,11 +41,15 @@ struct node {
  */
 void bfs(Game game);
 
+void bfs_v2(Game game);
+
 /**
  * Gets and print a solution using dfs
  * @param game Game
  */
 void dfs(Game game);
+
+void dfs_v2(Game game);
 
 /**
  * Gets and print a solution using greedy
