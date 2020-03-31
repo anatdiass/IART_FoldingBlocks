@@ -8,22 +8,25 @@
 
 //using namespace std::chrono;
 
-struct node{
-    char color;
-    //used to save the piece or the block of pieces that were selected
-    pair<int,int> selected;
-    //used to save the coords of the pieces after a reflection
-    int move;
-    //level in the tree
-    int level;
-    //value of the node, used to aStar and greedy
-    float value;
-    //heuristic value of the node, used only for aStar
-    float heuristic;
-    //Board that we are playing at the moment
-    Game prevGame;
-    //pointer to the father node
-    struct node *father;
+struct node {
+	char color;
+	//used to save the piece or the block of pieces that were selected
+	pair<int, int> selected;
+	//used to save the coords of the pieces after a reflection
+	int move;
+	//level in the tree
+	int level;
+	//value of the node, used to aStar and greedy
+	float value;
+	//heuristic value of the node, used only for aStar
+	float heuristic;
+	//Board that we are playing at the moment
+	Game prevGame;
+	//
+	//Board that we are playing at the moment
+	Game actualGame;
+	//pointer to the father node
+	struct node *father;
 };
 
 
@@ -34,3 +37,5 @@ void dfs(Game game);
 
 
 #endif //UNTITLED_ALGORITHMS_H
+
+
