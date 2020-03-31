@@ -16,6 +16,12 @@ private:
     int validMoves;
 
 public:
+
+    void level0(){
+        board=Board(2,2);
+        board.setPiece(1,0,'R');
+        board.defineBlocks();
+    }
     Game();
 
     int nrValidMoves();
@@ -27,15 +33,15 @@ public:
 
     /**
      * @brief Get the current board of the game
-     * 
-     * @return Board 
+     *
+     * @return Board
      */
 
     Board getBoard();
 
     /**
      * Get the next valid moves for a block
-     * @param color Color of the block 
+     * @param color Color of the block
      * @return vector with the valid the moves
      */
     vector<int> getBlockNextValidMoves(char color);
@@ -49,24 +55,24 @@ public:
     void printValidMoves();
 
     /**
-     * Verify if a play is valid 
-     * @param color Color of the block 
-     * @param move type of move 
+     * Verify if a play is valid
+     * @param color Color of the block
+     * @param move type of move
      * @return True if the play is valid
      */
     bool verifyPlay(char color, int move);
 
     /**
-     * Make a play  
-     * @param color Color of the block 
-     * @param move type of move 
+     * Make a play
+     * @param color Color of the block
+     * @param move type of move
      */
     void play(char color, int move);
 
-     /**
-     * Verify if the board is full (all the pieces have a color)
-     * @return True if the board is full
-     */
+    /**
+    * Verify if the board is full (all the pieces have a color)
+    * @return True if the board is full
+    */
     bool checkVictory();
 
     /**
@@ -95,19 +101,16 @@ public:
      */
     void level4();
 
-    void level5();
     void level6();
     void level7();
-    void level8();
     void level9();
-    void level10();
-    
+
     /**
      * Allows the user to choose which level to play
      */
     void chooseLevel();
 
-        
+
     /**
      * Game main loop
      */

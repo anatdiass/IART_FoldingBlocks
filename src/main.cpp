@@ -35,6 +35,7 @@ void selectAlgorithm(Game game){
     cout << "|-      Choose the algorithm      -|" << endl;
     cout << "| 1 - BFS (Breadth First Search)   |" << endl;
     cout << "| 2 - DFS (Depth First Search)     |" << endl;
+    cout << "| 3 - Greedy Algorithm             |" << endl;
     cout << "|__________________________________|" << endl;
     cout << "\nChoice: ";
     cin>>choice;
@@ -45,6 +46,9 @@ void selectAlgorithm(Game game){
             break;
         case 2:
             dfs(game);
+            break;
+        case 3:
+            greedy(game);
             break;
         default:
             break;
