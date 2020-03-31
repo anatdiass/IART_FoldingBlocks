@@ -80,7 +80,6 @@ void bfs(Game game) {
             bfsTree_parents.push(currentNode);
 
             game = currentNode->prevGame;
-            game.printValidMoves();
 
             switch (currentNode->move) {
                 case 1:
@@ -130,6 +129,7 @@ void bfs(Game game) {
             if (game.checkVictory()) {
                 cout << "\n\nAI won at level: " << currentNode->level << "\n";
                 cout << "Total moves: " << nMoves << endl;
+                game.getBoard().printBoard();
                 return;
             }
         } while (!bfsTree.empty());
@@ -267,6 +267,7 @@ void dfs(Game game) {
                             if (game.checkVictory()) {
                                 cout << "\n\nAI won at level: " << currentNode->level << "\n";
                                 cout << "Total moves: " << nMoves << endl;
+                                game.getBoard().printBoard();
                                 return;
                             }
                         }
@@ -354,8 +355,6 @@ void greedy(Game game){
 
             game = currentNode->prevGame;
 
-            game.printValidMoves();
-
             switch (currentNode->move) {
                 case 1:
                     if (game.verifyPlay(currentNode->color, 1)) {
@@ -404,6 +403,7 @@ void greedy(Game game){
             if (game.checkVictory()) {
                 cout << "\n\nAI won at level: " << currentNode->level << "\n";
                 cout << "Total moves: " << nMoves << endl;
+                game.getBoard().printBoard();
                 return;
             }
         } while (!greedyTree.empty());
@@ -578,6 +578,7 @@ void aStar(Game game, int heuristic){
             if (game.checkVictory()) {
                 cout << "\n\nAI won at level: " << currentNode->level << "\n";
                 cout << "Total moves: " << nMoves << endl;
+                game.getBoard().printBoard();
                 return;
             }
         } while (!aStarTree.empty());
