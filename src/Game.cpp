@@ -307,7 +307,7 @@ void Game::level7(){
 }
 
 
-void Game::level9(){
+void Game::level8(){
     board=Board(10,8);
 
     board.deleteCell(0,0);
@@ -364,9 +364,10 @@ void Game::chooseLevel() {
     cout << "| Level 2 (Beginner)                   |" << endl;
     cout << "| Level 3 (Beginner)                   |" << endl;
     cout << "| Level 4 (Easy)                       |" << endl;
+    cout << "| Level 5 (Easy)                       |" << endl;
     cout << "| Level 6 (Intermediate)               |" << endl;
     cout << "| Level 7 (Medium)                     |" << endl;
-    cout << "| Level 9 (Hard)                       |" << endl;
+    cout << "| Level 8 (Hard)                       |" << endl;
     cout << "|______________________________________|" << endl;
     cout << "\nChoice: ";
     cin>>choice;
@@ -396,8 +397,8 @@ void Game::chooseLevel() {
         case 7:
             level7();
             break;
-        case 9:
-            level9();
+        case 8:
+            level8();
             break;
         default:
             break;

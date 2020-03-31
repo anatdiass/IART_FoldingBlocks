@@ -103,7 +103,7 @@ public:
     void level5();
     void level6();
     void level7();
-    void level9();
+    void level8();
 
     /**
      * Allows the user to choose which level to play
