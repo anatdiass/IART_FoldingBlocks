@@ -377,9 +377,6 @@ void Game::chooseLevel() {
     cin>>choice;
 
     switch(choice){
-        case 0:
-            level0();
-            break;
         case 1:
             level1();
             break;

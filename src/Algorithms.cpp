@@ -17,6 +17,8 @@ stack<struct node *> dfsTree;
 stack<struct node *> dfsTree_parents;
 stack<struct node *> greedyTree;
 stack<struct node *> greedyTree_parents;
+queue<struct node *> aStarTree;
+queue<struct node *> aStarTree_parents;
 
 void bfs(Game game) {
 
@@ -77,21 +79,7 @@ void bfs(Game game) {
             bfsTree.pop();
             bfsTree_parents.push(currentNode);
 
-/*
-            if (bfsTree_parents.empty()) {
-                bfsTree_parents.push(currentNode);
-            }
-            else {
-                struct node *bfsTree_parents_var = bfsTree_parents.front();
-
-                if (bfsTree_parents_var == currentNode) {
-                    bfsTree_parents.push(currentNode);
-                }
-            }
-*/
-
             game = currentNode->prevGame;
-
             game.printValidMoves();
 
             switch (currentNode->move) {
@@ -301,7 +289,6 @@ void dfs(Game game) {
     } while (!game.endGame() || !game.getNextValidMoves().empty());
 }
 
-
 void greedy(Game game){
     vector<struct node *> children;
 
@@ -483,6 +470,204 @@ bool valueExist(vector<struct node*> v, float value){
     return false;
 }
 
+void aStar(Game game, int heuristic){
+    vector<struct node *> children;
 
+    int nMoves = 0;
+    Board b = game.getBoard();
+    b.defineBlocks();
 
+    b.printBoard();
+
+    do {
+        for (int i = 0; i < b.getNumRows(); i++) {
+            for (int j = 0; j < b.getNumCols(); j++) {
+                char colorPiece = b.getPieceColor(i, j);
+                if (colorPiece != ' ' && colorPiece != '-') {
+                    vector<int> possibleMoves;
+                    if (currentNode == NULL) {
+                        possibleMoves = game.getBlockNextValidMoves(colorPiece);
+                    }
+                    else {
+                        if(!aStarTree_parents.empty())
+                            node_var = aStarTree_parents.front();
+                        possibleMoves = node_var->actualGame.getBlockNextValidMoves(colorPiece);
+                    }
+
+                    if (!possibleMoves.empty()) {
+                        for (int move : possibleMoves) {
+                            pair<int, int> actualCell = make_pair(i, j);
+                            auto *newNode = new node();
+                            newNode->color = colorPiece;
+                            newNode->selected = actualCell;
+                            newNode->move = move;
+                            newNode->heuristicValue = getHeuristicValue(game, move,colorPiece, heuristic);
+                            if (newNode->heuristicValue != -1) {
+                                if (currentNode == NULL) {
+                                    newNode->father = NULL;
+                                    newNode->level = 1;
+                                    newNode->prevGame = game;
+                                } else {
+
+                                    newNode->father = node_var;
+                                    newNode->prevGame = newNode->father->actualGame;
+                                    newNode->level = newNode->father->level + 1;
+
+                                }
+                                if(!heuristicValueExist(children,newNode->heuristicValue))
+                                    children.push_back(newNode);
+                                newNode->value = newNode->heuristicValue + newNode->level;
+
+                            }
+                            else{
+                                if(currentNode!=NULL){
+                                    newNode->father=node_var;
+                                    newNode->prevGame=newNode->father->actualGame;
+                                    newNode->level=newNode->father->level+1;
+                                }
+                                newNode->value = newNode->heuristicValue + newNode->level;
+                                aStarTree.push(newNode);
+                            }
+                        }
+                    }
+                    if (!aStarTree_parents.empty()) {
+                        aStarTree_parents.pop();
+                    }
+                }
+            }
+        }
+        orderAStarTree(children);
+        do
+        {
+            currentNode = aStarTree.front();
+            aStarTree.pop();
+            aStarTree_parents.push(currentNode);
+
+            game = currentNode->prevGame;
+
+            game.printValidMoves();
+
+            switch (currentNode->move) {
+                case 1:
+                    if (game.verifyPlay(currentNode->color, 1)) {
+                        cout << "\n\nTree level: " << currentNode->level;
+                        cout << "\nMOVE: right reflexion of block with color " << currentNode->color << endl;
+                        game.play(currentNode->color, 1);
+                        b = game.getBoard();
+                        nMoves++;
+                    }
+                    game.getBoard().printBoard();
+
+                    break;
+                case 2:
+                    if (game.verifyPlay(currentNode->color, 2)) {
+                        cout << "\n\nTree level: " << currentNode->level;
+                        cout << "\nMove: left reflexion of block with color " << currentNode->color << endl;
+
+                        game.play(currentNode->color, 2);
+                        b = game.getBoard();
+                        nMoves++;
+                    }
+                    game.getBoard().printBoard();
+                    break;
+                case 3:
+                    if (game.verifyPlay(currentNode->color, 3)) {
+                        cout << "\n\nTree level: " << currentNode->level;
+                        cout << "\nMove: down reflexion of block with color " << currentNode->color << endl;
+                        game.play(currentNode->color, 3);
+                        b = game.getBoard();
+                        nMoves++;
+                    }
+                    game.getBoard().printBoard();
+
+                    break;
+                case 4:
+                    if (game.verifyPlay(currentNode->color, 4)) {
+                        cout << "\n\nTree level: " << currentNode->level;
+                        cout << "\nMove: up reflexion of block with color " << currentNode->color << endl;
+                        game.play(currentNode->color, 4);
+                        b = game.getBoard();
+                        nMoves++;
+                    }
+                    game.getBoard().printBoard();
+                    break;
+                default:
+                    break;
+            }
+
+            game.setBoard(b);
+            currentNode->actualGame = game;
+            allNodes.push_back(*currentNode);
+            if (game.checkVictory()) {
+                cout << "\n\nAI won at level: " << currentNode->level << "\n";
+                cout << "Total moves: " << nMoves << endl;
+                return;
+            }
+        } while (!aStarTree.empty());
+    } while (!game.endGame() || !game.checkVictory());
+}
+
+void orderAStarTree(vector<struct node *> &v){
+    while (!aStarTree.empty()){
+        v.push_back(aStarTree.front());
+        aStarTree.pop();
+    }
+    while (!v.empty()){
+        int id = getMinVal(v);
+        aStarTree.push(v.at(id));
+        v.erase(v.begin()+id);
+    }
+}
+
+int getMinVal(vector<struct node *> &nodes){
+    int low = 10000;
+    int i;
+    for (int j=0; j<(int)nodes.size(); j++)
+    {
+        int val = nodes.at(j)->value;
+        if (val < low){
+            low=val;
+            i=j;
+        }
+    }
+    return i;
+}
+
+float getHeuristicValue(Game game, int move, char blockColor, int heuristic)
+{
+    float val=0;
+    int greedyValue = getGreedyValue(game, move,blockColor);
+
+    //End game
+    if (greedyValue == -1)
+        return -1;
+
+    switch (heuristic){
+        //heuristic = nrColorfulPieces / greedyVal
+        case 1:
+            val = (float)getTotalPiecesBoard(game.getBoard()) / (float)greedyValue;
+            break;
+
+        //heuristic = greedyVal / nrColorfulPieces
+        case 2:
+            val = (float)greedyValue / (float)getTotalPiecesBoard(game.getBoard());
+            break;
+
+        //heuristic = greedyVal
+        case 3:
+            val = (float)greedyValue;
+            break;
+        default:
+            break;
+    }
+    return val;
+}
+
+bool heuristicValueExist(vector<struct node*>v, float value){
+    for(auto node: v){
+        if (node->heuristicValue==value)
+            return true;
+    }
+    return false;
+}
 
