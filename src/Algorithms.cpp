@@ -302,8 +302,6 @@ void dfs(Game game) {
 }
 
 
-
-
 void greedy(Game game){
     vector<struct node *> children;
 
@@ -320,7 +318,6 @@ void greedy(Game game){
                 if (colorPiece != ' ' && colorPiece != '-') {
                     vector<int> possibleMoves;
                     if (currentNode == NULL) {
-
                         possibleMoves = game.getBlockNextValidMoves(colorPiece);
                     }
                     else {
@@ -336,7 +333,7 @@ void greedy(Game game){
                             newNode->color = colorPiece;
                             newNode->selected = actualCell;
                             newNode->move = move;
-                            newNode->value = calculateGreedyValue(game,move,colorPiece);
+                            newNode->value = getGreedyValue(game,move,colorPiece);
                             if (newNode->value != -1) {
                                 if (currentNode == NULL) {
                                     newNode->father = NULL;
@@ -349,21 +346,29 @@ void greedy(Game game){
                                     newNode->level = newNode->father->level + 1;
 
                                 }
+                                if(!valueExist(children,newNode->value))
+                                    children.push_back(newNode);
+                            }
+                            else{
+                                if(currentNode!=NULL){
+                                    newNode->father=node_var;
+                                    newNode->prevGame=newNode->father->actualGame;
+                                    newNode->level=newNode->father->level+1;
+                                }
                                 greedyTree.push(newNode);
-                                children.push_back(newNode);
                             }
                         }
                     }
-                    if (greedyTree_parents.size() > 0) {
+                    if (!greedyTree_parents.empty()) {
                         greedyTree_parents.pop();
                     }
                 }
             }
         }
-        while (children.size() > 0){
-            int index = getBestValue(children);
-            greedyTree.push(children.at(index));
-            children.erase(children.begin() + index);
+        while (!children.empty()){
+            int id = getBestValue(children);
+            greedyTree.push(children.at(id));
+            children.erase(children.begin() + id);
         }
 
         do {
@@ -431,40 +436,22 @@ void greedy(Game game){
                 cout << "Total moves: " << nMoves << endl;
                 return;
             }
-        } while (greedyTree.size() > 0);
+        } while (!greedyTree.empty());
     } while (!game.endGame() || !game.checkVictory());
 }
 
-int getBestValue(vector<struct node *> &avl)
-{
-    int maxValue = INT_MIN;
-    int i = 0;
-    for (int k = 0; k < (int)avl.size(); k++)
-    {
-        int curValue = avl.at(k)->value;
-        if (maxValue < curValue)
-        {
-            maxValue = curValue;
-            i = k;
-        }
-    }
-    return i;
-}
+int getGreedyValue(Game game, int move, char blockColor){
+    Game g2 = game;
+    if(g2.verifyPlay(blockColor,move))
+        g2.play(blockColor,move);
 
-int calculateGreedyValue(Game game, int move, char blockColor)
-{
-    if(game.verifyPlay(blockColor, move)){
-        game.play(blockColor,move);
-    }
-    while (game.getNextValidMoves().size()>0)
-        ;
-    if (game.endGame())
+    if (g2.checkVictory() || g2.getNextValidMoves().empty())
         return -1;
     else
-        return getTotalPieces(game.getBoard());
+        return getTotalPiecesBoard(g2.getBoard());
 }
 
-int getTotalPieces(Board b){
+int getTotalPiecesBoard(Board b){
     int sum=0;
     for(int i=0;i<b.getNumRows();i++){
         for(int j=0;j<b.getNumCols();j++){
@@ -474,3 +461,28 @@ int getTotalPieces(Board b){
     }
     return sum;
 }
+
+int getBestValue(vector<struct node *> &nodes){
+    int max = -2;
+    int i = 0;
+    for (int j=0; j<(int)nodes.size(); j++){
+        int val = nodes.at(j)->value;
+        if (val>max){
+            max=val;
+            i=j;
+        }
+    }
+    return i;
+}
+
+bool valueExist(vector<struct node*> v, float value){
+    for(auto node: v){
+        if (node->value==value)
+            return true;
+    }
+    return false;
+}
+
+
+
+

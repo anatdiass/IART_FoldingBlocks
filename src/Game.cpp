@@ -18,6 +18,10 @@ void Game::calculateValidMoves(){
     }
 }
 
+void Game::setBoard(Board board) {
+    this->board = board;
+}
+
 Board Game::getBoard(){
     return this->board;
 }

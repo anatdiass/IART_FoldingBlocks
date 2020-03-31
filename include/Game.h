@@ -16,23 +16,30 @@ private:
     int validMoves;
 
 public:
-
-    void level0(){
-        board=Board(2,2);
-        board.setPiece(1,0,'R');
-        board.defineBlocks();
-    }
+    /**
+     * Default constructor
+     */
     Game();
 
+    /**
+     * Return the number of valid moves
+     * @return Total of valid moves
+     */
     int nrValidMoves();
-    void calculateValidMoves();
-
-    void setBoard(Board board){
-        this->board = board;
-    }
 
     /**
-     * @brief Get the current board of the game
+     * Calculates the number of valid moves
+     */
+    void calculateValidMoves();
+
+    /**
+     * Define the game board
+     * @param board Board
+     */
+    void setBoard(Board board);
+
+    /**
+     * Get the current board of the game
      *
      * @return Board
      */
@@ -52,6 +59,9 @@ public:
      */
     vector<pair<char, vector<int>>> getNextValidMoves();
 
+    /**
+     * Prints on the screen the valid moves of the game
+     */
     void printValidMoves();
 
     /**
@@ -97,12 +107,28 @@ public:
     void level3();
 
     /**
-     * Defines the board of third level
+     * Defines the board of fourth level
      */
     void level4();
+
+    /**
+     * Defines the board of fifth level
+     */
     void level5();
+
+    /**
+     * Defines the board of sixth level
+    */
     void level6();
+
+    /**
+     * Defines the board of seventh level
+    */
     void level7();
+
+    /**
+     * Defines the board of eigth level
+     */
     void level8();
 
     /**
@@ -110,13 +136,10 @@ public:
      */
     void chooseLevel();
 
-
     /**
      * Game main loop
      */
     void loopGame();
-
-
 };
 
 
